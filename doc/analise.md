@@ -17,7 +17,7 @@ Selecione **Análise de sequência binária** e informe os bits, por exemplo `01
 - contagem de zeros e uns;
 - bytes em hexadecimal e caracteres ASCII imprimíveis se a largura for múltipla de oito.
 
-Para bytes fora do intervalo ASCII imprimível, o relatório usa `.`. Em comprimentos que não formam bytes completos, o campo ASCII é omitido. O interpretador analisa uma sequência fornecida pelo usuário; ele não abre ou executa arquivos.
+Para bytes fora do intervalo ASCII imprimível, o relatório usa `.`. Em comprimentos que não formam bytes completos, o relatório indica que a leitura ASCII está indisponível. O interpretador analisa uma sequência fornecida pelo usuário; ele não abre ou executa arquivos.
 
 ## Exemplos
 

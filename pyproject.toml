@@ -24,6 +24,7 @@ dynamic = ["version"]
 
 [project.scripts]
 binlab = "binlab.cli:main"
+binlab-gui = "binlab.gui:main"
 
 [tool.setuptools]
 package-dir = { "" = "src" }

@@ -2,7 +2,7 @@
 
 ## Integração contínua
 
-`.github/workflows/ci.yml` executa em pull requests e em pushes para `main` e `feat/**`. Em Python 3.8 e 3.13, compila os módulos, instala o pacote e confirma que a versão pode ser importada. A permissão do token fica somente em leitura.
+`.github/workflows/ci.yml` executa em pull requests e em pushes para `main` e `feat/**`. Em Python 3.8 e 3.13, compila os módulos, instala o pacote, confirma a importação e executa a suíte `unittest`. A permissão do token fica somente em leitura. Localmente, rode `python -m unittest discover -s tests -v`.
 
 ## Tags automáticas para funcionalidades
 
@@ -23,8 +23,8 @@ Exemplo de release manual:
 ```bash
 git switch main
 git pull --ff-only
-git tag -a v0.2.0 -m "Release 0.2.0"
-git push origin v0.2.0
+git tag -a v0.3.0 -m "Release 0.3.0"
+git push origin v0.3.0
 ```
 
 Crie versões somente depois de integrar e revisar as funcionalidades desejadas. Tags `feat/...` não publicam releases.

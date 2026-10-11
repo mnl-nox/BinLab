@@ -2,7 +2,7 @@
 
 BinLab é uma calculadora e leitor didático para explorar inteiros em binário, octal, decimal e hexadecimal e fazer inspeção estática básica de código-fonte e arquivos de bytes. O programa recebe valores pelo terminal e apresenta operações, conversões e propriedades das sequências analisadas.
 
-O projeto está na versão 0.2.0. A arquitetura e a organização dos módulos estão descritas em [architecture.md](architecture.md). O sistema cobre aritmética inteira, operações lógicas bit a bit, deslocamentos, conversões entre bases, tabela verdade e leitura estática de fontes C/assembly, dumps hex e alguns formatos binários. Não depende de pacotes Python de terceiros em tempo de execução; desassemblagem usa GNU `objdump` opcionalmente.
+O projeto está na versão 0.3.0. A arquitetura e a organização dos módulos estão descritas em [architecture.md](architecture.md). O sistema cobre aritmética inteira, operações lógicas bit a bit, deslocamentos, conversões entre bases, tabela verdade e leitura estática de fontes C/assembly, dumps hex e alguns formatos binários. A interface desktop usa Tkinter; não há dependências Python de terceiros em tempo de execução. A desassemblagem usa GNU `objdump` opcionalmente.
 
 ## Limites da representação
 

@@ -6,6 +6,8 @@ Execute a partir do diretório do projeto:
 python3 src/halfAdder.py
 ```
 
+Para usar a interface gráfica, instale o pacote com `python -m pip install .` e execute `binlab-gui`. Consulte [gui.md](gui.md) para conhecer as abas.
+
 O menu fica ativo até selecionar `0. Sair`. Uma entrada inválida mostra uma mensagem e permite tentar novamente.
 
 Para ler um arquivo C, assembly, binário ou hexadecimal, escolha a opção 7 e informe o caminho. Os detalhes estão em [leitor.md](leitor.md).
