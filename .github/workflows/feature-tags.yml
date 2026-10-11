@@ -1,0 +1,34 @@
+name: Tag feature commits
+
+on:
+  push:
+    branches:
+      - "feat/**"
+
+permissions:
+  contents: write
+
+jobs:
+  tag:
+    name: Create an immutable tag for this feature commit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out branch commit
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - name: Create and push feature tag
+        env:
+          GITHUB_REF_NAME: ${{ github.ref_name }}
+          GITHUB_SHA: ${{ github.sha }}
+        run: |
+          branch_slug="$(printf '%s' "$GITHUB_REF_NAME" | tr '/_' '--' | tr -cd '[:alnum:].-')"
+          tag="feat/${branch_slug}/${GITHUB_SHA}"
+          if git ls-remote --exit-code --tags origin "refs/tags/${tag}" >/dev/null 2>&1; then
+            echo "Tag ${tag} already exists; nothing to do."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git tag -a "$tag" "$GITHUB_SHA" -m "Feature commit ${GITHUB_SHA} (${GITHUB_REF_NAME})"
+          git push origin "refs/tags/${tag}"

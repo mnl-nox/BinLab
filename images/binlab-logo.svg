@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 220" role="img" aria-labelledby="title desc">
+  <title id="title">BinLab</title>
+  <desc id="desc">Ícone de chip com trilhas binárias e o nome BinLab.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#101b35"/>
+      <stop offset="1" stop-color="#172d52"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#49e3c1"/>
+      <stop offset="1" stop-color="#62a8ff"/>
+    </linearGradient>
+  </defs>
+  <rect x="8" y="8" width="704" height="204" rx="34" fill="url(#bg)"/>
+  <g fill="none" stroke="url(#accent)" stroke-linecap="round" stroke-width="8">
+    <path d="M60 72h34l20 20M60 148h34l20-20M160 110H94M220 72h-34l-20 20M220 148h-34l-20-20M160 110h66"/>
+    <path d="M91 72h22M91 148h22" stroke-width="5"/>
+  </g>
+  <rect x="112" y="62" width="96" height="96" rx="18" fill="#0b1429" stroke="url(#accent)" stroke-width="6"/>
+  <text x="160" y="105" fill="#eef6ff" font-family="monospace" font-size="27" font-weight="700" text-anchor="middle">01</text>
+  <text x="160" y="137" fill="#49e3c1" font-family="monospace" font-size="18" text-anchor="middle">HEX</text>
+  <text x="260" y="119" fill="#f5f8ff" font-family="system-ui, sans-serif" font-size="74" font-weight="750" letter-spacing="-3">Bin<tspan fill="#49e3c1">Lab</tspan></text>
+  <text x="265" y="158" fill="#a9bad7" font-family="system-ui, sans-serif" font-size="21" letter-spacing="2">BINARY · HEX · CODE</text>
+</svg>
