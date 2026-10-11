@@ -3,7 +3,9 @@
 
 from __future__ import annotations
 
+import sys
 import tkinter as tk
+from pathlib import Path
 from tkinter import filedialog, ttk
 from typing import Callable
 
@@ -228,7 +230,10 @@ class BinLabGUI:
         self.reader_output = self._output(tab, 16)
 
     def _browse(self) -> None:
-        path = filedialog.askopenfilename(title="Selecione C, assembly, HEX ou um binário")
+        path = filedialog.askopenfilename(
+            title="Selecione C, assembly, HEX ou um binário",
+            initialdir=str(Path.home()),
+        )
         if path:
             self.path_entry.delete(0, "end")
             self.path_entry.insert(0, path)
@@ -243,7 +248,17 @@ class BinLabGUI:
 
 def main() -> None:
     """Inicia a janela principal do BinLab."""
-    root = tk.Tk()
+    try:
+        root = tk.Tk()
+    except tk.TclError as error:
+        print(
+            "Não foi possível abrir a interface gráfica. O BinLab precisa de uma "
+            "sessão X11/XWayland acessível. Verifique DISPLAY e XAUTHORITY ou "
+            "execute o comando em um desktop com suporte gráfico.\n"
+            f"Detalhe: {error}",
+            file=sys.stderr,
+        )
+        raise SystemExit(1) from None
     BinLabGUI(root)
     root.mainloop()
 

@@ -2,6 +2,14 @@
 
 Este projeto segue [Semantic Versioning](https://semver.org/).
 
+## 0.3.1 — 2026-10-11
+
+### Corrigido
+
+- Seletor de arquivos inicia na pasta pessoal do usuário, não na raiz do projeto.
+- Falha ao abrir a GUI sem uma sessão gráfica agora apresenta uma orientação legível.
+- Documentação da GUI esclarece requisitos de X11/XWayland e a pasta inicial do leitor.
+
 ## 0.3.0 — 2026-10-11
 
 ### Adicionado

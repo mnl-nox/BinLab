@@ -23,8 +23,8 @@ Exemplo de release manual:
 ```bash
 git switch main
 git pull --ff-only
-git tag -a v0.3.0 -m "Release 0.3.0"
-git push origin v0.3.0
+git tag -a v0.3.1 -m "Release 0.3.1"
+git push origin v0.3.1
 ```
 
 Crie versões somente depois de integrar e revisar as funcionalidades desejadas. Tags `feat/...` não publicam releases.

@@ -4,7 +4,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/CI-GitHub_Actions-2088FF?logo=githubactions&logoColor=white" alt="CI com GitHub Actions">
-  <img src="https://img.shields.io/badge/version-0.3.0-49e3c1" alt="Versão 0.3.0">
+  <img src="https://img.shields.io/badge/version-0.3.1-49e3c1" alt="Versão 0.3.1">
   <img src="https://img.shields.io/badge/Python-3.8%2B-3776ab?logo=python&logoColor=white" alt="Python 3.8+">
   <img src="https://img.shields.io/badge/Linux-supported-fcc624?logo=linux&logoColor=black" alt="Linux">
   <img src="https://img.shields.io/badge/license-MIT-blue" alt="Licença MIT">
