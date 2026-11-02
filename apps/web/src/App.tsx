@@ -58,6 +58,7 @@ function BinaryLab() {
               {baseOptions.map((option) => <option key={option.value} value={option.value}>Base {option.value}</option>)}
             </select>
           </div>
+          {!converted && <p className="error-text">Valor inválido para a base selecionada ou limite de entrada excedido.</p>}
           <div className="result-list">
             {baseOptions.map((option) => <div className="result-row" key={option.value}><span>{option.label}</span><code>{converted?.[option.value] ?? "—"}</code></div>)}
           </div>
