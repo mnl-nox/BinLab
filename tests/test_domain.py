@@ -1,8 +1,11 @@
-"""Testes unitários das regras de domínio reutilizáveis."""
+"""Testes unitários das regras de domínio e limites de recursos."""
 
 import unittest
 
 from binlab.domain import analyze_bits, calculate, convert_integer, format_integer, parse_integer
+from binlab.domain.analysis import MAX_BIT_WIDTH
+from binlab.domain.numeric import MAX_NUMERIC_DIGITS
+from binlab.domain.operations import MAX_NOT_WIDTH, MAX_SHIFT_DISTANCE
 
 
 class NumericTests(unittest.TestCase):
@@ -16,10 +19,20 @@ class NumericTests(unittest.TestCase):
         self.assertEqual(format_integer(-10, 16), "-A")
 
     def test_reject_invalid_base_and_digits(self):
-        with self.assertRaises(ValueError):
-            parse_integer("10", 3)
-        with self.assertRaises(ValueError):
-            parse_integer("102", 2)
+        for call in (lambda: parse_integer("10", 3), lambda: parse_integer("102", 2)):
+            with self.assertRaises(ValueError):
+                call()
+
+    def test_numeric_runtime_types_and_size(self):
+        for call in (
+            lambda: parse_integer(10, 2),
+            lambda: parse_integer("10", True),
+            lambda: format_integer(True, 2),
+            lambda: format_integer("10", 2),
+            lambda: parse_integer("1" * (MAX_NUMERIC_DIGITS + 1), 2),
+        ):
+            with self.assertRaises(ValueError):
+                call()
 
 
 class OperationTests(unittest.TestCase):
@@ -42,6 +55,26 @@ class OperationTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             calculate(-1, "AND", 1)
 
+    def test_bool_and_non_integer_operands_are_rejected(self):
+        for call in (
+            lambda: calculate(True, "+", 1),
+            lambda: calculate(1, "+", False),
+            lambda: calculate("1", "+", 1),
+            lambda: calculate(1, None, 1),
+        ):
+            with self.assertRaises(ValueError):
+                call()
+
+    def test_not_and_shift_limits(self):
+        for call in (
+            lambda: calculate(0, "NOT", width=MAX_NOT_WIDTH + 1),
+            lambda: calculate(1, "NOT", width=True),
+            lambda: calculate(1, "<<", MAX_SHIFT_DISTANCE + 1),
+            lambda: calculate(1, ">>", -1),
+        ):
+            with self.assertRaises(ValueError):
+                call()
+
 
 class AnalysisTests(unittest.TestCase):
     def test_analysis_preserves_width_and_twos_complement(self):
@@ -54,8 +87,9 @@ class AnalysisTests(unittest.TestCase):
 
     def test_ascii_and_invalid_sequence(self):
         self.assertEqual(analyze_bits("01000001").ascii_text, "A")
-        with self.assertRaises(ValueError):
-            analyze_bits("10x1")
+        for value in ("10x1", 100, "1" * (MAX_BIT_WIDTH + 1)):
+            with self.assertRaises(ValueError):
+                analyze_bits(value)
 
 
 if __name__ == "__main__":
