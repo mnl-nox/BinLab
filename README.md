@@ -90,6 +90,45 @@ tests/              testes unitários
 - [Política de segurança](SECURITY.md)
 - [Como contribuir](CONTRIBUTING.md) · [Histórico](CHANGELOG.md)
 
+## Limites e segurança do leitor
+
+O leitor faz inspeção estática e não executa nem compila os arquivos importados. Os limites atuais são: fonte 2 MiB, binário 8 MiB, texto HEX 4 MiB, saída decodificada HEX 1 MiB, lacuna Intel HEX 64 KiB, saída combinada do objdump 64 KiB e timeout de 20 segundos. Strings retornadas são limitadas a 30 ocorrências de até 160 caracteres. A análise de bits e as operações de domínio também possuem limites de largura.
+
+O parser Intel HEX exige EOF único e terminal, valida checksum e estrutura dos registros, rejeita sobreposições e evita materializar endereços esparsos fora dos limites. O objdump é iniciado sem shell, com ambiente reduzido e saída drenada sob teto de memória.
+
+Esses controles reduzem riscos de exaustão de recursos, mas não equivalem a sandbox de execução. Não use o BinLab como ambiente de execução de arquivos não confiáveis. A inspeção via API permanece bloqueada até revisão e validação da nova implementação no CI.
+
+## Estrutura atual
+
+```text
+src/binlab/domain/ regras puras para conversão, operações e análise
+src/binlab/        adaptadores CLI/GUI e leitura estática
+src/halfAdder.py   ponto de entrada legado
+doc/               documentação da versão atual
+docs/              arquitetura, auditoria e plano de evolução
+images/            logo e diagrama SVG
+.github/workflows/ integração contínua, tags e releases
+tests/              testes unitários
+```
+
+![Diagrama da arquitetura BinLab](images/architecture.svg)
+
+## Documentação
+
+- [Objetivo e escopo atual](doc/objetive.md)
+- [Arquitetura atual](doc/architecture.md)
+- [Plano de entregas BinLab Engineering](docs/ROADMAP.md)
+- [Arquitetura alvo](docs/architecture/overview.md)
+- [Contratos](docs/contracts/README.md)
+- [Modelo de ameaças](docs/security/threat-model.md)
+- [Auditoria técnica de 2 de novembro de 2026](docs/audit/2026-11-02-code-review.md)
+- [Licenciamento](docs/legal/LICENSING.md)
+- [Política de privacidade](docs/legal/PRIVACY.md)
+- [CI/CD, tags e versões](doc/ci-cd.md)
+- [Interface gráfica atual](doc/gui.md)
+- [Política de segurança](SECURITY.md)
+- [Como contribuir](CONTRIBUTING.md) · [Histórico](CHANGELOG.md)
+
 ## Limites atuais
 
 O leitor não executa nem compila os arquivos. As estatísticas de C/assembly são heurísticas. Um executável compilado não contém necessariamente o código C original; a desassemblagem depende dos formatos e processadores suportados por `objdump`.
