@@ -22,6 +22,7 @@ MAX_BINARY_BYTES = 8 * 1024 * 1024
 MAX_HEX_TEXT_BYTES = 4 * 1024 * 1024
 MAX_HEX_DECODED_BYTES = 1024 * 1024
 MAX_HEX_GAP_BYTES = 64 * 1024
+MAX_HEX_RECORDS = 65536
 MAX_STRINGS = 30
 MAX_STRING_LENGTH = 160
 MAX_OBJDUMP_OUTPUT = 64 * 1024
@@ -109,6 +110,9 @@ def parse_hex_text(text: str) -> bytes:
     except UnicodeEncodeError as error:
         raise ValueError("O arquivo HEX deve conter somente caracteres ASCII.") from error
 
+    line_count = text.count("\\n") + (1 if text and not text.endswith("\\n") else 0)
+    if line_count > MAX_HEX_RECORDS:
+        raise ValueError("Intel HEX excede o limite de {} linhas.".format(MAX_HEX_RECORDS))
     lines = [line.strip() for line in text.splitlines() if line.strip()]
     if not lines:
         raise ValueError("O arquivo hexadecimal está vazio.")
