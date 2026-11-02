@@ -19,18 +19,20 @@ A intenção atual é aplicar a MIT ao código-fonte e à documentação do repo
 
 ## Atribuição
 
-O arquivo LICENSE atualmente identifica “BinLab contributors” como titular coletivo. Essa atribuição deve ser confirmada pelo mantenedor: quem detém os direitos autorais das contribuições e se há contribuições externas sujeitas a termos adicionais.
+O titular identificado pelo mantenedor é **Manoel E. S. S (mnl-nox)**. O aviso de copyright do projeto consta no arquivo [LICENSE](../../LICENSE).
 
-Não substituir a titularidade por nome de pessoa ou empresa sem confirmação. Se houver múltiplos contribuidores, manter atribuições compatíveis com as contribuições e os termos aceitos.
+Essa atribuição identifica o titular declarado para o projeto; ela não elimina direitos de terceiros sobre contribuições externas, dependências, marcas ou conteúdos que mantenham seus próprios avisos e licenças. Contribuições externas devem ser aceitas somente quando o autor tiver direito de licenciá-las sob os termos aplicáveis.
 
 ## Política para contribuições
 
 Ao submeter uma contribuição, o autor deve ter direito de licenciá-la sob MIT e preservar avisos de terceiros. O projeto não adota CLA neste momento; isso deve ser revisto se houver necessidade de relicenciamento ou governança institucional.
 
-## Identificadores
+## Identificadores e contato
 
 - Licença SPDX: `MIT`.
 - Arquivo de licença: `LICENSE`.
+- Titular declarado: Manoel E. S. S (`mnl-nox`).
+- Contato do mantenedor: [ghostnether28@gmail.com](mailto:ghostnether28@gmail.com).
 - Versão atual do pacote na auditoria: `0.3.1`.
 
-Este documento é informativo e não substitui aconselhamento jurídico. A titularidade e os avisos devem ser revisados antes de uma distribuição comercial ou institucional.
+Este documento é informativo e não substitui aconselhamento jurídico. A titularidade de contribuições externas e os avisos de terceiros devem ser revisados antes de uma distribuição comercial ou institucional.
