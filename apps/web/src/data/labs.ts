@@ -15,7 +15,7 @@ export type LabDefinition = {
 
 export const labs: LabDefinition[] = [
   { id: "binary", title: "Binary & Logic", description: "Bases, bits e operações lógicas", icon: Binary, status: "Disponível" },
-  { id: "architecture", title: "Arquitetura", description: "CPU, ISA, memória e organização", icon: Cpu, status: "Em desenvolvimento" },
+  { id: "architecture", title: "Arquitetura", description: "CPU, ISA, memória e organização", icon: Cpu, status: "Planejado" },
   { id: "compiler", title: "Compiler & Code", description: "Compiladores, C, Assembly e ABI", icon: FileCode2, status: "Planejado" },
   { id: "systems", title: "Operating Systems", description: "Processos, memória virtual e kernel", icon: HardDrive, status: "Planejado" },
   { id: "network", title: "Network & Web", description: "Protocolos, diagnóstico e serviços", icon: Network, status: "Planejado" },
