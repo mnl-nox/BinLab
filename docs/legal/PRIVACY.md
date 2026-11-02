@@ -62,6 +62,6 @@ Esta política será atualizada quando o comportamento de tratamento de dados mu
 
 ## 10. Contato e solicitações
 
-Para reportar uma questão de privacidade, entre em contato com o mantenedor por um canal privado disponibilizado no perfil do projeto: https://github.com/mnl-nox. Não publique dados pessoais, arquivos privados ou segredos em issues públicas.
+No momento, o repositório não informa um endereço dedicado de contato para privacidade. Solicite ao mantenedor, pelo perfil https://github.com/mnl-nox, um canal privado antes de enviar qualquer dado pessoal. Não publique dados pessoais, arquivos privados ou segredos em issues públicas.
 
-**Ponto pendente para publicação formal:** adicionar um endereço de contato de privacidade controlado pelo mantenedor. Nenhum endereço foi presumido nesta versão.
+**Ponto pendente para publicação formal:** o mantenedor deve cadastrar um endereço de contato de privacidade controlado pelo projeto e verificar que o canal está operacional. Nenhum endereço foi presumido nesta versão.
