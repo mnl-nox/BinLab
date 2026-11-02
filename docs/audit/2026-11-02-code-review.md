@@ -89,13 +89,15 @@ O domínio matemático é pequeno e tem testes unitários básicos. O principal 
 - **Evidência original:** o workflow de tag verificava versão e construía distribuições, mas não compilava fontes nem executava testes.
 - **Correção aplicada:** agora executa compileall, instalação, importação, unittest e build antes de criar o GitHub Release.
 
-### BL-META-001 — Dados de autoria e contato ainda genéricos
+### BL-META-001 — Dados de autoria e contato
 
 - **Severidade:** Baixa / documental
+- **Status:** Resolvido nesta branch em 2 de novembro de 2026.
+- **Correção aplicada:** titularidade declarada por Manoel E. S. S (mnl-nox), copyright atualizado em `LICENSE`, metadados `authors` atualizados em `pyproject.toml` e contato de privacidade publicado em `docs/legal/PRIVACY.md` (`ghostnether28@gmail.com`).
 - **Arquivos:** `LICENSE`, `pyproject.toml`, README
-- **Evidência:** copyright usa “BinLab contributors” e metadados de autoria também são genéricos; não há contato institucional/email de privacidade.
+- **Evidência original:** copyright usava “BinLab contributors” e metadados de autoria eram genéricos; não havia contato de privacidade.
 - **Impacto:** atribuição legal e canal de solicitações ficam pouco específicos.
-- **Correção requerida:** mantenedor deve confirmar titularidade/copyright e fornecer contato de privacidade antes de uma publicação formal. Não inventar nome ou email.
+- **Resultado:** a confirmação foi fornecida pelo mantenedor. O endereço informado é publicado como contato do projeto e poderá ser coletado por crawlers/spam.
 
 ## Controles positivos observados
 
@@ -118,8 +120,8 @@ O README carregava badges remotos de shields.io; eles foram removidos nesta bran
 - README agora apresenta metadados estáticos, sem badges remotos.
 - Metadados do pacote incluem URLs de projeto, issues e segurança.
 - Workflow de release passou a executar testes antes da publicação.
-- O arquivo `LICENSE` já continha a licença MIT válida e foi preservado; a titularidade “BinLab contributors” precisa de confirmação do mantenedor.
-- Não foi inventado email de contato. A política registra que o canal dedicado de privacidade está pendente.
+- O arquivo `LICENSE` mantém a licença MIT válida e agora identifica o titular declarado pelo mantenedor: Manoel E. S. S (mnl-nox).
+- O contato de privacidade informado pelo mantenedor foi publicado em `docs/legal/PRIVACY.md`; o endereço é público e não há SLA de resposta declarado.
 - Ações GitHub ainda usam tags mutáveis; Dependabot semanal foi configurado em `.github/dependabot.yml`; o pinning por SHA completo continua aberto em [issue #3](https://github.com/mnl-nox/BinLab/issues/3).
 - Correção de parser e limites de recursos está rastreada em [issue #2](https://github.com/mnl-nox/BinLab/issues/2).
 
