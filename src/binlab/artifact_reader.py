@@ -300,7 +300,7 @@ def _run_bounded(command: list, timeout: int = OBJDUMP_TIMEOUT_SECONDS,
     for reader in readers:
         reader.join()
     if overflow.is_set():
-        suffix = b"\n[saída truncada: limite de {} bytes excedido]".format(output_limit)
+        suffix = ("\\n[saída truncada: limite de {} bytes excedido]".format(output_limit)).encode("utf-8")
     elif timed_out:
         suffix = b"\n[processo encerrado por timeout]"
     else:
