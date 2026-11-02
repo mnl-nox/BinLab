@@ -82,7 +82,7 @@ export default function BinaryLab() {
         <BookOpen size={18} />
         <div>
           <strong>Modelo mental</strong>
-          <p>Uma operação bit a bit trabalha sobre a representação inteira. AND mantém bits presentes nos dois operandos; OR combina bits; XOR mantém posições diferentes; deslocamento move os bits e equivale a multiplicar por uma potência de dois para valores não negativos.</p>
+          <p>Uma operação bit a bit trabalha sobre a representação inteira. AND mantém bits presentes nos dois operandos; OR combina bits; XOR mantém posições diferentes; deslocamento move os bits. Atenção: BigInt usa semântica de inteiro com sinal e extensão de sinal, não um registrador de largura fixa. A simulação de registradores de N bits exigirá máscara explícita.</p>
         </div>
       </section>
     </div>
