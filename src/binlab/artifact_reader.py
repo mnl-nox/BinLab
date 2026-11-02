@@ -243,7 +243,7 @@ def inspect_source(path: Union[str, Path]) -> str:
     raw = _read_limited(path, MAX_SOURCE_BYTES, "Arquivo-fonte")
     text = raw.decode("utf-8", errors="replace")
     summary = _summarize_c(text) if path.suffix in {".c", ".h", ".cc", ".cpp", ".cxx"} else _summarize_assembly(text)
-    return "Arquivo-fonte: {} ({} bytes)\\n{}".format(path, len(raw), summary)
+    return "Arquivo-fonte: {} ({} bytes)\n{}".format(path, len(raw), summary)
 
 
 def _run_bounded(command: list, timeout: int = OBJDUMP_TIMEOUT_SECONDS,
@@ -300,9 +300,9 @@ def _run_bounded(command: list, timeout: int = OBJDUMP_TIMEOUT_SECONDS,
     for reader in readers:
         reader.join()
     if overflow.is_set():
-        suffix = b"\\n[saída truncada: limite de {} bytes excedido]".format(output_limit)
+        suffix = b"\n[saída truncada: limite de {} bytes excedido]".format(output_limit)
     elif timed_out:
-        suffix = b"\\n[processo encerrado por timeout]"
+        suffix = b"\n[processo encerrado por timeout]"
     else:
         suffix = b""
     stdout = bytes(buffers[0])
@@ -365,7 +365,7 @@ def disassemble_hex_bytes(data: bytes, architecture: str) -> str:
             output = _run_bounded([tool, "-D", "-b", "binary", "-m", architecture, "--", temporary.name])
     except (OSError, ValueError) as error:
         return "objdump não conseguiu analisar os bytes: {}".format(error)
-    return "Desassemblagem dos bytes hexadecimais:\\n" + output
+    return "Desassemblagem dos bytes hexadecimais:\n" + output
 
 
 def inspect_file(path: Union[str, Path], architecture: Optional[str] = None) -> str:
@@ -382,11 +382,11 @@ def inspect_file(path: Union[str, Path], architecture: Optional[str] = None) -> 
             data = parse_hex_text(raw.decode("ascii"))
         except (UnicodeDecodeError, ValueError) as error:
             raise ValueError("Falha ao interpretar arquivo hexadecimal: {}".format(error)) from error
-        report = "Arquivo hexadecimal convertido em {} bytes.\\n{}".format(
+        report = "Arquivo hexadecimal convertido em {} bytes.\n{}".format(
             len(data), inspect_binary(data, str(path), disassemble=False)
         )
         if architecture:
-            report += "\\n\\n" + disassemble_hex_bytes(data, architecture)
+            report += "\n\n" + disassemble_hex_bytes(data, architecture)
         return report
 
     data = _read_limited(path, MAX_BINARY_BYTES, "Arquivo binário")
