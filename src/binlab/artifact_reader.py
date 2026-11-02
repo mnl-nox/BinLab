@@ -307,7 +307,7 @@ def _run_bounded(command: list, timeout: int = OBJDUMP_TIMEOUT_SECONDS,
         suffix = b""
     stdout = bytes(buffers[0])
     stderr = bytes(buffers[1])
-    output = stdout or stderr or b"objdump não produziu saída."
+    output = stdout or stderr or "objdump não produziu saída.".encode("utf-8")
     return (output + suffix).decode("utf-8", errors="replace")
 
 
