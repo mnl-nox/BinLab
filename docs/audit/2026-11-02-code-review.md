@@ -81,13 +81,13 @@ O domínio matemático é pequeno e tem testes unitários básicos. O principal 
 - **Correção requerida:** fixar cada action externa a SHA completo verificado e manter comentário com a versão correspondente; habilitar Dependabot para GitHub Actions e revisar atualizações.
 - **Referência:** GitHub recomenda pinning por SHA completo como a forma imutável de referenciar uma action: https://docs.github.com/en/actions/reference/security/secure-use
 
-### BL-CI-002 — Workflow de release não repete a suíte de testes
+### BL-CI-002 — Workflow de release não repetia a suíte de testes
 
 - **Severidade:** Média
 - **Arquivo:** `.github/workflows/release.yml`
-- **Evidência:** o workflow de tag verifica versão e constrói distribuições, mas não compila fontes nem executa os testes antes de publicar.
-- **Impacto:** uma tag pode publicar artefato sem validação explícita no próprio fluxo de release.
-- **Correção requerida:** executar compileall, instalação, testes e build no job de release antes de criar GitHub Release.
+- **Status:** corrigido nesta branch; ainda depende de execução verde no GitHub Actions.
+- **Evidência original:** o workflow de tag verificava versão e construía distribuições, mas não compilava fontes nem executava testes.
+- **Correção aplicada:** agora executa compileall, instalação, importação, unittest e build antes de criar o GitHub Release.
 
 ### BL-META-001 — Dados de autoria e contato ainda genéricos
 
@@ -110,7 +110,18 @@ O domínio matemático é pequeno e tem testes unitários básicos. O principal 
 
 Na revisão das fontes consultadas não foram identificadas chamadas explícitas a HTTP, sockets, analytics ou telemetria na aplicação Python. A aplicação atual é local-first: arquivos são lidos localmente; objdump, quando habilitado, é executado localmente. Isso não equivale a uma auditoria de tráfego de todo o ambiente operacional.
 
-O README carregava badges remotos de shields.io; esses recursos podem gerar requisições ao serviço terceiro ao visualizar a página do repositório. A atualização documental deve removê-los ou declarar essa dependência externa. A hospedagem do repositório e seus logs são operados pelo GitHub, sob as políticas próprias do provedor.
+O README carregava badges remotos de shields.io; eles foram removidos nesta branch para evitar requisições desnecessárias a esse terceiro ao visualizar a página do repositório. A hospedagem do repositório e seus logs continuam sob operação do GitHub e suas políticas.
+
+## Estado da entrega documental
+
+- Política de privacidade e documento de licenciamento adicionados em `docs/legal/`.
+- README agora apresenta metadados estáticos, sem badges remotos.
+- Metadados do pacote incluem URLs de projeto, issues e segurança.
+- Workflow de release passou a executar testes antes da publicação.
+- O arquivo `LICENSE` já continha a licença MIT válida e foi preservado; a titularidade “BinLab contributors” precisa de confirmação do mantenedor.
+- Não foi inventado email de contato. A política registra que o canal dedicado de privacidade está pendente.
+- Ações GitHub ainda usam tags mutáveis; rastrear em [issue #3](https://github.com/mnl-nox/BinLab/issues/3).
+- Correção de parser e limites de recursos está rastreada em [issue #2](https://github.com/mnl-nox/BinLab/issues/2).
 
 ## Portão de segurança antes da API
 
