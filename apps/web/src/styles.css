@@ -91,3 +91,76 @@ input:focus, select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px c
 @media (max-width: 1050px) { .sidebar { width: 230px; flex-basis: 230px; } .page-wrap { padding: 35px 25px 20px; } .topbar { padding: 0 25px; } }
 @media (max-width: 760px) { .sidebar { position: fixed; inset: 0 auto 0 0; width: min(290px, 86vw); transform: translateX(-105%); transition: transform .22s ease; box-shadow: 20px 0 60px #0005; } .sidebar-open { transform: translateX(0); } .mobile-close { display: grid; margin-left: auto; } .mobile-menu { display: grid; } .mobile-backdrop { display: block; position: fixed; inset: 0; z-index: 4; border: 0; background: #02061799; } .topbar { height: 59px; padding: 0 17px; justify-content: flex-start; gap: 12px; } .breadcrumbs { flex: 1; gap: 7px; } .top-actions { gap: 9px; } .environment-tag { display: none; } .page-wrap { padding: 30px 17px 20px; } .section-heading { align-items: flex-start; flex-direction: column; margin-bottom: 22px; } .tool-grid { grid-template-columns: 1fr; } .panel { padding: 18px; } .app-footer { flex-direction: column; margin-top: 30px; } }
 @media (max-width: 390px) { .input-row { flex-direction: column; } .input-row select { min-height: 38px; } .result-row { align-items: flex-start; flex-direction: column; gap: 6px; } }
+
+/* Readability and accessibility layer — BinLab application */
+.app-shell { font-size: 16px; line-height: 1.6; }
+.sidebar { width: 276px; flex-basis: 276px; padding: 28px 18px 20px; }
+.brand { gap: 12px; padding-bottom: 32px; }
+.brand-mark { width: 44px; height: 44px; font-size: 19px; }
+.brand strong { font-size: 15px; letter-spacing: .12em; }
+.brand small { font-size: 11px; letter-spacing: .14em; }
+.workspace-label, .nav-label { font-size: 11px; letter-spacing: .12em; }
+.workspace-switch { min-height: 44px; font-size: 14px; }
+.nav-item { min-height: 44px; padding: 11px 12px; font-size: 14px; }
+.system-status strong { font-size: 13px; }
+.system-status small { font-size: 12px; }
+.sidebar-bottom a { min-height: 40px; font-size: 13px; }
+.topbar { height: 72px; padding-inline: 40px; }
+.breadcrumbs { font-size: 13px; }
+.environment-tag { font-size: 11px; }
+.theme-toggle, .mobile-menu, .mobile-close { width: 40px; height: 40px; }
+.page-wrap { padding: 48px 44px 24px; }
+.eyebrow { font-size: 12px; letter-spacing: .14em; }
+.section-heading h2, .empty-lab h2 { font-size: clamp(30px, 3vw, 40px); letter-spacing: -.035em; line-height: 1.15; }
+.section-heading p, .empty-lab p { font-size: 15px; line-height: 1.75; }
+.live-indicator { min-height: 36px; font-size: 12px; }
+.tool-grid { gap: 20px; }
+.panel { padding: 25px; }
+.panel-heading { margin-bottom: 25px; }
+.panel-icon { width: 42px; height: 42px; }
+.panel-heading h3 { font-size: 16px; }
+.panel-heading p { font-size: 13px; line-height: 1.5; }
+.field-label { font-size: 13px; margin-bottom: 9px; }
+.input-row input, .full-input { min-height: 46px; padding: 12px 14px; font-size: 15px; }
+.input-row select, .operator-row select { min-height: 42px; padding-inline: 12px; font-size: 13px; }
+.result-list { gap: 9px; }
+.result-row { min-height: 46px; padding: 12px 14px; }
+.result-row span { font-size: 13px; }
+.result-row code, .logic-result code { font-size: 14px; }
+.helper-text { font-size: 13px; line-height: 1.7; }
+.operator-row { min-height: 42px; }
+.operator-row .field-label { font-size: 13px; }
+.logic-result { min-height: 48px; padding: 13px 14px; }
+.logic-result span { font-size: 13px; }
+.note-panel { padding: 19px 21px; }
+.note-panel strong { font-size: 14px; }
+.note-panel p { font-size: 13px; line-height: 1.7; }
+.app-footer { font-size: 11px; line-height: 1.6; }
+.empty-icon { width: 66px; height: 66px; }
+.status-pill { font-size: 12px; padding: 8px 12px; }
+.error-text { font-size: 12px; }
+input:focus-visible, select:focus-visible, button:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+button, input, select { -webkit-tap-highlight-color: transparent; }
+@media (max-width: 1050px) {
+  .sidebar { width: 246px; flex-basis: 246px; }
+  .page-wrap { padding: 40px 28px 22px; }
+  .topbar { padding-inline: 28px; }
+}
+@media (max-width: 760px) {
+  .topbar { height: 64px; padding-inline: 16px; }
+  .page-wrap { padding: 32px 17px 22px; }
+  .section-heading h2, .empty-lab h2 { font-size: clamp(28px, 7vw, 36px); }
+  .section-heading p, .empty-lab p { font-size: 14px; }
+  .panel { padding: 20px; }
+  .panel-heading h3 { font-size: 16px; }
+  .panel-heading p { font-size: 12px; }
+  .input-row { gap: 10px; }
+  .app-footer { font-size: 11px; }
+}
+@media (max-width: 390px) {
+  .panel { padding: 17px; }
+  .result-row { align-items: flex-start; flex-direction: column; gap: 7px; }
+}

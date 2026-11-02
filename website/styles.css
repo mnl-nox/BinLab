@@ -247,3 +247,76 @@ html[data-theme="dark"] .moon-icon, html[data-theme="light"] .sun-icon { display
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
+
+
+/* Readability and accessibility layer — BinLab visual system */
+:root {
+  --type-body: 1rem;
+  --type-small: .875rem;
+  --type-meta: .75rem;
+  --focus-ring: 3px;
+}
+body { font-size: var(--type-body); line-height: 1.72; }
+.site-header { min-height: 82px; }
+.brand-name strong { font-size: 1rem; letter-spacing: .12em; }
+.brand-name small { font-size: .72rem; letter-spacing: .16em; }
+.primary-nav { gap: clamp(16px, 2vw, 30px); }
+.primary-nav a { font-size: .875rem; }
+.header-github { font-size: .8125rem; }
+.hero { min-height: 640px; }
+.overline, .eyebrow { font-size: .75rem; letter-spacing: .14em; }
+.hero h1 { font-size: clamp(2.75rem, 5.5vw, 4.6rem); line-height: 1.08; letter-spacing: -.045em; }
+.hero-lede { font-size: 1.125rem; line-height: 1.75; max-width: 620px; }
+.button { min-height: 46px; padding: 12px 18px; font-size: .9375rem; }
+.hero-meta { font-size: .8125rem; }
+.signal-strip strong { font-size: 1.15rem; }
+.signal-strip span { font-size: .8125rem; }
+.section-intro h2, .security-copy h2, .quickstart-copy h2 { font-size: clamp(2rem, 3.6vw, 3rem); line-height: 1.14; letter-spacing: -.035em; }
+.section-intro p, .security-copy p, .quickstart-copy p { font-size: 1rem; line-height: 1.75; }
+.platform-card h3, .lab-copy h3, .architecture-copy h3 { font-size: 1.125rem; line-height: 1.35; }
+.platform-card p, .lab-copy p, .architecture-copy p { font-size: .9375rem; line-height: 1.7; }
+.platform-card small, .lab-label, .roadmap-step i { font-size: .75rem; }
+.lab-number { font-size: .8125rem; }
+.arch-node strong { font-size: .9375rem; }
+.arch-node small { font-size: .8125rem; }
+.architecture-rules span { font-size: .875rem; }
+.security-list li { font-size: .9375rem; line-height: 1.65; }
+.security-notice { font-size: .875rem; line-height: 1.65; }
+.code-title { font-size: .75rem; }
+.code-panel pre { font-size: .8125rem; line-height: 1.8; }
+.roadmap-step { min-height: 78px; }
+.roadmap-step strong { font-size: .9375rem; }
+.roadmap-step small { font-size: .8125rem; line-height: 1.5; }
+.footer-main p { font-size: .875rem; line-height: 1.7; }
+.footer-github { font-size: .875rem; }
+.footer-bottom { font-size: .75rem; }
+.not-found p { font-size: 1rem; }
+button, a { -webkit-tap-highlight-color: transparent; }
+button:focus-visible, a:focus-visible { outline: var(--focus-ring) solid var(--accent); outline-offset: 3px; }
+@media (max-width: 980px) {
+  .primary-nav a { font-size: .8125rem; }
+}
+@media (max-width: 760px) {
+  .site-header { min-height: 70px; }
+  .primary-nav a { font-size: 1rem; }
+  .hero { padding-top: 58px; }
+  .hero h1 { font-size: clamp(2.55rem, 9vw, 3.8rem); }
+  .hero-lede { font-size: 1.0625rem; }
+  .section-intro p, .security-copy p, .quickstart-copy p { font-size: .96875rem; }
+  .platform-card h3, .lab-copy h3 { font-size: 1.0625rem; }
+  .platform-card p, .lab-copy p, .architecture-copy p { font-size: .9rem; }
+  .lab-copy p { line-height: 1.6; }
+  .roadmap-step strong { font-size: .9375rem; }
+  .roadmap-step small { font-size: .8125rem; }
+}
+@media (max-width: 430px) {
+  body { font-size: .96875rem; }
+  .brand-name strong { font-size: .875rem; }
+  .brand-name small { font-size: .6875rem; }
+  .hero h1 { font-size: clamp(2.35rem, 10vw, 3.1rem); letter-spacing: -.04em; }
+  .hero-meta { font-size: .75rem; }
+  .platform-card p { font-size: .875rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
