@@ -37,3 +37,7 @@ Crie versões somente após revisão e integração. Tags de feature não public
 - Permissões de escrita ficam restritas ao workflow de tags/release que precisa delas.
 - Não inserir tokens em arquivos, argumentos de build ou logs.
 - Ações de terceiros e dependências devem ser revisadas e atualizadas de forma controlada.
+
+## Atualização de actions
+
+`.github/dependabot.yml` verifica semanalmente atualizações das GitHub Actions. A configuração de Dependabot não substitui a revisão de segurança: as referências dos workflows ainda precisam ser fixadas em SHA completo verificado. Esse trabalho está rastreado na [issue #3](https://github.com/mnl-nox/BinLab/issues/3).
