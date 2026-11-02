@@ -92,7 +92,7 @@ tests/              testes unitários
 
 ## Limites e segurança do leitor
 
-O leitor faz inspeção estática e não executa nem compila os arquivos importados. Os limites atuais são: fonte 2 MiB, binário 8 MiB, texto HEX 4 MiB, saída decodificada HEX 1 MiB, lacuna Intel HEX 64 KiB, saída combinada do objdump 64 KiB e timeout de 20 segundos. Strings retornadas são limitadas a 30 ocorrências de até 160 caracteres. A análise de bits e as operações de domínio também possuem limites de largura.
+O leitor faz inspeção estática e não executa nem compila os arquivos importados. Os limites atuais são: fonte 2 MiB, binário 8 MiB, texto HEX 4 MiB, até 65.536 linhas/registros Intel HEX, saída decodificada HEX 1 MiB, lacuna Intel HEX 64 KiB, saída combinada do objdump 64 KiB e timeout de 20 segundos. Strings retornadas são limitadas a 30 ocorrências de até 160 caracteres. A análise de bits e as operações de domínio também possuem limites de largura.
 
 O parser Intel HEX exige EOF único e terminal, valida checksum e estrutura dos registros, rejeita sobreposições e evita materializar endereços esparsos fora dos limites. O objdump é iniciado sem shell, com ambiente reduzido e saída drenada sob teto de memória.
 
