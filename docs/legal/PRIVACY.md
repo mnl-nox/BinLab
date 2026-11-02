@@ -3,13 +3,13 @@
 **Responsável pelo projeto:** Manoel E. S. S (mnl-nox)  
 **Contato para privacidade:** [ghostnether28@gmail.com](mailto:ghostnether28@gmail.com)  
 **Data de vigência:** 2 de novembro de 2026  
-**Versão do produto coberta:** BinLab 0.3.1 (aplicação Python CLI/Tkinter)
+**Escopo coberto:** BinLab 0.3.1 (aplicação Python CLI/Tkinter), fundação Web local e site institucional estático
 
 ## 1. Escopo
 
-Esta política descreve o tratamento de dados pela aplicação BinLab 0.3.1, conforme o código-fonte revisado. Ela não substitui as políticas dos serviços de terceiros usados para hospedar o repositório, distribuir ferramentas ou fornecer recursos externos.
+Esta política descreve o tratamento de dados pela aplicação Python BinLab 0.3.1, pela fundação Web executada localmente e pelo site institucional estático em `website/`. Ela não substitui as políticas dos serviços de terceiros usados para hospedar o repositório, distribuir ferramentas ou servir o site.
 
-A política deverá ser revisada quando forem adicionados API local, interface Web, Tauri, banco de dados, sincronização, telemetria, autenticação, analytics ou serviços de IA.
+A política deverá ser revisada quando forem adicionados API local operacional, integração Tauri, banco de dados, sincronização, telemetria, autenticação, analytics ou serviços de IA.
 
 ## 2. Como a versão atual funciona
 
@@ -42,27 +42,39 @@ A aplicação atual não implementa envio intencional de conteúdo analisado a t
 
 O repositório é hospedado pelo GitHub. Ao visitar páginas do repositório, baixar arquivos ou interagir com issues/pull requests, o GitHub pode tratar dados técnicos e de conta segundo sua própria política de privacidade. Recursos externos incorporados na página também podem receber requisições do navegador. A aplicação instalada e a página de hospedagem são contextos distintos.
 
-## 6. Segurança
+
+## 6. Site institucional
+
+O site estático em `website/` é publicado pelo GitHub Pages. Na versão revisada:
+
+- Não há formulários, contas, analytics, pixels de rastreamento ou chamadas de API.
+- Não há fontes, bibliotecas ou imagens carregadas de CDNs externos; os recursos de interface são locais ao site.
+- A navegação para GitHub e outros destinos ocorre somente quando o visitante seleciona um link externo.
+- O provedor de hospedagem pode processar endereço IP, user-agent, horários de acesso e outros dados técnicos conforme seus próprios termos e políticas.
+
+O site institucional e a aplicação Web em desenvolvimento são componentes distintos. A interface Web executada localmente não envia conteúdo de entrada para um backend nesta etapa.
+
+## 7. Segurança
 
 O usuário deve manter o sistema operacional atualizado e utilizar arquivos de origem confiável. O leitor é estático e não executa nem compila automaticamente os arquivos importados. Ainda assim, parsers e ferramentas nativas podem conter vulnerabilidades.
 
 A auditoria de 2 de novembro de 2026 identificou limites de tamanho, alocação Intel HEX e captura de saída de subprocesso que precisam de correção antes de expor o leitor por API. Consulte [relatório de auditoria](../audit/2026-11-02-code-review.md).
 
-## 7. Direitos e legislação
+## 8. Direitos e legislação
 
 O responsável pelo projeto é Manoel E. S. S (identificador público: `mnl-nox`). Na versão atual, o mantenedor não opera um serviço central de contas ou coleta intencional de dados pessoais por telemetria. Direitos relacionados a dados tratados pelo GitHub ou por outros provedores devem ser exercidos diretamente junto a esses provedores.
 
 Se uma versão futura passar a tratar dados pessoais, o projeto deverá documentar finalidade, base legal, categorias de dados, retenção, compartilhamentos, canal do titular e medidas de segurança aplicáveis, inclusive conforme a Lei Geral de Proteção de Dados Pessoais (LGPD, Lei nº 13.709/2018), quando aplicável.
 
-## 8. Crianças e dados sensíveis
+## 9. Crianças e dados sensíveis
 
 O BinLab não foi projetado para coletar dados pessoais de crianças ou dados pessoais sensíveis. Não importe tais dados sem necessidade, autorização e salvaguardas apropriadas.
 
-## 9. Mudanças nesta política
+## 10. Mudanças nesta política
 
 Esta política será atualizada quando o comportamento de tratamento de dados mudar. Alterações materiais deverão ser descritas no changelog e associadas à versão do software.
 
-## 10. Contato e solicitações
+## 11. Contato e solicitações
 
 Para solicitações relacionadas à privacidade e ao tratamento de dados no âmbito do projeto, entre em contato com o responsável:
 

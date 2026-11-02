@@ -9,6 +9,8 @@
   <strong>Python core · React + TypeScript Web · Local-first · MIT</strong>
 </p>
 
+Site institucional: [BinLab Engineering](https://mnl-nox.github.io/BinLab/) · [Código-fonte do site](website/README.md).
+
 BinLab é um laboratório de engenharia computacional em evolução. O projeto combina ferramentas para representação numérica, lógica digital e inspeção estática de artefatos com uma arquitetura modular preparada para laboratórios de arquitetura de computadores, compiladores, sistemas operacionais, redes, segurança e computação científica.
 
 > **Estado do produto:** a versão Python 0.3.1 (CLI e GUI Tkinter) é a base funcional. A aplicação Web está em desenvolvimento ativo; nesta primeira entrega, o Binary & Logic Lab funciona localmente no navegador. API FastAPI, persistência e desktop Tauri ainda não estão integrados.
@@ -138,6 +140,8 @@ O avanço de cada etapa depende de testes, documentação, critérios de aceite 
 
 ## Documentação
 
+- [Site institucional](https://mnl-nox.github.io/BinLab/)
+- [Fonte e publicação do site](website/README.md)
 - [Plano de entregas](docs/ROADMAP.md)
 - [Arquitetura alvo](docs/architecture/overview.md)
 - [Arquitetura da aplicação Web](docs/architecture/web-application.md)

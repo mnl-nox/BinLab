@@ -4,6 +4,13 @@ Este projeto segue [Semantic Versioning](https://semver.org/).
 
 ## Não lançado
 
+### Website
+- Adicionado site institucional estático, responsivo e acessível em `website/`.
+- Incluídos visão do produto, laboratórios, arquitetura, segurança, instalação e roadmap.
+- Adicionados alternância de tema, navegação móvel, página 404 e validação de referências locais.
+- Criado workflow de publicação GitHub Pages com actions fixadas por SHA.
+- Política de privacidade ampliada para cobrir o site institucional e a fundação Web local.
+
 ### Web
 - Criada a fundação React + TypeScript + Vite + Tailwind CSS em \`apps/web/\`.
 - Adicionada navegação responsiva entre laboratórios e alternância de tema independente.

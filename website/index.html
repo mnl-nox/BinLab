@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1020">
+  <meta name="description" content="BinLab Engineering — laboratório local-first de ciência e engenharia computacional. Explore sistemas binários, arquitetura, compiladores, sistemas operacionais, redes e segurança.">
+  <meta property="og:title" content="BinLab Engineering">
+  <meta property="og:description" content="Computational Science & Technology Laboratory">
+  <meta property="og:type" content="website">
+  <title>BinLab Engineering — Computational Laboratory</title>
+  <link rel="icon" href="./assets/binlab-mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css">
+  <script defer src="./main.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Pular para o conteúdo</a>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="BinLab Engineering — início">
+      <span class="brand-mark">BL<span>.</span></span>
+      <span class="brand-name"><strong>BINLAB</strong><small>ENGINEERING</small></span>
+    </a>
+    <button class="menu-toggle" type="button" aria-label="Abrir navegação" aria-expanded="false" aria-controls="primary-nav">
+      <span></span><span></span>
+    </button>
+    <nav id="primary-nav" class="primary-nav" aria-label="Navegação principal">
+      <a href="#platform">Plataforma</a>
+      <a href="#laboratories">Laboratórios</a>
+      <a href="#architecture">Arquitetura</a>
+      <a href="#security">Segurança</a>
+      <a href="#roadmap">Roadmap</a>
+    </nav>
+    <div class="header-actions">
+      <button class="theme-toggle" type="button" aria-label="Alternar tema" title="Alternar tema">
+        <svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
+        <svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13Z"/></svg>
+      </button>
+      <a class="header-github" href="https://github.com/mnl-nox/BinLab" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section id="top" class="hero section-wrap">
+      <div class="hero-copy">
+        <div class="overline"><span class="pulse-dot"></span> COMPUTATIONAL SCIENCE & TECHNOLOGY</div>
+        <h1>Entenda a máquina.<br><span>Construa o laboratório.</span></h1>
+        <p class="hero-lede">Um ambiente de engenharia computacional para explorar a representação da informação, arquitetura de computadores, sistemas, redes e segurança — da lógica fundamental à análise avançada.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="https://github.com/mnl-nox/BinLab/tree/main/apps/web">Explorar aplicação Web <span aria-hidden="true">↗</span></a>
+          <a class="button button-secondary" href="#platform">Conhecer a plataforma <span aria-hidden="true">↓</span></a>
+        </div>
+        <div class="hero-meta"><span><i></i> Local-first</span><span>Open source</span><span>MIT License</span></div>
+      </div>
+      <div class="hero-visual" aria-label="Diagrama abstrato de dados binários e camadas de computação" role="img">
+        <div class="visual-top"><span>BINLAB / SYSTEM VIEW</span><span>01 — 08</span></div>
+        <div class="bit-field" aria-hidden="true">
+          <span>01001010</span><span>11001001</span><span>00110110</span><span>10101100</span>
+          <span>01100001</span><span>11010100</span><span>00101101</span><span>10011010</span>
+        </div>
+        <div class="architecture-stack" aria-hidden="true">
+          <div class="stack-row stack-top"><b>08</b><span>APPLICATION LAYER</span><i></i></div>
+          <div class="stack-row"><b>07</b><span>COMPUTATIONAL ENGINES</span><i></i></div>
+          <div class="stack-row"><b>06</b><span>DOMAIN & CORE</span><i></i></div>
+          <div class="stack-row stack-bottom"><b>05</b><span>HARDWARE / SYSTEM</span><i></i></div>
+        </div>
+        <div class="visual-foot"><span>INPUT → PROCESS → OUTPUT</span><span class="visual-state">● SYSTEM DESIGN</span></div>
+      </div>
+    </section>
+
+    <section class="signal-strip" aria-label="Princípios do projeto">
+      <div><strong>01</strong><span>Primeiros princípios</span></div>
+      <div><strong>02</strong><span>Arquitetura modular</span></div>
+      <div><strong>03</strong><span>Experimentação reproduzível</span></div>
+      <div><strong>04</strong><span>Segurança por padrão</span></div>
+    </section>
+
+    <section id="platform" class="section-wrap content-section">
+      <div class="section-intro">
+        <span class="eyebrow">01 / PLATAFORMA</span>
+        <h2>Uma bancada de engenharia,<br><em>não uma caixa-preta.</em></h2>
+        <p>BinLab está evoluindo de uma ferramenta Python de terminal e desktop para uma plataforma local-first. Cada camada tem responsabilidade definida; cada recurso deve ser verificável, testável e documentado.</p>
+      </div>
+      <div class="platform-grid">
+        <article class="platform-card">
+          <span class="card-index">01 — CORE</span>
+          <div class="card-icon">⌘</div>
+          <h3>Núcleo computacional</h3>
+          <p>Domínio Python independente de interface, com regras numéricas, operações lógicas e leitura estática de artefatos.</p>
+          <span class="card-status status-available">Disponível · Python</span>
+        </article>
+        <article class="platform-card">
+          <span class="card-index">02 — WEB</span>
+          <div class="card-icon">▤</div>
+          <h3>Aplicação Web</h3>
+          <p>Interface React e TypeScript com navegação modular, tema independente e Binary & Logic Lab local.</p>
+          <span class="card-status status-progress">Fundação implementada</span>
+        </article>
+        <article class="platform-card">
+          <span class="card-index">03 — API</span>
+          <div class="card-icon">⌁</div>
+          <h3>Serviços locais</h3>
+          <p>API versionada e contratos explícitos para orquestrar casos de uso sem acoplar a interface ao domínio.</p>
+          <span class="card-status status-planned">Planejado · bloqueio de segurança</span>
+        </article>
+        <article class="platform-card">
+          <span class="card-index">04 — DESKTOP</span>
+          <div class="card-icon">▣</div>
+          <h3>Ambiente desktop</h3>
+          <p>Shell Tauri para integrar a experiência local com ciclo de vida supervisionado do backend.</p>
+          <span class="card-status status-planned">Planejado</span>
+        </article>
+      </div>
+    </section>
+
+    <section id="laboratories" class="section-wrap content-section laboratories-section">
+      <div class="section-intro">
+        <span class="eyebrow">02 / LABORATÓRIOS</span>
+        <h2>Do bit ao sistema.<br><em>Do sistema ao experimento.</em></h2>
+        <p>Os laboratórios serão ambientes especializados com três modos de trabalho: aprender conceitos, experimentar parâmetros e investigar artefatos ou comportamentos.</p>
+      </div>
+      <div class="lab-list">
+        <article class="lab-item lab-active"><span class="lab-number">01</span><div class="lab-symbol">01·0</div><div class="lab-copy"><h3>Binary & Logic</h3><p>Representação numérica, complemento de dois, portas lógicas, somadores e análise de bits.</p></div><span class="lab-label">Fundação disponível</span></article>
+        <article class="lab-item"><span class="lab-number">02</span><div class="lab-symbol">CPU</div><div class="lab-copy"><h3>Computer Architecture</h3><p>ISA, datapath, ciclo de instrução, registradores, cache, pipeline e memória.</p></div><span class="lab-label">Planejado</span></article>
+        <article class="lab-item"><span class="lab-number">03</span><div class="lab-symbol">C/ASM</div><div class="lab-copy"><h3>Compiler & Code</h3><p>Compilação, linking, ELF, ABI, assembly, análise de código e toolchains.</p></div><span class="lab-label">Planejado</span></article>
+        <article class="lab-item"><span class="lab-number">04</span><div class="lab-symbol">KRN</div><div class="lab-copy"><h3>Operating Systems</h3><p>Processos, threads, escalonamento, memória virtual, syscalls e sistemas de arquivos.</p></div><span class="lab-label">Planejado</span></article>
+        <article class="lab-item"><span class="lab-number">05</span><div class="lab-symbol">NET</div><div class="lab-copy"><h3>Network & Web</h3><p>TCP/IP, DNS, HTTP, roteamento, diagnóstico, observabilidade e protocolos.</p></div><span class="lab-label">Planejado</span></article>
+        <article class="lab-item"><span class="lab-number">06</span><div class="lab-symbol">SEC</div><div class="lab-copy"><h3>Security & Forensics</h3><p>Análise estática, hardening, investigação, evidências e experimentos controlados.</p></div><span class="lab-label">Planejado</span></article>
+        <article class="lab-item"><span class="lab-number">07</span><div class="lab-symbol">Σx</div><div class="lab-copy"><h3>Scientific Computing</h3><p>Métodos numéricos, simulação, visualização e experimentação científica.</p></div><span class="lab-label">Planejado</span></article>
+        <article class="lab-item"><span class="lab-number">08</span><div class="lab-symbol">AI</div><div class="lab-copy"><h3>AI & Data</h3><p>Dados, modelos, avaliação e inferência local opcional.</p></div><span class="lab-label">Planejado</span></article>
+      </div>
+    </section>
+
+    <section id="architecture" class="section-wrap content-section architecture-section">
+      <div class="section-intro">
+        <span class="eyebrow">03 / ARQUITETURA</span>
+        <h2>Separação clara.<br><em>Dependências controladas.</em></h2>
+        <p>O desenho inicial é um monólito modular: um backend local, módulos coesos e contratos versionados. Não há necessidade de distribuir complexidade em microserviços antes de existir uma razão técnica.</p>
+      </div>
+      <div class="architecture-diagram">
+        <div class="arch-client-row"><div class="arch-node"><small>INTERFACE 01</small><strong>Web · React / TS</strong></div><div class="arch-node"><small>INTERFACE 02</small><strong>Desktop · Tauri</strong></div></div>
+        <div class="arch-connector"><span>HTTP /api/v1 · contrato tipado</span></div>
+        <div class="arch-node arch-api"><small>ADAPTER</small><strong>API local · FastAPI</strong><p>Rotas, autenticação, validação e erros HTTP</p></div>
+        <div class="arch-connector"><span>casos de uso · DTOs</span></div>
+        <div class="arch-node arch-app"><small>APPLICATION</small><strong>Serviços de aplicação</strong><p>Orquestração, políticas e portas</p></div>
+        <div class="arch-connector"><span>regras e invariantes</span></div>
+        <div class="arch-node arch-domain"><small>CORE</small><strong>Domínio Python</strong><p>Regras puras, sem dependência de framework ou interface</p></div>
+        <div class="arch-connector"><span>interfaces / adapters</span></div>
+        <div class="arch-client-row arch-infra"><div class="arch-node"><small>PERSISTÊNCIA</small><strong>SQLite · arquivos</strong></div><div class="arch-node"><small>PROCESSOS</small><strong>Ferramentas locais</strong></div></div>
+      </div>
+      <div class="architecture-rules">
+        <div><b>01</b><span>O domínio não importa UI, API ou banco.</span></div>
+        <div><b>02</b><span>Componentes Web não acessam filesystem diretamente.</span></div>
+        <div><b>03</b><span>Contratos HTTP são versionados e testados.</span></div>
+        <div><b>04</b><span>Dados locais permanecem locais por padrão.</span></div>
+      </div>
+    </section>
+
+    <section id="security" class="section-wrap content-section security-section">
+      <div class="security-copy">
+        <span class="eyebrow">04 / SEGURANÇA</span>
+        <h2>Seguro por desenho.<br><em>Verificável na prática.</em></h2>
+        <p>Segurança não é um módulo isolado. É uma propriedade da arquitetura, das fronteiras de entrada e dos processos que executam ferramentas locais.</p>
+        <a class="text-link" href="https://github.com/mnl-nox/BinLab/blob/main/docs/security/threat-model.md" target="_blank" rel="noopener noreferrer">Ler o modelo de ameaças <span>↗</span></a>
+      </div>
+      <div class="security-points">
+        <div><span class="security-check">01</span><div><strong>Inspeção estática</strong><p>Artefatos importados não são executados nem compilados automaticamente.</p></div></div>
+        <div><span class="security-check">02</span><div><strong>Limites de recursos</strong><p>Leitura, parsing, memória e subprocessos possuem limites documentados.</p></div></div>
+        <div><span class="security-check">03</span><div><strong>Serviço local protegido</strong><p>Loopback, origem explícita, autenticação, CSRF e DNS rebinding serão tratados antes da API.</p></div></div>
+        <div><span class="security-check">04</span><div><strong>Auditoria contínua</strong><p>Testes de abuso, fuzzing e revisão complementar fazem parte dos critérios de liberação.</p></div></div>
+      </div>
+      <div class="security-notice"><span>!</span><p><strong>Estado atual:</strong> a inspeção de artefatos via API permanece bloqueada pela Issue #2 até a conclusão de fuzz/property tests, testes de fronteira e revisão de segurança.</p></div>
+    </section>
+
+    <section class="section-wrap quickstart-section">
+      <div class="quickstart-copy">
+        <span class="eyebrow">05 / PRIMEIROS PASSOS</span>
+        <h2>Comece pelo<br><em>que já existe.</em></h2>
+        <p>Clone o repositório e execute a versão Python atual. Para explorar a fundação Web, inicie o Vite dentro de <code>apps/web</code>.</p>
+        <div class="quick-links"><a href="https://github.com/mnl-nox/BinLab" target="_blank" rel="noopener noreferrer">Repositório <span>↗</span></a><a href="https://github.com/mnl-nox/BinLab/blob/main/README.md" target="_blank" rel="noopener noreferrer">Documentação principal <span>↗</span></a></div>
+      </div>
+      <div class="code-panels">
+        <div class="code-panel"><div class="code-title"><span>PYTHON / CLI</span><span>01</span></div><pre><code>git clone https://github.com/mnl-nox/BinLab.git
+cd BinLab
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install .
+binlab</code></pre></div>
+        <div class="code-panel"><div class="code-title"><span>WEB / DEVELOPMENT</span><span>02</span></div><pre><code>cd apps/web
+npm install
+npm run dev
+
+# validation
+npm test
+npm run build</code></pre></div>
+      </div>
+    </section>
+
+    <section id="roadmap" class="section-wrap content-section roadmap-section">
+      <div class="section-intro">
+        <span class="eyebrow">06 / ROADMAP</span>
+        <h2>Evolução incremental.<br><em>Critérios antes de promessas.</em></h2>
+        <p>O roadmap é público. Cada etapa só será considerada concluída quando código, testes, documentação e critérios de aceite estiverem alinhados.</p>
+      </div>
+      <div class="roadmap-track">
+        <div class="roadmap-step complete"><span>01</span><div><strong>Fundação Python</strong><small>CLI, GUI e domínio atual</small></div><i>Base existente</i></div>
+        <div class="roadmap-step active"><span>02</span><div><strong>Aplicação Web</strong><small>Interface modular e Binary & Logic</small></div><i>Em desenvolvimento</i></div>
+        <div class="roadmap-step"><span>03</span><div><strong>Backend seguro</strong><small>FastAPI, contratos e autenticação local</small></div><i>Bloqueado por Issue #2</i></div>
+        <div class="roadmap-step"><span>04</span><div><strong>Desktop Tauri</strong><small>Lifecycle e integração local</small></div><i>Planejado</i></div>
+        <div class="roadmap-step"><span>05</span><div><strong>Laboratórios avançados</strong><small>Arquitetura, OS, redes, segurança e ciência</small></div><i>Planejado</i></div>
+        <div class="roadmap-step"><span>06</span><div><strong>Projetos e experimentos</strong><small>SQLite, evidências e exportação</small></div><i>Planejado</i></div>
+      </div>
+      <a class="text-link" href="https://github.com/mnl-nox/BinLab/blob/main/docs/ROADMAP.md" target="_blank" rel="noopener noreferrer">Acompanhar roadmap completo <span>↗</span></a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-main">
+      <a class="brand" href="#top"><span class="brand-mark">BL<span>.</span></span><span class="brand-name"><strong>BINLAB</strong><small>ENGINEERING</small></span></a>
+      <p>Computational Science & Technology Laboratory.<br>Entender os fundamentos. Construir com método.</p>
+      <a class="footer-github" href="https://github.com/mnl-nox/BinLab" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Manoel E. S. S — mnl-nox</span><span><a href="https://github.com/mnl-nox/BinLab/blob/main/docs/legal/PRIVACY.md">Privacidade</a> · <a href="https://github.com/mnl-nox/BinLab/blob/main/SECURITY.md">Segurança</a></span><span>MIT License · Local-first by design</span></div>
+  </footer>
+</body>
+</html>

@@ -44,7 +44,9 @@ As etapas podem ter subentregas menores. Uma etapa só é considerada concluída
 - [ ] Revisão funcional, acessibilidade e responsividade em navegador.
 - [ ] Cliente HTTP tipado e contratos de integração, somente após definição da API.
 - [ ] Backend FastAPI: bloqueado pela Issue #2 até fuzz/property tests, testes de fronteira e revisão complementar.
-- [ ] Integração Tauri, persistência e site institucional: etapas posteriores.
+- [x] Fonte do site institucional estático criada em `website/`, com workflow GitHub Pages e validação de links.
+- [ ] Primeiro deploy do site e confirmação da URL pública.
+- [ ] Integração Tauri e persistência: etapas posteriores.
 
 ## Etapa 0 — critérios de aceite
 
