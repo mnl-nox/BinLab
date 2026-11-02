@@ -2,13 +2,7 @@
   <img src="images/binlab-logo.svg" alt="BL" width="120">
 </p>
 
-<p align="center">
-  <img src="https://img.shields.io/badge/CI-GitHub_Actions-2088FF?logo=githubactions&logoColor=white" alt="CI com GitHub Actions">
-  <img src="https://img.shields.io/badge/version-0.3.1-49e3c1" alt="Versão 0.3.1">
-  <img src="https://img.shields.io/badge/Python-3.8%2B-3776ab?logo=python&logoColor=white" alt="Python 3.8+">
-  <img src="https://img.shields.io/badge/Linux-supported-fcc624?logo=linux&logoColor=black" alt="Linux">
-  <img src="https://img.shields.io/badge/license-MIT-blue" alt="Licença MIT">
-</p>
+**BinLab 0.3.1** · Python 3.8+ · Linux · Licença MIT
 
 BinLab é uma aplicação de terminal e desktop para aprender operações numéricas e lógicas, converter bases e inspecionar estaticamente dados binários, dumps hexadecimais, fontes C e assembly.
 
@@ -26,7 +20,7 @@ BinLab é uma aplicação de terminal e desktop para aprender operações numér
 ## Requisitos atuais
 
 - Python 3.8 ou superior.
-- GNU `objdump` opcional para disassemblagem; sua disponibilidade depende do formato e da arquitetura.
+- GNU `objdump` opcional para desassemblagem; sua disponibilidade depende do formato e da arquitetura.
 
 ## Instalação e execução
 
@@ -72,7 +66,7 @@ src/binlab/domain/ regras puras para conversão, operações e análise
 src/binlab/        adaptadores CLI/GUI e leitura estática
 src/halfAdder.py   ponto de entrada legado
 doc/               documentação da versão atual
-docs/              arquitetura e plano de evolução
+docs/              arquitetura, auditoria e plano de evolução
 images/            logo e diagrama SVG
 .github/workflows/ integração contínua, tags e releases
 tests/              testes unitários
@@ -88,6 +82,9 @@ tests/              testes unitários
 - [Arquitetura alvo](docs/architecture/overview.md)
 - [Contratos](docs/contracts/README.md)
 - [Modelo de ameaças](docs/security/threat-model.md)
+- [Auditoria técnica de 2 de novembro de 2026](docs/audit/2026-11-02-code-review.md)
+- [Licenciamento](docs/legal/LICENSING.md)
+- [Política de privacidade](docs/legal/PRIVACY.md)
 - [CI/CD, tags e versões](doc/ci-cd.md)
 - [Interface gráfica atual](doc/gui.md)
 - [Política de segurança](SECURITY.md)
@@ -97,4 +94,4 @@ tests/              testes unitários
 
 O leitor não executa nem compila os arquivos. As estatísticas de C/assembly são heurísticas. Um executável compilado não contém necessariamente o código C original; a desassemblagem depende dos formatos e processadores suportados por `objdump`.
 
-A auditoria inicial também identificou a necessidade de impor limites de tamanho e memória ao processamento de arquivos, especialmente Intel HEX esparso. Esse endurecimento é requisito antes de disponibilizar a inspeção pela API.
+A auditoria identificou limites de tamanho e memória que precisam ser corrigidos antes de disponibilizar a inspeção pela API. Consulte o relatório técnico. A aplicação instalada é local-first; o repositório é hospedado pelo GitHub, sujeito às políticas desse provedor.
