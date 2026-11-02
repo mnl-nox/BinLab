@@ -63,11 +63,24 @@ class HexReaderTests(unittest.TestCase):
             reader.parse_hex_text(text)
 
     def test_decoded_span_is_bounded(self):
-        text = "\n".join((
-            intel_record(reader.MAX_HEX_DECODED_BYTES, 0, b"X"),
+        records = []
+        for index in range(18):
+            absolute = index * 65535
+            upper = absolute >> 16
+            offset = absolute & 0xFFFF
+            records.append(intel_record(0, 4, upper.to_bytes(2, "big")))
+            records.append(intel_record(offset, 0, b"X"))
+        records.append(intel_record(0, 1))
+        with self.assertRaisesRegex(ValueError, "Span Intel HEX"):
+            reader.parse_hex_text("\\n".join(records))
+
+    def test_data_record_address_overflow_is_rejected(self):
+        text = "\\n".join((
+            intel_record(0, 4, b"\\xff\\xff"),
+            intel_record(0xFFFF, 0, b"XX"),
             intel_record(0, 1),
         ))
-        with self.assertRaisesRegex(ValueError, "Span Intel HEX"):
+        with self.assertRaisesRegex(ValueError, "32 bits"):
             reader.parse_hex_text(text)
 
     def test_hex_dump_and_format_signature(self):
