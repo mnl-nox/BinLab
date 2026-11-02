@@ -88,6 +88,10 @@ class HexReaderTests(unittest.TestCase):
         self.assertEqual(reader.detect_format(b"\x7fELF"), "ELF")
         self.assertIn("Formato provável: ELF", reader.inspect_binary(b"\x7fELF", "demo", disassemble=False))
 
+    def test_intel_hex_record_count_is_bounded(self):
+        with self.assertRaisesRegex(ValueError, "limite de"):
+            reader.parse_hex_text("\\n" * (reader.MAX_HEX_RECORDS + 1))
+
     def test_raw_hex_size_is_bounded(self):
         with self.assertRaisesRegex(ValueError, "excede o limite"):
             reader.parse_hex_text("AA" * (reader.MAX_HEX_DECODED_BYTES + 1))
