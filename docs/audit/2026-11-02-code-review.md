@@ -14,7 +14,7 @@ O domínio matemático é pequeno e tem testes unitários básicos. O principal 
 
 ### BL-SEC-001 — Leitura de arquivos sem limite de tamanho
 
-- **Status:** Implementado nesta branch; aguardando CI e revisão final.
+- **Status:** Implementado nesta branch; CI da matriz Python 3.8/3.13 aprovado no commit de código 208c3fd4e2bf6b9dd20728cf1badbd84a77f544a. Revisão de segurança e fuzzing complementar ainda pendentes.
 - **Correção:** leitura limitada a 2 MiB para fontes, 8 MiB para binários e 4 MiB para texto HEX, usando leitura de no máximo limite + 1 byte.
 
 - **Severidade:** Alta
@@ -26,7 +26,7 @@ O domínio matemático é pequeno e tem testes unitários básicos. O principal 
 
 ### BL-SEC-002 — Intel HEX esparso pode provocar alocação desproporcional
 
-- **Status:** Implementado nesta branch; aguardando CI e revisão final.
+- **Status:** Implementado nesta branch; CI da matriz Python 3.8/3.13 aprovado no commit de código 208c3fd4e2bf6b9dd20728cf1badbd84a77f544a. Revisão de segurança e fuzzing complementar ainda pendentes.
 - **Correção:** span decodificado máximo de 1 MiB, lacuna máxima de 64 KiB, até 65.536 linhas/registros, endereços limitados a 32 bits e materialização somente após validação dos segmentos.
 
 - **Severidade:** Alta
@@ -38,7 +38,7 @@ O domínio matemático é pequeno e tem testes unitários básicos. O principal 
 
 ### BL-SEC-003 — Validação incompleta do protocolo Intel HEX
 
-- **Status:** Implementado nesta branch; aguardando CI e revisão final.
+- **Status:** Implementado nesta branch; CI da matriz Python 3.8/3.13 aprovado no commit de código 208c3fd4e2bf6b9dd20728cf1badbd84a77f544a. Revisão de segurança e fuzzing complementar ainda pendentes.
 - **Correção:** EOF obrigatório e terminal, validação de contagem/checksum/campos dos tipos 00–05 suportados, rejeição de sobreposição e dados após EOF.
 
 - **Severidade:** Média
@@ -50,7 +50,7 @@ O domínio matemático é pequeno e tem testes unitários básicos. O principal 
 
 ### BL-SEC-004 — Saída de objdump só é limitada depois de capturada
 
-- **Status:** Implementado nesta branch; aguardando CI e revisão final.
+- **Status:** Implementado nesta branch; CI da matriz Python 3.8/3.13 aprovado no commit de código 208c3fd4e2bf6b9dd20728cf1badbd84a77f544a. Revisão de segurança e fuzzing complementar ainda pendentes.
 - **Correção:** subprocesso com stdin fechado, ambiente reduzido, sem shell, stdout/stderr drenados por threads e teto combinado de 64 KiB durante execução, timeout de 20 segundos.
 
 - **Severidade:** Média/Alta
@@ -62,7 +62,7 @@ O domínio matemático é pequeno e tem testes unitários básicos. O principal 
 
 ### BL-SEC-005 — Operações de bits sem limites de largura/deslocamento
 
-- **Status:** Implementado nesta branch; aguardando CI e revisão final.
+- **Status:** Implementado nesta branch; CI da matriz Python 3.8/3.13 aprovado no commit de código 208c3fd4e2bf6b9dd20728cf1badbd84a77f544a. Revisão de segurança e fuzzing complementar ainda pendentes.
 - **Correção:** análise limitada a 4096 bits, operandos a 4096 bits, NOT a 4096 bits, shifts a 4096 posições e validação runtime que rejeita bool.
 
 - **Severidade:** Média
@@ -74,7 +74,7 @@ O domínio matemático é pequeno e tem testes unitários básicos. O principal 
 
 ### BL-SEC-006 — Extração de strings materializa todos os resultados
 
-- **Status:** Implementado nesta branch; aguardando CI e revisão final.
+- **Status:** Implementado nesta branch; CI da matriz Python 3.8/3.13 aprovado no commit de código 208c3fd4e2bf6b9dd20728cf1badbd84a77f544a. Revisão de segurança e fuzzing complementar ainda pendentes.
 - **Correção:** varredura incremental que interrompe após 30 strings, cada uma limitada a 160 caracteres.
 
 - **Severidade:** Média
@@ -85,7 +85,7 @@ O domínio matemático é pequeno e tem testes unitários básicos. O principal 
 
 ### BL-ENG-001 — Contratos de domínio dependem de type hints, não de validação de runtime
 
-- **Status:** Implementado nesta branch; aguardando CI e revisão final.
+- **Status:** Implementado nesta branch; CI da matriz Python 3.8/3.13 aprovado no commit de código 208c3fd4e2bf6b9dd20728cf1badbd84a77f544a. Revisão de segurança e fuzzing complementar ainda pendentes.
 - **Correção:** validação runtime para texto, inteiros e bases; bool rejeitado como inteiro nas APIs de domínio.
 
 - **Severidade:** Média
@@ -148,7 +148,9 @@ O README carregava badges remotos de shields.io; eles foram removidos nesta bran
 
 ## Resultado de validação CI
 
-Na execução GitHub Actions #27, os dois jobs (Python 3.8 e 3.13) concluíram com `success`, incluindo compilação, instalação, importação, testes, build e limpeza pós-job. Essa execução antecede os commits finais de metadados legais e pinning de actions; a revisão final desta branch ainda exige execução CI associada ao HEAD atualizado.
+- Execução #59 (`41497295027`): jobs Python 3.8 e 3.13 concluídos com `success` no commit de código `208c3fd4e2bf6b9dd20728cf1badbd84a77f544a`. Ambos passaram por compileall, instalação, importação, 30 testes unitários, build de wheel/source distribution e limpeza pós-job.
+- Depois dessa execução, somente documentação da auditoria foi alterada nesta branch; o código testado não mudou.
+- A execução #27 refere-se ao baseline anterior e não é usada como evidência para este hardening.
 
 ## Portão de segurança antes da API
 
