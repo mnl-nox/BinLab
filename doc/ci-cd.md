@@ -20,7 +20,7 @@ python -m build
 
 ## Releases versionadas
 
-`.github/workflows/release.yml` é acionado por tags `v*`. Compara a tag com `binlab.__version__`, constrói wheel e source distribution e cria um GitHub Release. Atualize a versão e o changelog antes de marcar uma release.
+`.github/workflows/release.yml` é acionado por tags `v*`. Compara a tag com `binlab.__version__`, compila fontes e testes, instala o pacote, executa a suíte `unittest`, constrói wheel e source distribution e só então cria um GitHub Release. Atualize a versão e o changelog antes de marcar uma release.
 
 ```bash
 git switch main
