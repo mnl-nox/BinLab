@@ -22,6 +22,12 @@ classifiers = [
 ]
 dynamic = ["version"]
 
+[project.urls]
+Homepage = "https://github.com/mnl-nox/BinLab"
+Repository = "https://github.com/mnl-nox/BinLab"
+Issues = "https://github.com/mnl-nox/BinLab/issues"
+Security = "https://github.com/mnl-nox/BinLab/security"
+
 [project.scripts]
 binlab = "binlab.cli:main"
 binlab-gui = "binlab.gui:main"
