@@ -14,7 +14,7 @@ Site estático do BinLab Engineering. O conteúdo é servido diretamente pelo Gi
 
 O workflow `.github/workflows/pages.yml` empacota a pasta `website/` e publica em GitHub Pages após push na `main`. As actions externas estão fixadas em SHAs completos.
 
-A primeira publicação exige que GitHub Pages esteja habilitado para a origem **GitHub Actions** nas configurações do repositório. A URL esperada para este repositório é `https://mnl-nox.github.io/BinLab/`, sujeita à configuração e conclusão do primeiro deploy.
+**Ação manual necessária:** em GitHub, abra **Settings → Pages → Build and deployment → Source** e selecione **GitHub Actions**. O token de CI não possui permissão administrativa para habilitar Pages automaticamente. Após essa configuração, faça um novo push em `main` (ou execute novamente o workflow). A URL esperada é `https://mnl-nox.github.io/BinLab/`; ela só estará disponível após o primeiro deploy bem-sucedido.
 
 ## Limites
 
