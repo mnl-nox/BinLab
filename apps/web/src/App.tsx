@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import {
   Activity, ArrowLeftRight, Binary, BookOpen, Boxes, Cpu, FileCode2,
-  FlaskConical, GitBranch, HardDrive, Menu, Moon, Network, Search,
+  GitBranch, HardDrive, Menu, Moon, Network,
   ShieldCheck, Sun, Terminal, X
 } from "lucide-react";
 import { bitwiseOperation, convertInteger, formatInteger, parseInteger, type NumericBase } from "./domain/numbers";
@@ -26,11 +26,9 @@ const baseOptions: { value: NumericBase; label: string }[] = [
 function BinaryLab() {
   const [input, setInput] = useState("255");
   const [base, setBase] = useState<NumericBase>(10);
-  const [error, setError] = useState("");
   const [left, setLeft] = useState("1100");
   const [right, setRight] = useState("1010");
   const [operator, setOperator] = useState<"&" | "|" | "^" | "<<">("&");
-  const [bitError, setBitError] = useState("");
 
   const converted = useMemo(() => {
     try { return convertInteger(input, base); } catch { return null; }
@@ -55,16 +53,15 @@ function BinaryLab() {
           <div className="panel-heading"><div className="panel-icon"><ArrowLeftRight size={18} /></div><div><h3>Conversor de bases</h3><p>Um inteiro, quatro representações</p></div></div>
           <label className="field-label" htmlFor="number-input">Valor de entrada</label>
           <div className="input-row">
-            <input id="number-input" value={input} onChange={(event) => { setInput(event.target.value); setError(""); }} spellCheck={false} autoComplete="off" />
+            <input id="number-input" value={input} onChange={(event) => setInput(event.target.value)} spellCheck={false} autoComplete="off" />
             <select aria-label="Base de entrada" value={base} onChange={(event) => setBase(Number(event.target.value) as NumericBase)}>
               {baseOptions.map((option) => <option key={option.value} value={option.value}>Base {option.value}</option>)}
             </select>
           </div>
-          {error && <p className="error-text">{error}</p>}
           <div className="result-list">
             {baseOptions.map((option) => <div className="result-row" key={option.value}><span>{option.label}</span><code>{converted?.[option.value] ?? "—"}</code></div>)}
           </div>
-          <p className="helper-text">Inteiros de precisão arbitrária via BigInt. Prefixos 0b, 0o e 0x identificam as bases.</p>
+          <p className="helper-text">Inteiros via BigInt. A saída usa prefixos 0b, 0o e 0x para identificar as bases.</p>
         </section>
         <section className="panel logic-panel">
           <div className="panel-heading"><div className="panel-icon"><Binary size={18} /></div><div><h3>Operações bit a bit</h3><p>Manipulação direta de bits</p></div></div>
@@ -79,7 +76,6 @@ function BinaryLab() {
           <label className="field-label" htmlFor="operand-b">{operator === "<<" ? "Deslocamento · decimal" : "Operando B · binário"}</label>
           <input id="operand-b" className="full-input mono" value={right} onChange={(event) => setRight(event.target.value)} spellCheck={false} />
           <div className="logic-result"><span>Resultado</span><code>{bitResult ?? "Entrada inválida"}</code></div>
-          {bitError && <p className="error-text">{bitError}</p>}
           <p className="helper-text">O deslocamento é limitado a 4096 posições. Os operandos são interpretados como inteiros.</p>
         </section>
       </div>
