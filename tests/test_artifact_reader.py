@@ -90,7 +90,7 @@ class HexReaderTests(unittest.TestCase):
 
     def test_intel_hex_record_count_is_bounded(self):
         with self.assertRaisesRegex(ValueError, "limite de"):
-            reader.parse_hex_text("\\n" * (reader.MAX_HEX_RECORDS + 1))
+            reader.parse_hex_text(chr(10) * (reader.MAX_HEX_RECORDS + 1))
 
     def test_raw_hex_size_is_bounded(self):
         with self.assertRaisesRegex(ValueError, "excede o limite"):
