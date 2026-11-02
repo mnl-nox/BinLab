@@ -76,9 +76,9 @@ O domínio matemático é pequeno e tem testes unitários básicos. O principal 
 
 - **Severidade:** Média (supply chain)
 - **Arquivos:** `.github/workflows/*.yml`
-- **Evidência:** referências como `actions/checkout@v7` e `actions/setup-python@v7` não fixam o commit exato.
+- **Evidência original:** os workflows usavam tags mutáveis para `actions/checkout` e `actions/setup-python`.
 - **Impacto:** uma tag de action pode mudar e alterar código executado no pipeline.
-- **Correção requerida:** fixar cada action externa a SHA completo verificado e manter comentário com a versão correspondente; habilitar Dependabot para GitHub Actions e revisar atualizações.
+- **Status:** corrigido nesta branch para `actions/checkout` e `actions/setup-python` nos workflows de CI e release, com SHAs completos e comentários de versão; Dependabot semanal permanece habilitado. Revalidar periodicamente as referências e incluir qualquer action externa futura.
 - **Referência:** GitHub recomenda pinning por SHA completo como a forma imutável de referenciar uma action: https://docs.github.com/en/actions/reference/security/secure-use
 
 ### BL-CI-002 — Workflow de release não repetia a suíte de testes
@@ -122,12 +122,12 @@ O README carregava badges remotos de shields.io; eles foram removidos nesta bran
 - Workflow de release passou a executar testes antes da publicação.
 - O arquivo `LICENSE` mantém a licença MIT válida e agora identifica o titular declarado pelo mantenedor: Manoel E. S. S (mnl-nox).
 - O contato de privacidade informado pelo mantenedor foi publicado em `docs/legal/PRIVACY.md`; o endereço é público e não há SLA de resposta declarado.
-- Ações GitHub ainda usam tags mutáveis; Dependabot semanal foi configurado em `.github/dependabot.yml`; o pinning por SHA completo continua aberto em [issue #3](https://github.com/mnl-nox/BinLab/issues/3).
+- As actions usadas nos workflows de CI e release foram fixadas em SHAs completos verificados; Dependabot semanal está configurado em `.github/dependabot.yml`. A issue #3 permanece para governança adicional, revisão de permissões, SBOM/attestations e demais controles de supply chain.
 - Correção de parser e limites de recursos está rastreada em [issue #2](https://github.com/mnl-nox/BinLab/issues/2).
 
 ## Resultado de validação CI
 
-Na execução GitHub Actions #27, os passos de compilação, instalação do pacote, importação, testes unitários e build de wheel/source distribution concluíram com sucesso em Python 3.8 e 3.13. No momento da consulta, o runner ainda estava finalizando os passos de limpeza pós-job; por isso, o resultado de job ainda não havia sido marcado como conclusão final.
+Na execução GitHub Actions #27, os dois jobs (Python 3.8 e 3.13) concluíram com `success`, incluindo compilação, instalação, importação, testes, build e limpeza pós-job. Essa execução antecede os commits finais de metadados legais e pinning de actions; a revisão final desta branch ainda exige execução CI associada ao HEAD atualizado.
 
 ## Portão de segurança antes da API
 
