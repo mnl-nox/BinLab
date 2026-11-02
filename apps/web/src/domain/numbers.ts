@@ -5,7 +5,7 @@ const MAX_OPERAND_BITS = 4096;
 export function parseInteger(input: string, base: NumericBase): bigint {
   const normalized = input.trim().replaceAll("_", "");
   if (!normalized) throw new Error("Informe um valor.");
-  if (normalized.length > MAX_INPUT_DIGITS + 1) throw new Error("Entrada excede 4096 dígitos.");
+  if (normalized.replace(/^[+-]/, "").length > MAX_INPUT_DIGITS) throw new Error("Entrada excede 4096 dígitos.");
 
   const pattern: Record<NumericBase, RegExp> = {
     2: /^[+-]?[01]+$/,
