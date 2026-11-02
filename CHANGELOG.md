@@ -2,6 +2,16 @@
 
 Este projeto segue [Semantic Versioning](https://semver.org/).
 
+## Não lançado
+
+### Segurança e documentação
+
+- Auditoria estática documentada com achados e critérios de bloqueio para a futura API.
+- Política de privacidade da versão 0.3.1 e escopo da licença MIT documentados.
+- README atualizado para não carregar badges remotos de terceiros.
+- Metadados do pacote agora apontam para repositório, issues e canal de segurança.
+- Workflow de release reforçado para executar testes antes de publicar.
+
 ## 0.3.1 — 2026-10-11
 
 ### Corrigido

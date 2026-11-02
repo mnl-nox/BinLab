@@ -2,29 +2,42 @@
 
 ## Integração contínua
 
-`.github/workflows/ci.yml` executa em pull requests e em pushes para `main` e `feat/**`. Em Python 3.8 e 3.13, compila os módulos, instala o pacote, confirma a importação e executa a suíte `unittest`. A permissão do token fica somente em leitura. Localmente, rode `python -m unittest discover -s tests -v`.
+`.github/workflows/ci.yml` executa em pull requests e em pushes para `main`, `feat/**`, `stage/**` e `architecture/**`. Em Python 3.8 e 3.13, compila fontes e testes, instala o pacote, verifica a importação, executa `unittest` e constrói wheel e source distribution. O token tem permissão somente de leitura nesse workflow.
+
+Execução local:
+
+```bash
+python -m compileall -q src tests
+python -m pip install .
+python -m unittest discover -s tests -v
+python -m pip install build
+python -m build
+```
 
 ## Tags automáticas para funcionalidades
 
-`.github/workflows/feature-tags.yml` é acionado em cada push para uma branch `feat/*`. Cria e envia uma tag anotada para o commit recebido, no padrão:
-
-```text
-feat/<nome-da-branch>/<sha-completo>
-```
-
-Assim cada commit publicado na branch de funcionalidade possui sua própria referência imutável. O workflow precisa da permissão de repositório `contents: write` concedida ao `GITHUB_TOKEN`. Repositórios que bloqueiam criação de tags por Actions precisam liberar esse padrão de tag nas regras do GitHub.
+`.github/workflows/feature-tags.yml` é acionado em cada push para uma branch `feat/*`. Cria uma tag anotada por commit no padrão `feat/<nome-da-branch>/<sha-completo>`. Requer `contents: write`; não representa uma release.
 
 ## Releases versionadas
 
-`.github/workflows/release.yml` é acionado por tags `v*`. Antes de publicar, compara a tag com `binlab.__version__`, constrói wheel e source distribution e cria um GitHub Release com notas automáticas. A versão atual está em `src/binlab/__init__.py`; atualize-a antes de criar a próxima tag.
-
-Exemplo de release manual:
+`.github/workflows/release.yml` é acionado por tags `v*`. Compara a tag com `binlab.__version__`, compila fontes e testes, instala o pacote, executa a suíte `unittest`, constrói wheel e source distribution e só então cria um GitHub Release. Atualize a versão e o changelog antes de marcar uma release.
 
 ```bash
 git switch main
 git pull --ff-only
-git tag -a v0.3.1 -m "Release 0.3.1"
-git push origin v0.3.1
+git tag -a vX.Y.Z -m "Release X.Y.Z"
+git push origin vX.Y.Z
 ```
 
-Crie versões somente depois de integrar e revisar as funcionalidades desejadas. Tags `feat/...` não publicam releases.
+Crie versões somente após revisão e integração. Tags de feature não publicam releases.
+
+## Segurança de pipeline
+
+- CI de validação usa `contents: read`.
+- Permissões de escrita ficam restritas ao workflow de tags/release que precisa delas.
+- Não inserir tokens em arquivos, argumentos de build ou logs.
+- Ações de terceiros e dependências devem ser revisadas e atualizadas de forma controlada.
+
+## Atualização de actions
+
+`.github/dependabot.yml` verifica semanalmente atualizações das GitHub Actions. A configuração de Dependabot não substitui a revisão de segurança: as referências dos workflows ainda precisam ser fixadas em SHA completo verificado. Esse trabalho está rastreado na [issue #3](https://github.com/mnl-nox/BinLab/issues/3).

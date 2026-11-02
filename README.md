@@ -2,29 +2,25 @@
   <img src="images/binlab-logo.svg" alt="BL" width="120">
 </p>
 
-<p align="center">
-  <img src="https://img.shields.io/badge/CI-GitHub_Actions-2088FF?logo=githubactions&logoColor=white" alt="CI com GitHub Actions">
-  <img src="https://img.shields.io/badge/version-0.3.1-49e3c1" alt="Versão 0.3.1">
-  <img src="https://img.shields.io/badge/Python-3.8%2B-3776ab?logo=python&logoColor=white" alt="Python 3.8+">
-  <img src="https://img.shields.io/badge/Linux-supported-fcc624?logo=linux&logoColor=black" alt="Linux">
-  <img src="https://img.shields.io/badge/license-MIT-blue" alt="Licença MIT">
-</p>
+**BinLab 0.3.1** · Python 3.8+ · Linux · Licença MIT
 
 BinLab é uma aplicação de terminal e desktop para aprender operações numéricas e lógicas, converter bases e inspecionar estaticamente dados binários, dumps hexadecimais, fontes C e assembly.
 
-## Recursos
+> **Evolução em andamento:** o projeto está sendo organizado como BinLab Engineering, um laboratório local-first de engenharia computacional. A implementação será incremental; os módulos Web, API e desktop Tauri ainda não fazem parte da versão atual.
+
+## Recursos atuais
 
 - Aritmética inteira e operações lógicas bit a bit.
 - Conversão entre binário, octal, decimal e hexadecimal.
 - Análise de largura, sinal, bytes e caracteres ASCII.
 - Leitura estática de fontes C/assembly, dumps hex e arquivos binários.
 - Desassemblagem opcional com GNU `objdump`.
-- Interface gráfica desktop em Tkinter, sem dependências Python extras.
+- Interface gráfica desktop em Tkinter, sem dependências Python extras de runtime.
 
-## Requisitos
+## Requisitos atuais
 
 - Python 3.8 ou superior.
-- GNU `objdump` opcional para disassemblagem; sua disponibilidade depende do formato e da arquitetura.
+- GNU `objdump` opcional para desassemblagem; sua disponibilidade depende do formato e da arquitetura.
 
 ## Instalação e execução
 
@@ -57,38 +53,45 @@ O banner do terminal colore o nome e a legenda em ANSI quando a saída é intera
 
 ## Testes
 
-Com o ambiente virtual ativado, execute a suíte padrão da biblioteca Python:
-
 ```bash
 python -m unittest discover -s tests -v
 ```
 
-Os testes cobrem a API de domínio e o serviço de leitura HEX/C. O mesmo comando é executado pelo CI em Python 3.8 e 3.13.
+O CI executa compilação, instalação, testes e build das distribuições em Python 3.8 e 3.13.
 
-## Estrutura
+## Estrutura atual
 
 ```text
 src/binlab/domain/ regras puras para conversão, operações e análise
 src/binlab/        adaptadores CLI/GUI e leitura estática
 src/halfAdder.py   ponto de entrada legado
-doc/               guias de uso, arquitetura, análise e CI/CD
-images/            logo e diagrama da arquitetura em SVG
-.github/workflows/ integração contínua, tags de feat e releases
-tests/              testes unitários do domínio e dos leitores
+doc/               documentação da versão atual
+docs/              arquitetura, auditoria e plano de evolução
+images/            logo e diagrama SVG
+.github/workflows/ integração contínua, tags e releases
+tests/              testes unitários
 ```
 
 ![Diagrama da arquitetura BinLab](images/architecture.svg)
 
 ## Documentação
 
-- [Objetivo e escopo](doc/objetive.md)
-- [Arquitetura e API reutilizável](doc/architecture.md)
-- [Operações e análise](doc/operacoes.md) · [Leitor de arquivos](doc/leitor.md)
-- [Uso](doc/case.md) · [Conversões](doc/analise.md)
+- [Objetivo e escopo atual](doc/objetive.md)
+- [Arquitetura atual](doc/architecture.md)
+- [Plano de entregas BinLab Engineering](docs/ROADMAP.md)
+- [Arquitetura alvo](docs/architecture/overview.md)
+- [Contratos](docs/contracts/README.md)
+- [Modelo de ameaças](docs/security/threat-model.md)
+- [Auditoria técnica de 2 de novembro de 2026](docs/audit/2026-11-02-code-review.md)
+- [Licenciamento](docs/legal/LICENSING.md)
+- [Política de privacidade](docs/legal/PRIVACY.md)
 - [CI/CD, tags e versões](doc/ci-cd.md)
-- [Interface gráfica](doc/gui.md)
+- [Interface gráfica atual](doc/gui.md)
+- [Política de segurança](SECURITY.md)
 - [Como contribuir](CONTRIBUTING.md) · [Histórico](CHANGELOG.md)
 
-## Limites
+## Limites atuais
 
-O leitor não executa nem compila os arquivos. As estatísticas de C e assembly são heurísticas. Um executável compilado não contém necessariamente o código C original; a desassemblagem depende dos formatos e processadores suportados por `objdump`.
+O leitor não executa nem compila os arquivos. As estatísticas de C/assembly são heurísticas. Um executável compilado não contém necessariamente o código C original; a desassemblagem depende dos formatos e processadores suportados por `objdump`.
+
+A auditoria identificou limites de tamanho e memória que precisam ser corrigidos antes de disponibilizar a inspeção pela API. Consulte o relatório técnico. A aplicação instalada é local-first; o repositório é hospedado pelo GitHub, sujeito às políticas desse provedor.
