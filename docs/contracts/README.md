@@ -15,7 +15,7 @@ O domínio existente expõe a API Python em binlab.domain:
 
 As funções validam tipos em runtime; bool não é aceito como inteiro de domínio. Os limites atuais são 4096 dígitos para parsing numérico, 4096 bits para análise e operandos, 4096 bits para NOT e 4096 posições para shifts. Alterações nesses limites exigem testes e atualização desta documentação.
 
-O leitor de artefatos aplica limites independentes: fonte 2 MiB, binário 8 MiB, texto HEX 4 MiB, span HEX decodificado 1 MiB, lacuna HEX 64 KiB e saída objdump 64 KiB com timeout de 20 segundos. O parser Intel HEX exige EOF único e terminal e rejeita registros sobrepostos.
+O leitor de artefatos aplica limites independentes: fonte 2 MiB, binário 8 MiB, texto HEX 4 MiB, até 65.536 linhas/registros HEX, span HEX decodificado 1 MiB, lacuna HEX 64 KiB e saída objdump 64 KiB com timeout de 20 segundos. O parser Intel HEX exige EOF único e terminal e rejeita registros sobrepostos.
 
 Os objetos de análise não devem ser convertidos em schemas HTTP dentro do domínio.
 
