@@ -24,3 +24,12 @@ themeButton?.addEventListener("click", () => {
   themeColor?.setAttribute("content", nextTheme === "dark" ? "#0b1020" : "#f5f7fa");
   themeButton.setAttribute("aria-label", nextTheme === "dark" ? "Ativar tema claro" : "Ativar tema escuro");
 });
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && navigation?.classList.contains("is-open")) {
+    navigation.classList.remove("is-open");
+    menuButton?.setAttribute("aria-expanded", "false");
+    menuButton?.setAttribute("aria-label", "Abrir navegação");
+    menuButton?.focus();
+  }
+});
