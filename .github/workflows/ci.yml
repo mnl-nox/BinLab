@@ -6,6 +6,7 @@ on:
     branches:
       - main
       - "feat/**"
+      - "feature/**"
       - "stage/**"
       - "architecture/**"
 
@@ -14,7 +15,7 @@ permissions:
 
 jobs:
   quality:
-    name: Quality and tests (Python ${{ matrix.python-version }})
+    name: Python quality and tests (${{ matrix.python-version }})
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -39,3 +40,23 @@ jobs:
         run: python -m unittest discover -s tests -v
       - name: Build wheel and source distribution
         run: python -m build
+
+  web:
+    name: Web quality and tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Set up Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: "20"
+      - name: Install Web dependencies
+        working-directory: apps/web
+        run: npm install --no-audit --no-fund
+      - name: Run Web domain tests
+        working-directory: apps/web
+        run: npm test
+      - name: Build Web application
+        working-directory: apps/web
+        run: npm run build

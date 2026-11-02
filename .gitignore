@@ -13,6 +13,13 @@ venv/
 .mypy_cache/
 .ruff_cache/
 
+# Node and frontend build output
+node_modules/
+**/node_modules/
+apps/web/dist/
+apps/web/.vite/
+*.tsbuildinfo
+
 # Build and distribution output
 build/
 dist/

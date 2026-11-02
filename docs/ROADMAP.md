@@ -2,7 +2,7 @@
 
 ## Objetivo
 
-Evoluir o BinLab para um laboratório de engenharia computacional local-first, com interfaces Web e desktop, preservando o domínio Python existente. A arquitetura inicial será um **monólito modular**: um backend implantável, módulos internos com fronteiras explícitas e contratos versionados. Microserviços não fazem parte do escopo inicial.
+Evoluir o BinLab para um laboratório de engenharia computacional local-first, com interfaces Web e desktop, preservando o domínio Python existente. A arquitetura inicial será um **monólito modular**: um único backend implantável, módulos internos com fronteiras explícitas e contratos versionados. Microserviços não fazem parte do escopo inicial.
 
 ## Princípios de engenharia
 
@@ -33,25 +33,39 @@ Evoluir o BinLab para um laboratório de engenharia computacional local-first, c
 
 As etapas podem ter subentregas menores. Uma etapa só é considerada concluída quando seus critérios de aceite passam no CI e a documentação descreve limitações conhecidas.
 
+## Estado atual — 2026-11-02
+
+- [x] Branch isolada para a fundação Web.
+- [x] Estrutura inicial React + TypeScript + Vite + Tailwind em \`apps/web/\`.
+- [x] Navegação responsiva e tema independente.
+- [x] Conversão de bases e operações binárias locais com BigInt.
+- [x] Testes de domínio e job de CI para testes/build Web adicionados.
+- [ ] Execução de CI e correção de eventuais falhas.
+- [ ] Revisão funcional, acessibilidade e responsividade em navegador.
+- [ ] Cliente HTTP tipado e contratos de integração, somente após definição da API.
+- [ ] Backend FastAPI: bloqueado pela Issue #2 até fuzz/property tests, testes de fronteira e revisão complementar.
+- [ ] Integração Tauri, persistência e site institucional: etapas posteriores.
+
 ## Etapa 0 — critérios de aceite
 
 - [ ] Branch de trabalho isolada da branch principal.
-- [ ] Arquitetura alvo e decisões registradas.
-- [ ] Contratos de domínio, aplicação e API documentados.
-- [ ] Ameaças e controles mínimos documentados.
-- [ ] CI executa testes, valida compilação e constrói distribuição.
-- [ ] Testes existentes preservados.
-- [ ] Nenhuma mudança quebra CLI/GUI legadas.
-- [ ] Riscos e débitos técnicos registrados.
+- [x] Arquitetura alvo e decisões registradas.
+- [x] Contratos de domínio, aplicação e API documentados.
+- [x] Ameaças e controles mínimos documentados.
+- [x] CI executa testes, valida compilação e constrói distribuição Python.
+- [x] Testes existentes preservados.
+- [ ] Nenhuma mudança quebra CLI/GUI legadas (validar no CI desta PR).
+- [x] Riscos e débitos técnicos registrados.
 
 ## Etapa 1 — Backend
 
-- FastAPI fica em adaptador HTTP, fora de `domain/`.
-- `application/` define casos de uso e portas.
+- FastAPI fica em adaptador HTTP, fora de \`domain/\`.
+- \`application/\` define casos de uso e portas.
 - Rotas chamam serviços; não implementam regras de negócio.
-- API começa em `/api/v1`, com OpenAPI gerado e exemplos de contrato.
+- API começa em \`/api/v1\`, com OpenAPI gerado e exemplos de contrato.
 - Erros seguem Problem Details (RFC 9457).
 - Limites de tamanho, timeout, CORS restrito e autenticação local são obrigatórios antes de expor operações sensíveis.
+- **Bloqueio:** não expor o leitor nem operações irrestritas até encerrar a [Issue #2](https://github.com/mnl-nox/BinLab/issues/2).
 
 ## Etapa 2 — Web
 
@@ -60,6 +74,7 @@ As etapas podem ter subentregas menores. Uma etapa só é considerada concluída
 - Estados de carregamento, erro, vazio e sucesso definidos.
 - Acessibilidade por teclado e semântica HTML testadas.
 - A aplicação Web é servida localmente pelo backend ou por origem de desenvolvimento explicitamente permitida.
+- A primeira fundação está em \`apps/web/\`; não representa integração HTTP concluída.
 
 ## Etapa 3 — Desktop
 
