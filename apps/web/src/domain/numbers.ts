@@ -9,12 +9,13 @@ export function parseInteger(input: string, base: NumericBase): bigint {
     10: /^[+-]?\d+$/,
     16: /^[+-]?[\da-fA-F]+$/
   };
-  if (!pattern[base].test(normalized)) {
-    throw new Error(`Valor inválido para a base ${base}.`);
-  }
-  const sign = normalized.startsWith("-") ? -1n : 1n;
-  const digits = normalized.replace(/^[+-]/, "");
-  return sign * BigInt(`0x${BigInt(parseInt(digits, base)).toString(16)}`);
+  if (!pattern[base].test(normalized)) throw new Error(`Valor inválido para a base ${base}.`);
+
+  const negative = normalized.startsWith("-");
+  const digits = normalized.replace(/^[+-]/, "").toLowerCase();
+  let value = 0n;
+  for (const char of digits) value = value * BigInt(base) + BigInt(parseInt(char, 16));
+  return negative ? -value : value;
 }
 
 export function formatInteger(value: bigint, base: NumericBase): string {
@@ -25,12 +26,7 @@ export function formatInteger(value: bigint, base: NumericBase): string {
 
 export function convertInteger(input: string, source: NumericBase): Record<NumericBase, string> {
   const value = parseInteger(input, source);
-  return {
-    2: formatInteger(value, 2),
-    8: formatInteger(value, 8),
-    10: formatInteger(value, 10),
-    16: formatInteger(value, 16)
-  };
+  return { 2: formatInteger(value, 2), 8: formatInteger(value, 8), 10: formatInteger(value, 10), 16: formatInteger(value, 16) };
 }
 
 export function bitwiseOperation(a: bigint, operator: "&" | "|" | "^" | "<<", b: bigint): bigint {
