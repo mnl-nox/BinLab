@@ -19,7 +19,6 @@
 
 O BinLab é um laboratório de engenharia computacional projetado para estudar, experimentar e investigar sistemas desde a representação binária até arquitetura de computadores, compiladores, sistemas operacionais, redes, segurança e computação científica. A prioridade arquitetural é **execução local, transparência técnica, modularidade e segurança por padrão**.
 
-**Site institucional:** o código-fonte está em [website/](website/README.md). A publicação pública depende de habilitação do GitHub Pages em *Settings → Pages → Build and deployment → Source → GitHub Actions*.
 
 ## Índice
 
