@@ -56,7 +56,8 @@ class HexReaderTests(unittest.TestCase):
 
     def test_sparse_addresses_are_bounded(self):
         text = "\n".join((
-            intel_record(reader.MAX_HEX_GAP_BYTES + 1, 0, b"X"),
+            intel_record(0, 4, b"\x00\x01"),
+            intel_record(1, 0, b"X"),
             intel_record(0, 1),
         ))
         with self.assertRaisesRegex(ValueError, "Intervalo esparso"):
@@ -97,7 +98,7 @@ class HexReaderTests(unittest.TestCase):
             reader.parse_hex_text("AA" * (reader.MAX_HEX_DECODED_BYTES + 1))
 
     def test_printable_strings_are_capped(self):
-        data = b" ".join(("STRING{:02d}".format(index).encode("ascii") for index in range(100)))
+        data = b"\x00".join(("STRING{:02d}".format(index).encode("ascii") for index in range(100)))
         strings = reader.printable_strings(data)
         self.assertEqual(len(strings), reader.MAX_STRINGS)
         self.assertTrue(all(len(value) <= reader.MAX_STRING_LENGTH for value in strings))
