@@ -29,18 +29,21 @@ npm run build
 ## Organização
 
 - `src/domain/`: operações numéricas puras, sem dependência de React.
-- `src/App.tsx`: composição da experiência e navegação entre laboratórios.
+- `src/data/`: definições estáticas dos laboratórios e metadados de navegação.
+- `src/components/`: shell compartilhado, sidebar e topbar.
+- `src/labs/`: módulos funcionais isolados por laboratório.
 - `src/styles.css`: tokens visuais, temas e responsividade.
 - `src/main.tsx`: bootstrap da aplicação.
 
-O tema é estado de apresentação isolado. Não compartilha estado, eventos ou dependências com agentes de IA.
+O domínio numérico não importa React. O estado de tema pertence ao shell visual e não compartilha estado, eventos ou dependências com agentes de IA.
 
 ## Limites desta entrega
 
 - Não existe backend FastAPI integrado.
 - Não existe persistência de projetos ou experimentos.
 - Não existe execução de código C, Assembly ou binários.
-- Os laboratórios ainda não implementados aparecem como planejados, sem simular funcionalidades.
+- Os demais laboratórios ainda não estão implementados.
 - O cliente HTTP será introduzido junto com um contrato de API revisado e seguro. Não configure endpoints fictícios.
+- As operações BigInt usam semântica de inteiros com sinal e extensão de sinal; não simulam automaticamente registradores de largura fixa.
 
 A API de inspeção de artefatos permanece bloqueada pela Issue #2 até a conclusão dos testes de fronteira/fuzzing e revisão de segurança.
