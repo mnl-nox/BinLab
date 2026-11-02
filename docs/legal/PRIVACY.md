@@ -1,5 +1,7 @@
 # Política de privacidade — BinLab
 
+**Responsável pelo projeto:** Manoel E. S. S (mnl-nox)  
+**Contato para privacidade:** [ghostnether28@gmail.com](mailto:ghostnether28@gmail.com)  
 **Data de vigência:** 2 de novembro de 2026  
 **Versão do produto coberta:** BinLab 0.3.1 (aplicação Python CLI/Tkinter)
 
@@ -48,7 +50,7 @@ A auditoria de 2 de novembro de 2026 identificou limites de tamanho, alocação 
 
 ## 7. Direitos e legislação
 
-O BinLab é um projeto de software. Na versão atual, o mantenedor não opera um serviço central de contas ou coleta intencional de dados pessoais por telemetria. Direitos relacionados a dados tratados pelo GitHub ou por outros provedores devem ser exercidos diretamente junto a esses provedores.
+O responsável pelo projeto é Manoel E. S. S (identificador público: `mnl-nox`). Na versão atual, o mantenedor não opera um serviço central de contas ou coleta intencional de dados pessoais por telemetria. Direitos relacionados a dados tratados pelo GitHub ou por outros provedores devem ser exercidos diretamente junto a esses provedores.
 
 Se uma versão futura passar a tratar dados pessoais, o projeto deverá documentar finalidade, base legal, categorias de dados, retenção, compartilhamentos, canal do titular e medidas de segurança aplicáveis, inclusive conforme a Lei Geral de Proteção de Dados Pessoais (LGPD, Lei nº 13.709/2018), quando aplicável.
 
@@ -62,6 +64,11 @@ Esta política será atualizada quando o comportamento de tratamento de dados mu
 
 ## 10. Contato e solicitações
 
-No momento, o repositório não informa um endereço dedicado de contato para privacidade. Solicite ao mantenedor, pelo perfil https://github.com/mnl-nox, um canal privado antes de enviar qualquer dado pessoal. Não publique dados pessoais, arquivos privados ou segredos em issues públicas.
+Para solicitações relacionadas à privacidade e ao tratamento de dados no âmbito do projeto, entre em contato com o responsável:
 
-**Ponto pendente para publicação formal:** o mantenedor deve cadastrar um endereço de contato de privacidade controlado pelo projeto e verificar que o canal está operacional. Nenhum endereço foi presumido nesta versão.
+**Manoel E. S. S (mnl-nox)**  
+**E-mail:** [ghostnether28@gmail.com](mailto:ghostnether28@gmail.com)
+
+Não envie senhas, tokens, arquivos privados ou outros dados sensíveis por e-mail sem necessidade. Não publique dados pessoais, arquivos privados ou segredos em issues públicas.
+
+O contato acima é um canal de comunicação do mantenedor; não representa, por si só, um serviço de atendimento com prazo de resposta garantido.
