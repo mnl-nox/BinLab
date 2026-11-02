@@ -6,7 +6,7 @@ Este projeto segue [Semantic Versioning](https://semver.org/).
 
 ### Segurança
 - Limites de leitura aplicados durante a leitura de fontes, binários e arquivos HEX.
-- Parser Intel HEX agora exige EOF único e terminal, valida tipos e campos, rejeita sobreposição e limita endereços, lacunas e span decodificado.
+- Parser Intel HEX agora exige EOF único e terminal, valida tipos e campos, rejeita sobreposição e limita linhas/registros, endereços, lacunas e span decodificado.
 - Extração de strings limitada incrementalmente a 30 ocorrências.
 - Saída de objdump limitada durante a execução, com timeout, pipes drenados concorrentemente, stdin fechado e ambiente reduzido.
 - Operações de domínio validam tipos em runtime e limitam operandos, largura de NOT, shifts e sequências binárias.
