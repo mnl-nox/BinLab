@@ -11,8 +11,9 @@ describe("numeric domain", () => {
     });
   });
 
-  it("parses hexadecimal input", () => {
+  it("parses hexadecimal and preserves integers beyond JavaScript safe-number range", () => {
     expect(parseInteger("FF", 16)).toBe(255n);
+    expect(parseInteger("9007199254740993", 10)).toBe(9007199254740993n);
   });
 
   it("rejects digits outside the selected base", () => {
