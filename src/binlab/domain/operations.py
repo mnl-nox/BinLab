@@ -2,35 +2,55 @@
 
 from typing import Optional, Tuple
 
+MAX_OPERAND_BITS = 4096
+MAX_NOT_WIDTH = 4096
+MAX_SHIFT_DISTANCE = 4096
+
 ARITHMETIC_OPERATORS = {"+", "-", "*", "//", "%"}
 BITWISE_OPERATORS = {"AND", "OR", "XOR", "NOT"}
 SHIFT_OPERATORS = {"<<", ">>"}
 OPERATORS = ARITHMETIC_OPERATORS | BITWISE_OPERATORS | SHIFT_OPERATORS
 
 
-def calculate(a: int, operator: str, b: Optional[int] = None, width: Optional[int] = None) -> int:
-    """Aplica uma operação validada a inteiros e retorna o resultado.
+def _require_integer(value: int, label: str) -> None:
+    if isinstance(value, bool) or not isinstance(value, int):
+        raise ValueError("{} deve ser um inteiro (bool não é aceito).".format(label))
+    if value.bit_length() > MAX_OPERAND_BITS:
+        raise ValueError("{} excede o limite de {} bits.".format(label, MAX_OPERAND_BITS))
 
-    `b` é o segundo operando ou a quantidade de posições nos deslocamentos.
-    `width` define o complemento finito para NOT.
+
+def calculate(a: int, operator: str, b: Optional[int] = None, width: Optional[int] = None) -> int:
+    """Aplica operação limitada a inteiros.
+
+    Operandos são limitados a 4096 bits, NOT a 4096 bits e shifts a 4096 posições.
     """
+    _require_integer(a, "Operando A")
+    if not isinstance(operator, str):
+        raise ValueError("Operador deve ser texto.")
     operator = operator.strip()
     if operator.isalpha():
         operator = operator.upper()
     if operator not in OPERATORS:
-        raise ValueError(f"Operador não suportado: {operator}.")
+        raise ValueError("Operador não suportado: {}.".format(operator))
+
     if operator == "NOT":
-        if width is None or width < 1:
-            raise ValueError("NOT requer uma largura positiva em bits.")
+        if isinstance(width, bool) or not isinstance(width, int) or width < 1 or width > MAX_NOT_WIDTH:
+            raise ValueError("NOT requer largura entre 1 e {} bits.".format(MAX_NOT_WIDTH))
         if a < 0 or a >= (1 << width):
             raise ValueError("A largura deve comportar o operando não negativo.")
         return (~a) & ((1 << width) - 1)
+
     if b is None:
-        raise ValueError(f"O operador {operator} requer um segundo operando.")
+        raise ValueError("O operador {} requer um segundo operando.".format(operator))
+    _require_integer(b, "Operando B")
+
     if operator in {"//", "%"} and b == 0:
         raise ValueError("Não é possível dividir por zero.")
     if operator in BITWISE_OPERATORS | SHIFT_OPERATORS and (a < 0 or b < 0):
         raise ValueError("Operações bit a bit e deslocamentos requerem operandos não negativos.")
+    if operator in SHIFT_OPERATORS and b > MAX_SHIFT_DISTANCE:
+        raise ValueError("Deslocamento excede o limite de {} posições.".format(MAX_SHIFT_DISTANCE))
+
     operations = {
         "+": lambda: a + b,
         "-": lambda: a - b,
