@@ -72,11 +72,11 @@ class HexReaderTests(unittest.TestCase):
             records.append(intel_record(offset, 0, b"X"))
         records.append(intel_record(0, 1))
         with self.assertRaisesRegex(ValueError, "Span Intel HEX"):
-            reader.parse_hex_text("\\n".join(records))
+            reader.parse_hex_text("\n".join(records))
 
     def test_data_record_address_overflow_is_rejected(self):
-        text = "\\n".join((
-            intel_record(0, 4, b"\\xff\\xff"),
+        text = "\n".join((
+            intel_record(0, 4, b"\xff\xff"),
             intel_record(0xFFFF, 0, b"XX"),
             intel_record(0, 1),
         ))
