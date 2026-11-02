@@ -110,7 +110,8 @@ def parse_hex_text(text: str) -> bytes:
     except UnicodeEncodeError as error:
         raise ValueError("O arquivo HEX deve conter somente caracteres ASCII.") from error
 
-    line_count = text.count("\\n") + (1 if text and not text.endswith("\\n") else 0)
+    line_breaks = text.count(chr(10)) + text.count(chr(13)) - text.count(chr(13) + chr(10))
+    line_count = line_breaks + (1 if text and not text.endswith((chr(10), chr(13))) else 0)
     if line_count > MAX_HEX_RECORDS:
         raise ValueError("Intel HEX excede o limite de {} linhas.".format(MAX_HEX_RECORDS))
     lines = [line.strip() for line in text.splitlines() if line.strip()]
