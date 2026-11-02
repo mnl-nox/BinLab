@@ -85,7 +85,7 @@ O domínio matemático é pequeno e tem testes unitários básicos. O principal 
 
 - **Severidade:** Média
 - **Arquivo:** `.github/workflows/release.yml`
-- **Status:** corrigido nesta branch; ainda depende de execução verde no GitHub Actions.
+- **Status:** corrigido nesta branch; as etapas de compilação, instalação, importação, testes e build passaram na matriz Python 3.8/3.13 da execução CI #27.
 - **Evidência original:** o workflow de tag verificava versão e construía distribuições, mas não compilava fontes nem executava testes.
 - **Correção aplicada:** agora executa compileall, instalação, importação, unittest e build antes de criar o GitHub Release.
 
@@ -120,8 +120,12 @@ O README carregava badges remotos de shields.io; eles foram removidos nesta bran
 - Workflow de release passou a executar testes antes da publicação.
 - O arquivo `LICENSE` já continha a licença MIT válida e foi preservado; a titularidade “BinLab contributors” precisa de confirmação do mantenedor.
 - Não foi inventado email de contato. A política registra que o canal dedicado de privacidade está pendente.
-- Ações GitHub ainda usam tags mutáveis; rastrear em [issue #3](https://github.com/mnl-nox/BinLab/issues/3).
+- Ações GitHub ainda usam tags mutáveis; Dependabot semanal foi configurado em `.github/dependabot.yml`; o pinning por SHA completo continua aberto em [issue #3](https://github.com/mnl-nox/BinLab/issues/3).
 - Correção de parser e limites de recursos está rastreada em [issue #2](https://github.com/mnl-nox/BinLab/issues/2).
+
+## Resultado de validação CI
+
+Na execução GitHub Actions #27, os passos de compilação, instalação do pacote, importação, testes unitários e build de wheel/source distribution concluíram com sucesso em Python 3.8 e 3.13. No momento da consulta, o runner ainda estava finalizando os passos de limpeza pós-job; por isso, o resultado de job ainda não havia sido marcado como conclusão final.
 
 ## Portão de segurança antes da API
 
