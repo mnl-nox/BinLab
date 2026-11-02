@@ -27,7 +27,7 @@ O domínio matemático é pequeno e tem testes unitários básicos. O principal 
 ### BL-SEC-002 — Intel HEX esparso pode provocar alocação desproporcional
 
 - **Status:** Implementado nesta branch; aguardando CI e revisão final.
-- **Correção:** span decodificado máximo de 1 MiB, lacuna máxima de 64 KiB, endereços limitados a 32 bits e materialização somente após validação dos segmentos.
+- **Correção:** span decodificado máximo de 1 MiB, lacuna máxima de 64 KiB, até 65.536 linhas/registros, endereços limitados a 32 bits e materialização somente após validação dos segmentos.
 
 - **Severidade:** Alta
 - **Arquivo:** `src/binlab/artifact_reader.py::parse_hex_text`
