@@ -1,15 +1,34 @@
 # Contribuindo
 
-1. Crie uma branch de funcionalidade no formato `feat/nome-curto`.
-2. Mantenha as mudanças focadas e atualize a documentação quando alterar comportamento.
-3. Verifique localmente com `python -m compileall -q src`, `python -m pip install .` e `python -m unittest discover -s tests -v`.
-4. Envie a branch e abra um pull request para `main`.
+1. Crie uma branch de trabalho no padrão `feat/nome-curto`, `stage/nome-curto` ou `architecture/nome-curto`.
+2. Mantenha mudanças focadas em uma etapa/entrega.
+3. Atualize documentação, contratos e testes no mesmo pull request.
+4. Execute localmente:
 
-Cada push para `feat/*` recebe uma tag automática `feat/<branch>/<sha>`. Essa tag identifica o commit e não representa uma versão de release.
+```bash
+python -m compileall -q src tests
+python -m pip install .
+python -m unittest discover -s tests -v
+python -m pip install build
+python -m build
+``
+
+5. Envie a branch e abra pull request para `main`. Não integre etapas incompletas sem explicitar bloqueios e riscos.
+
+Branches `feat/*` recebem tags automáticas por commit. Tags de feature são referências de rastreabilidade, não releases.
+
+## Critérios de revisão
+
+- Responsabilidade única e dependências apontando para dentro.
+- Contratos explícitos e compatibilidade considerada.
+- Entradas externas validadas e limites de recursos definidos.
+- Nenhuma execução automática de arquivos importados.
+- Testes de regressão e documentação atualizados.
+- Dependências novas justificadas.
 
 ## Mensagens de commit
 
-Use mensagens curtas no padrão Conventional Commits:
+Use Conventional Commits:
 
 ```text
 feat: adiciona conversão hexadecimal
@@ -20,4 +39,4 @@ refactor: separa leitor estático da interface
 
 ## Versões
 
-O projeto usa Semantic Versioning. Atualize `src/binlab/__init__.py` e o `CHANGELOG.md`, então crie uma tag de release `vX.Y.Z`. O workflow constrói as distribuições e publica o GitHub Release automaticamente.
+O projeto usa Semantic Versioning. Atualize `src/binlab/__init__.py` e `CHANGELOG.md`, então crie uma tag `vX.Y.Z`. O workflow de release valida a correspondência e publica as distribuições.
