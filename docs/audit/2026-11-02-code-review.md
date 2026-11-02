@@ -14,6 +14,9 @@ O domínio matemático é pequeno e tem testes unitários básicos. O principal 
 
 ### BL-SEC-001 — Leitura de arquivos sem limite de tamanho
 
+- **Status:** Implementado nesta branch; aguardando CI e revisão final.
+- **Correção:** leitura limitada a 2 MiB para fontes, 8 MiB para binários e 4 MiB para texto HEX, usando leitura de no máximo limite + 1 byte.
+
 - **Severidade:** Alta
 - **Arquivo:** `src/binlab/artifact_reader.py`
 - **Evidência:** `inspect_file()` usa `Path.read_bytes()`; `inspect_source()` usa `Path.read_text()`. Não há limite máximo antes da leitura.
@@ -22,6 +25,9 @@ O domínio matemático é pequeno e tem testes unitários básicos. O principal 
 - **Bloqueia:** exposição do leitor pela API e processamento em lote.
 
 ### BL-SEC-002 — Intel HEX esparso pode provocar alocação desproporcional
+
+- **Status:** Implementado nesta branch; aguardando CI e revisão final.
+- **Correção:** span decodificado máximo de 1 MiB, lacuna máxima de 64 KiB, endereços limitados a 32 bits e materialização somente após validação dos segmentos.
 
 - **Severidade:** Alta
 - **Arquivo:** `src/binlab/artifact_reader.py::parse_hex_text`
@@ -32,6 +38,9 @@ O domínio matemático é pequeno e tem testes unitários básicos. O principal 
 
 ### BL-SEC-003 — Validação incompleta do protocolo Intel HEX
 
+- **Status:** Implementado nesta branch; aguardando CI e revisão final.
+- **Correção:** EOF obrigatório e terminal, validação de contagem/checksum/campos dos tipos 00–05 suportados, rejeição de sobreposição e dados após EOF.
+
 - **Severidade:** Média
 - **Arquivo:** `src/binlab/artifact_reader.py::parse_hex_text`
 - **Evidência:** o parser interrompe no primeiro tipo EOF sem validar todos os campos do EOF; aceita arquivo sem EOF; ignora linhas posteriores ao EOF; tipos de início 03/05 não validam comprimento; registros sobrepostos são sobrescritos silenciosamente.
@@ -40,6 +49,9 @@ O domínio matemático é pequeno e tem testes unitários básicos. O principal 
 - **Testes requeridos:** EOF ausente/duplicado/malformado, registro após EOF, tipo desconhecido, contagem incompatível, checksum incorreto, sobreposição e endereços de fronteira.
 
 ### BL-SEC-004 — Saída de objdump só é limitada depois de capturada
+
+- **Status:** Implementado nesta branch; aguardando CI e revisão final.
+- **Correção:** subprocesso com stdin fechado, ambiente reduzido, sem shell, stdout/stderr drenados por threads e teto combinado de 64 KiB durante execução, timeout de 20 segundos.
 
 - **Severidade:** Média/Alta
 - **Arquivo:** `src/binlab/artifact_reader.py::_objdump_file` e `disassemble_hex_bytes`
@@ -50,6 +62,9 @@ O domínio matemático é pequeno e tem testes unitários básicos. O principal 
 
 ### BL-SEC-005 — Operações de bits sem limites de largura/deslocamento
 
+- **Status:** Implementado nesta branch; aguardando CI e revisão final.
+- **Correção:** análise limitada a 4096 bits, operandos a 4096 bits, NOT a 4096 bits, shifts a 4096 posições e validação runtime que rejeita bool.
+
 - **Severidade:** Média
 - **Arquivos:** `src/binlab/domain/operations.py`, `src/binlab/domain/analysis.py`, CLI e GUI
 - **Evidência:** `calculate()` permite largura arbitrária em NOT e deslocamento arbitrário; `analyze_bits()` aceita sequências sem limite.
@@ -59,6 +74,9 @@ O domínio matemático é pequeno e tem testes unitários básicos. O principal 
 
 ### BL-SEC-006 — Extração de strings materializa todos os resultados
 
+- **Status:** Implementado nesta branch; aguardando CI e revisão final.
+- **Correção:** varredura incremental que interrompe após 30 strings, cada uma limitada a 160 caracteres.
+
 - **Severidade:** Média
 - **Arquivo:** `src/binlab/artifact_reader.py::printable_strings`
 - **Evidência:** regex cria uma lista de todas as sequências imprimíveis e só depois o relatório seleciona as primeiras 30.
@@ -66,6 +84,9 @@ O domínio matemático é pequeno e tem testes unitários básicos. O principal 
 - **Correção requerida:** extrair incrementalmente e parar após o limite de resultados ou impor limite de bytes analisados.
 
 ### BL-ENG-001 — Contratos de domínio dependem de type hints, não de validação de runtime
+
+- **Status:** Implementado nesta branch; aguardando CI e revisão final.
+- **Correção:** validação runtime para texto, inteiros e bases; bool rejeitado como inteiro nas APIs de domínio.
 
 - **Severidade:** Média
 - **Arquivos:** `domain/numeric.py`, `domain/operations.py`, `domain/analysis.py`
@@ -106,7 +127,7 @@ O domínio matemático é pequeno e tem testes unitários básicos. O principal 
 - A invocação de objdump usa lista de argumentos, não shell.
 - O leitor não executa nem compila o artefato importado.
 - CI declara `contents: read` no workflow de validação.
-- Testes existentes cobrem conversão, operações básicas, análise de bits, HEX e leitura de fonte, mas ainda não cobrem os casos de abuso acima.
+- A branch de hardening adiciona testes determinísticos para limites de arquivo, HEX malformado/esparso/sobreposto, EOF/checksum, flood/timeout de subprocesso, tipos runtime e limites do domínio. O resultado do CI desta branch ainda é necessário antes de considerar os achados fechados.
 
 ## Privacidade — observações do código
 
@@ -123,7 +144,7 @@ O README carregava badges remotos de shields.io; eles foram removidos nesta bran
 - O arquivo `LICENSE` mantém a licença MIT válida e agora identifica o titular declarado pelo mantenedor: Manoel E. S. S (mnl-nox).
 - O contato de privacidade informado pelo mantenedor foi publicado em `docs/legal/PRIVACY.md`; o endereço é público e não há SLA de resposta declarado.
 - As actions usadas nos workflows de CI e release foram fixadas em SHAs completos verificados; Dependabot semanal está configurado em `.github/dependabot.yml`. A issue #3 permanece para governança adicional, revisão de permissões, SBOM/attestations e demais controles de supply chain.
-- Correção de parser e limites de recursos está rastreada em [issue #2](https://github.com/mnl-nox/BinLab/issues/2).
+- Correção de parser e limites de recursos está implementada na branch `security/artifact-reader-hardening`; a issue #2 só deve ser fechada após CI verde, revisão final e merge.
 
 ## Resultado de validação CI
 
