@@ -4,25 +4,49 @@ Este projeto segue [Semantic Versioning](https://semver.org/).
 
 ## Não lançado
 
+### Website
+- Adicionado site institucional estático, responsivo e acessível em `website/`.
+- Incluídos visão do produto, laboratórios, arquitetura, segurança, instalação e roadmap.
+- Adicionados alternância de tema, navegação móvel, página 404 e validação de referências locais.
+- Criado workflow de publicação GitHub Pages com actions fixadas por SHA.
+- Política de privacidade ampliada para cobrir o site institucional e a fundação Web local.
+
+### Web
+- Criada a fundação React + TypeScript + Vite + Tailwind CSS em `apps/web/`.
+- Adicionada navegação responsiva entre laboratórios e alternância de tema independente.
+- Implementado conversor de bases e operações AND/OR/XOR/shift-left locais com BigInt.
+- Adicionados limites de entrada e largura de operandos/resultados no domínio Web.
+- Revertida a atualização de Vitest 4.1.11 para 2.1.8 após falha de instalação no CI.
+- Parsing numérico agora valida separadores somente entre dígitos válidos da base.
+- Mensagens de erro do domínio são preservadas e exibidas na interface.
+- Ampliada a cobertura de testes para sinais, separadores, bases inválidas, precisão e operações bit a bit.
+- Laboratórios ainda não implementados são identificados como planejados; não há integração com API.
+
 ### Linux packaging
 - Adicionados entrypoints PyInstaller para CLI e GUI Tkinter.
 - Adicionado pipeline de release Linux x86_64 com pacotes `.deb`, `.rpm` e tarball portátil.
 - Definida baseline de build Ubuntu 22.04; suporte ARM64, AppImage e Flatpak permanece fora da primeira entrega.
 
-### Web
-- Revertida a atualização de Vitest 4.1.11 para 2.1.8 após falha de instalação no CI.
-- Parsing numérico agora valida separadores somente entre dígitos válidos da base.
-- Mensagens de erro do domínio são preservadas e exibidas na interface.
-- Ampliada a cobertura de testes para sinais, separadores, bases inválidas, precisão e operações bit a bit.
+### CI
+- Pipeline valida testes e build da aplicação Web em Node.js 20.
+- Branches `feature/**` incluídas no gatilho de push.
+- Adicionado job Linux para construir e inspecionar pacotes .deb, .rpm e tar.gz.
+- Fixada a referência `actions/checkout` do workflow de tags de feature por SHA completo.
+- Permissões de escrita dos workflows de tags e release limitadas aos jobs que precisam delas.
 
-### Python / segurança
+### Segurança
+- Limites de leitura aplicados durante a leitura de fontes, binários e arquivos HEX.
+- Parser Intel HEX exige EOF único e terminal, valida tipos e campos, rejeita sobreposição e limita linhas/registros, endereços, lacunas e span decodificado.
+- Extração de strings limitada incrementalmente a 30 ocorrências.
+- Saída de objdump limitada durante a execução, com timeout, pipes drenados concorrentemente, stdin fechado e ambiente reduzido.
+- Operações de domínio validam tipos em runtime e limitam operandos, largura de NOT, shifts e sequências binárias.
 - Adicionados testes property-based com Hypothesis para round-trip numérico, operações lógicas, HEX bruto, Intel HEX válido e checksum corrompido.
 - A dependência Hypothesis é opcional e instalada somente no extra `test`.
 
-### CI / supply chain
-- Fixada a referência `actions/checkout` do workflow de tags de feature por SHA completo.
-- Permissões de escrita do workflow de tags e release limitadas aos jobs que precisam delas.
-- CI passa a construir e inspecionar pacotes Linux em runner Ubuntu 22.04.
+### Documentação
+- README consolidado, removendo seções duplicadas e separando recursos atuais de planejados.
+- Documentadas arquitetura, execução, limites, estado da aplicação Web e distribuição Linux.
+- Adicionado relatório de code review de 4 de novembro de 2026.
 
 ## 0.3.1 — 2026-10-11
 
