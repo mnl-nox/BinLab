@@ -11,6 +11,13 @@ const digitPatterns: Record<NumericBase, RegExp> = {
   16: /^[\da-fA-F]+(?:_[\da-fA-F]+)*$/
 };
 
+const basePrefixes: Record<NumericBase, string> = {
+  2: "0b",
+  8: "0o",
+  10: "0d",
+  16: "0x"
+};
+
 function assertBase(base: number): asserts base is NumericBase {
   if (![2, 8, 10, 16].includes(base)) {
     throw new Error("A base deve ser 2, 8, 10 ou 16.");
@@ -29,7 +36,12 @@ export function parseInteger(input: string, base: NumericBase): bigint {
   if (!trimmed) throw new Error("Informe um valor.");
 
   const sign = /^[+-]/.test(trimmed) ? trimmed[0] : "";
-  const digits = sign ? trimmed.slice(1) : trimmed;
+  let digits = sign ? trimmed.slice(1) : trimmed;
+  const prefix = basePrefixes[base];
+  if (digits.slice(0, 2).toLowerCase() === prefix) {
+    digits = digits.slice(2);
+  }
+
   if (!digits || !digitPatterns[base].test(digits)) {
     throw new Error(`Valor inválido para a base ${base}.`);
   }

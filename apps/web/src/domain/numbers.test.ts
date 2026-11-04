@@ -11,8 +11,10 @@ describe("numeric domain", () => {
     });
   });
 
-  it("parses hexadecimal and preserves integers beyond JavaScript safe-number range", () => {
+  it("parses prefixed hexadecimal and preserves integers beyond JavaScript safe-number range", () => {
     expect(parseInteger("FF", 16)).toBe(255n);
+    expect(parseInteger("0xFF", 16)).toBe(255n);
+    expect(parseInteger("0b1010", 2)).toBe(10n);
     expect(parseInteger("9007199254740993", 10)).toBe(9007199254740993n);
   });
 
@@ -27,6 +29,7 @@ describe("numeric domain", () => {
   it("rejects digits outside the selected base", () => {
     expect(() => parseInteger("102", 2)).toThrow();
     expect(() => parseInteger("8", 8)).toThrow();
+    expect(() => parseInteger("0x10", 2)).toThrow();
   });
 
   it("validates runtime base values and input types", () => {
@@ -38,9 +41,7 @@ describe("numeric domain", () => {
   it("round-trips signed values in every supported base", () => {
     for (const base of [2, 8, 10, 16] as const) {
       for (const value of [0n, 1n, -1n, 255n, -255n, 9007199254740993n]) {
-        const digits = formatInteger(value, base).replace(/^-/, "");
-        const signed = value < 0n ? `-${digits}` : digits;
-        expect(parseInteger(signed, base)).toBe(value);
+        expect(parseInteger(formatInteger(value, base), base)).toBe(value);
       }
     }
   });
