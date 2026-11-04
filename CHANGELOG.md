@@ -2,7 +2,7 @@
 
 Este projeto segue [Semantic Versioning](https://semver.org/).
 
-## Não lançado
+## 0.3.2 — 2026-11-04
 
 ### Website
 - Adicionado site institucional estático, responsivo e acessível em `website/`.

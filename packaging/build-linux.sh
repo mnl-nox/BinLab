@@ -41,4 +41,9 @@ fpm -s dir -t rpm -n binlab -v "$VERSION" -a x86_64 \
   --package "dist/binlab-${VERSION}-1.x86_64.rpm" -C package-root .
 
 tar -czf "dist/binlab-${VERSION}-linux-x86_64.tar.gz" -C package-root .
+(
+  cd dist
+  sha256sum "binlab_${VERSION}_amd64.deb" "binlab-${VERSION}-1.x86_64.rpm" \
+    "binlab-${VERSION}-linux-x86_64.tar.gz" > SHA256SUMS
+)
 printf 'Linux packages generated for BinLab %s (%s).\n' "$VERSION" "$ARCH"

@@ -15,7 +15,7 @@
   <a href="branding/LICENSE"><img alt="Visual assets: CC BY 4.0" src="https://img.shields.io/badge/Visual%20Assets-CC%20BY%204.0-0b7285.svg"></a>
 </p>
 
-> **Estado do projeto:** a versão Python 0.3.1 (CLI e GUI Tkinter) é a base funcional. A aplicação Web está em desenvolvimento; o Binary & Logic Lab é a primeira experiência funcional no navegador. API FastAPI, persistência e desktop Tauri ainda não fazem parte do produto integrado.
+> **Estado do projeto:** a versão Python 0.3.2 (CLI e GUI Tkinter) é a base funcional. A aplicação Web está em desenvolvimento; o Binary & Logic Lab é a primeira experiência funcional no navegador. API FastAPI, persistência e desktop Tauri ainda não fazem parte do produto integrado.
 
 O BinLab é um laboratório de engenharia computacional projetado para estudar, experimentar e investigar sistemas desde a representação binária até arquitetura de computadores, compiladores, sistemas operacionais, redes, segurança e computação científica. A prioridade arquitetural é **execução local, transparência técnica, modularidade e segurança por padrão**.
 
@@ -45,7 +45,7 @@ O BinLab é um laboratório de engenharia computacional projetado para estudar, 
 
 ## Capacidades disponíveis
 
-### Aplicação Python 0.3.1
+### Aplicação Python 0.3.2
 
 - Conversão entre binário, octal, decimal e hexadecimal.
 - Aritmética inteira e operações lógicas bit a bit.
@@ -78,7 +78,7 @@ Os arquivos são publicados como ativos de uma GitHub Release, depois da aprova�
 Debian / Ubuntu:
 
 ```bash
-sudo apt install ./binlab_0.3.1_amd64.deb
+sudo apt install ./binlab_0.3.2_amd64.deb
 binlab
 binlab-gui
 ```
@@ -86,7 +86,7 @@ binlab-gui
 Fedora / RHEL:
 
 ```bash
-sudo dnf install ./binlab-0.3.1-1.x86_64.rpm
+sudo dnf install ./binlab-0.3.2-1.x86_64.rpm
 binlab
 binlab-gui
 ```
@@ -94,7 +94,7 @@ binlab-gui
 Outras distribuições:
 
 ```bash
-tar -xzf binlab-0.3.1-linux-x86_64.tar.gz
+tar -xzf binlab-0.3.2-linux-x86_64.tar.gz
 sudo cp -a usr/. /usr/
 binlab
 binlab-gui
