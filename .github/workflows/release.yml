@@ -45,7 +45,12 @@ jobs:
         run: python -m build
       - name: Build Linux packages
         run: bash packaging/build-linux.sh
-      - name: Publish GitHub Release
+      - name: Publish or update GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release create "$GITHUB_REF_NAME" dist/* --verify-tag --generate-notes
+        run: |
+          if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
+            gh release upload "$GITHUB_REF_NAME" dist/* --clobber
+          else
+            gh release create "$GITHUB_REF_NAME" dist/* --verify-tag --generate-notes
+          fi
