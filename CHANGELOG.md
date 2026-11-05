@@ -2,6 +2,16 @@
 
 Este projeto segue [Semantic Versioning](https://semver.org/).
 
+## Não lançado
+
+### Website e identidade
+- Atualizada a página institucional com o estado real da versão 0.3.2, capacidades disponíveis e roadmap.
+- Adicionada seção de distribuição Linux com status explícito dos pacotes DEB, RPM e tarball.
+- Integrado o logotipo vetorial canônico nas variantes dark/light e símbolo correspondente para favicon.
+- Melhorados metadados Open Graph, navegação e apresentação responsiva da release.
+- Reescrita a documentação do site e alinhado o README principal com a versão e os artefatos existentes.
+- Esclarecido que a GitHub Release pública depende da criação da tag v0.3.2 e que os artefatos de Actions são temporários.
+
 ## 0.3.2 — 2026-11-04
 
 ### Website
