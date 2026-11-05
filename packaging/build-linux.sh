@@ -27,14 +27,14 @@ install -m 0644 branding/logo.svg package-root/usr/share/icons/hicolor/scalable/
 install -m 0644 README.md LICENSE package-root/usr/share/doc/binlab/
 
 fpm -s dir -t deb -n binlab -v "$VERSION" -a amd64 \
-  --license MIT --url https://github.com/mnl-nox/BinLab \
+  --license MIT --maintainer "BinLab Engineering <ghostnether28@gmail.com>" --vendor "BinLab Engineering" --url https://github.com/mnl-nox/BinLab \
   --description "Local-first computational engineering laboratory" \
   --depends libc6 --depends libx11-6 --depends libxext6 --depends libxrender1 \
   --depends libxtst6 --depends libxi6 --depends libfontconfig1 --depends libxft2 \
   --package "dist/binlab_${VERSION}_amd64.deb" -C package-root .
 
 fpm -s dir -t rpm -n binlab -v "$VERSION" -a x86_64 \
-  --license MIT --url https://github.com/mnl-nox/BinLab \
+  --license MIT --maintainer "BinLab Engineering <ghostnether28@gmail.com>" --vendor "BinLab Engineering" --url https://github.com/mnl-nox/BinLab \
   --description "Local-first computational engineering laboratory" \
   --depends glibc --depends libX11 --depends libXext --depends libXrender \
   --depends libXtst --depends libXi --depends fontconfig --depends libXft \
