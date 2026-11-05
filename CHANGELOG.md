@@ -24,7 +24,7 @@ Este projeto segue [Semantic Versioning](https://semver.org/).
 
 ### Linux packaging
 - Adicionados entrypoints PyInstaller para CLI e GUI Tkinter.
-- Adicionado pipeline de release Linux x86_64 com pacotes `.deb`, `.rpm` e tarball portátil.
+- Adicionado pipeline de release Linux x86_64 com pacotes `.deb`, `.rpm` e tarball portátil; baseline ELF GLIBC_2.14 verificada automaticamente.
 - Definida baseline de build Ubuntu 22.04; suporte ARM64, AppImage e Flatpak permanece fora da primeira entrega.
 
 ### CI

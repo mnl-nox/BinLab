@@ -48,7 +48,7 @@ Revisão estática da branch principal e do estado dos workflows, domínio TypeS
 
 ## Distribuição Linux proposta
 
-A primeira distribuição binária é x86_64, construída em Ubuntu 22.04 para manter uma baseline de glibc conservadora. O pipeline produz:
+A primeira distribuição binária é x86_64, construída em Ubuntu 22.04. A inspeção ELF confirmou requisito máximo GLIBC_2.14 nos dois executáveis; o script falha se a toolchain elevar esse baseline sem revisão. Distribuições musl, como Alpine, não são suportadas. O pipeline produz:
 - Debian package `.deb`;
 - RPM `.rpm`;
 - arquivo portátil `.tar.gz` com árvore `usr/`.
@@ -71,6 +71,7 @@ Os executáveis CLI e GUI são empacotados com PyInstaller. O pacote GUI depende
 - CI completo aprovado no commit `2ecdba418ae0834754bb6402fb64c228c54170c3`: Python 3.8, Python 3.13, Web (Node.js 22) e Linux package smoke build.
 - Pacotes .deb, .rpm e tar.gz construídos e inspecionados.
 - .deb instalado no runner Ubuntu 22.04; CLI executada e GUI iniciada sob Xvfb sem saída inesperada.
+- Metadados de maintainer/vendor definidos explicitamente; dependência mínima de glibc declarada como 2.14.
 - CLI do tarball extraído também foi executada e identificou a versão 0.3.2.
 - Checksums SHA-256 dos três pacotes conferidos.
 - RPM teve o manifesto inspecionado, mas ainda não foi instalado em uma VM Fedora/RHEL.

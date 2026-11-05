@@ -100,7 +100,7 @@ binlab
 binlab-gui
 ```
 
-A GUI requer uma sessão gráfica X11/compatibilidade XWayland e bibliotecas gráficas do host. A primeira linha não inclui AppImage, Flatpak nem build ARM64. A instalação dos pacotes deve ser validada em distribuições-alvo antes de declarar compatibilidade ampla.
+A GUI requer uma sessão gráfica X11/compatibilidade XWayland e bibliotecas gráficas do host. Os binários usam glibc com baseline GLIBC_2.14; distribuições baseadas em musl (como Alpine) não são suportadas por estes artefatos. A primeira linha não inclui AppImage, Flatpak nem build ARM64. A instalação dos pacotes deve ser validada em distribuições-alvo antes de declarar compatibilidade ampla.
 
 ### Python
 
