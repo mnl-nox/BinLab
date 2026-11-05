@@ -8,6 +8,8 @@
   <meta property="og:title" content="BinLab Engineering">
   <meta property="og:description" content="Computational Science & Technology Laboratory">
   <meta property="og:type" content="website">
+  <meta property="og:image" content="./assets/binlab-logo.svg">
+  <meta name="twitter:card" content="summary_large_image">
   <title>BinLab Engineering — Computational Laboratory</title>
   <link rel="icon" href="./assets/binlab-mark.svg" type="image/svg+xml">
   <link rel="stylesheet" href="./styles.css">
@@ -17,14 +19,14 @@
   <a class="skip-link" href="#main">Pular para o conteúdo</a>
   <header class="site-header">
     <a class="brand" href="#top" aria-label="BinLab Engineering — início">
-      <span class="brand-mark">BL<span>.</span></span>
-      <span class="brand-name"><strong>BINLAB</strong><small>ENGINEERING</small></span>
+      <img class="brand-logo" id="header-logo" src="./assets/binlab-logo.svg" alt="BinLab Engineering">
     </a>
     <button class="menu-toggle" type="button" aria-label="Abrir navegação" aria-expanded="false" aria-controls="primary-nav">
       <span></span><span></span>
     </button>
     <nav id="primary-nav" class="primary-nav" aria-label="Navegação principal">
       <a href="#platform">Plataforma</a>
+      <a href="#release">Versão 0.3.2</a>
       <a href="#laboratories">Laboratórios</a>
       <a href="#architecture">Arquitetura</a>
       <a href="#security">Segurança</a>
@@ -47,7 +49,7 @@
         <p class="hero-lede">Um ambiente de engenharia computacional para explorar a representação da informação, arquitetura de computadores, sistemas, redes e segurança — da lógica fundamental à análise avançada.</p>
         <div class="hero-actions">
           <a class="button button-primary" href="https://github.com/mnl-nox/BinLab/tree/main/apps/web">Explorar aplicação Web <span aria-hidden="true">↗</span></a>
-          <a class="button button-secondary" href="#platform">Conhecer a plataforma <span aria-hidden="true">↓</span></a>
+          <a class="button button-secondary" href="#release">Versão 0.3.2 e downloads <span aria-hidden="true">↓</span></a>
         </div>
         <div class="hero-meta"><span><i></i> Local-first</span><span>Open source</span><span>MIT License</span></div>
       </div>
@@ -195,6 +197,22 @@ npm run build</code></pre></div>
       </div>
     </section>
 
+
+    <section id="release" class="section-wrap content-section release-section">
+      <div class="release-heading">
+        <div><span class="eyebrow">RELEASE / LINUX</span><h2>BinLab <em>0.3.2</em></h2><p>Primeira distribuição binária para Linux x86_64, construída em Ubuntu 22.04 e com baseline GLIBC_2.14.</p></div>
+        <div class="release-version"><strong>0.3.2</strong><span>CORE VERSION</span><small>04 NOV 2026</small></div>
+      </div>
+      <div class="release-status"><span class="status-indicator"></span><div><strong>Pacotes construídos e validados no CI</strong><p>A publicação da tag v0.3.2 e da GitHub Release oficial ainda está pendente. O artefato de CI é temporário e exige login no GitHub.</p></div></div>
+      <div class="release-packages">
+        <article class="release-package"><span class="package-format">DEBIAN / UBUNTU</span><h3>.deb</h3><p>Pacote amd64 com CLI e GUI Tkinter. Instalado e smoke-tested no runner Ubuntu 22.04.</p><code>binlab_0.3.2_amd64.deb</code></article>
+        <article class="release-package"><span class="package-format">FEDORA / RHEL</span><h3>.rpm</h3><p>Pacote x86_64 construído e manifesto inspecionado. Instalação em Fedora/RHEL ainda não validada.</p><code>binlab-0.3.2-1.x86_64.rpm</code></article>
+        <article class="release-package"><span class="package-format">GLIBC LINUX</span><h3>.tar.gz</h3><p>Arquivo portátil com executáveis e recursos na árvore usr/.</p><code>binlab-0.3.2-linux-x86_64.tar.gz</code></article>
+      </div>
+      <div class="release-actions"><a class="button button-primary" href="https://github.com/mnl-nox/BinLab/actions/runs/41939255038" target="_blank" rel="noopener noreferrer">Abrir artefato de CI <span aria-hidden="true">↗</span></a><a class="button button-secondary" href="https://github.com/mnl-nox/BinLab/releases" target="_blank" rel="noopener noreferrer">Página de releases <span aria-hidden="true">↗</span></a><a class="text-link" href="https://github.com/mnl-nox/BinLab/blob/main/README.md#distribuição-linux" target="_blank" rel="noopener noreferrer">Instruções e checksums <span aria-hidden="true">↗</span></a></div>
+      <p class="release-footnote">Não há build ARM64, AppImage, Flatpak ou suporte a Alpine/musl nesta entrega. A GUI requer sessão gráfica e bibliotecas do host.</p>
+    </section>
+
     <section id="roadmap" class="section-wrap content-section roadmap-section">
       <div class="section-intro">
         <span class="eyebrow">06 / ROADMAP</span>
@@ -215,7 +233,7 @@ npm run build</code></pre></div>
 
   <footer class="site-footer">
     <div class="footer-main">
-      <a class="brand" href="#top"><span class="brand-mark">BL<span>.</span></span><span class="brand-name"><strong>BINLAB</strong><small>ENGINEERING</small></span></a>
+      <a class="brand" href="#top" aria-label="BinLab Engineering — início"><img class="brand-logo footer-logo" id="footer-logo" src="./assets/binlab-logo.svg" alt="BinLab Engineering"></a>
       <p>Computational Science & Technology Laboratory.<br>Entender os fundamentos. Construir com método.</p>
       <a class="footer-github" href="https://github.com/mnl-nox/BinLab" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
     </div>
