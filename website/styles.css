@@ -320,3 +320,60 @@ button:focus-visible, a:focus-visible { outline: var(--focus-ring) solid var(--a
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
 }
+
+
+/* Brand assets and release information */
+.brand-logo { display: block; width: 176px; height: auto; max-height: 52px; object-fit: contain; }
+.footer-logo { width: 190px; max-height: 58px; }
+.release-section { border-top: 1px solid var(--border); }
+.release-heading { display: flex; align-items: center; justify-content: space-between; gap: 28px; margin-bottom: 26px; }
+.release-heading .eyebrow { display: block; margin-bottom: 12px; }
+.release-heading h2 { margin: 0; font-size: clamp(2rem, 4vw, 3rem); line-height: 1.1; letter-spacing: -.04em; }
+.release-heading h2 em { color: var(--accent); font-style: normal; }
+.release-heading p { max-width: 650px; margin: 13px 0 0; color: var(--muted); }
+.release-version { display: grid; gap: 2px; min-width: 145px; padding: 17px 20px; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); text-align: center; }
+.release-version strong { color: var(--accent); font: 700 2rem/1.1 "SFMono-Regular", Consolas, monospace; }
+.release-version span, .release-version small { color: var(--muted); font-size: 9px; letter-spacing: .12em; }
+.release-status { display: flex; align-items: flex-start; gap: 13px; margin-bottom: 18px; padding: 17px 19px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); }
+.status-indicator { flex: 0 0 9px; width: 9px; height: 9px; margin-top: 7px; border-radius: 50%; background: var(--warning); box-shadow: 0 0 0 4px color-mix(in srgb, var(--warning) 14%, transparent); }
+.release-status strong { font-size: 13px; }
+.release-status p { margin: 3px 0 0; color: var(--muted); font-size: 11px; line-height: 1.7; }
+.release-status code, .release-footnote code { color: var(--accent); }
+.release-packages { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.release-package { min-width: 0; padding: 20px; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); }
+.package-format { color: var(--muted); font-size: 9px; font-weight: 750; letter-spacing: .13em; }
+.release-package h3 { margin: 9px 0 5px; font-size: 1.65rem; letter-spacing: -.03em; }
+.release-package p { min-height: 78px; margin: 0 0 14px; color: var(--muted); font-size: 11px; line-height: 1.7; }
+.release-package > code { display: block; overflow-wrap: anywhere; padding-top: 12px; border-top: 1px solid var(--border); color: var(--subtle); font: 10px/1.6 "SFMono-Regular", Consolas, monospace; }
+.release-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+.release-footnote { margin: 18px 0 0; color: var(--muted); font-size: 10px; line-height: 1.7; }
+@media (max-width: 760px) {
+  .brand-logo { width: 148px; max-height: 46px; }
+  .release-heading { align-items: flex-start; }
+  .release-version { min-width: 112px; padding: 13px; }
+  .release-packages { grid-template-columns: 1fr; }
+  .release-package p { min-height: 0; }
+}
+@media (max-width: 430px) {
+  .brand-logo { width: 132px; }
+  .release-heading { flex-direction: column; }
+  .release-version { grid-template-columns: auto 1fr; align-items: center; column-gap: 12px; text-align: left; }
+  .release-version strong { grid-row: span 2; }
+  .release-actions .button { width: 100%; }
+}
+
+
+/* Current product capabilities */
+.available-capabilities { margin-top: 34px; padding-top: 27px; border-top: 1px solid var(--border); }
+.capabilities-heading .eyebrow { display: block; margin-bottom: 9px; }
+.capabilities-heading h3 { margin: 0 0 17px; font-size: 1.35rem; letter-spacing: -.025em; }
+.capability-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.capability-card { min-width: 0; padding: 17px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); }
+.capability-card > span { color: var(--muted); font-size: 8px; font-weight: 750; letter-spacing: .12em; }
+.capability-card h4 { margin: 9px 0 6px; font-size: 1rem; }
+.capability-card p { min-height: 94px; margin: 0 0 12px; color: var(--muted); font-size: 10px; line-height: 1.7; }
+.capability-card code { display: block; overflow-wrap: anywhere; padding-top: 9px; border-top: 1px solid var(--border); color: var(--accent); font: 9px/1.5 "SFMono-Regular", Consolas, monospace; }
+.capabilities-note { margin: 13px 0 0; color: var(--muted); font-size: 10px; line-height: 1.7; }
+@media (max-width: 980px) { .capability-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 760px) { .capability-card p { min-height: 0; } }
+@media (max-width: 430px) { .capability-grid { grid-template-columns: 1fr; } }

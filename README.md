@@ -1,157 +1,193 @@
-# BinLab Engineering
-
 <p align="center">
-  <strong>Computational Science & Technology Laboratory</strong><br>
-  Engenharia computacional, experimentação técnica e análise local-first.
+  <img src="branding/logo.svg" alt="BinLab Engineering" width="560">
 </p>
 
 <p align="center">
-  <strong>Python Core · React + TypeScript · Local-first · MIT</strong>
+  <strong>Laboratório de Engenharia Computacional</strong><br>
+  Entenda os fundamentos. Inspecione sistemas. Construa experimentos reproduzíveis.
 </p>
 
 <p align="center">
-  <a href="https://github.com/mnl-nox/BinLab/actions"><img alt="CI" src="https://github.com/mnl-nox/BinLab/actions/workflows/ci.yml/badge.svg"></a>
-  <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-blue.svg"></a>
-  <a href="branding/LICENSE"><img alt="Visual assets: CC BY 4.0" src="https://img.shields.io/badge/Visual%20Assets-CC%20BY%204.0-0b7285.svg"></a>
+  <a href="https://github.com/mnl-nox/BinLab/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/mnl-nox/BinLab/actions/workflows/ci.yml/badge.svg"></a>
+  <a href="https://github.com/mnl-nox/BinLab/actions/workflows/pages.yml"><img alt="GitHub Pages" src="https://github.com/mnl-nox/BinLab/actions/workflows/pages.yml/badge.svg"></a>
+  <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/Code-MIT-2563eb.svg"></a>
+  <a href="branding/LICENSE"><img alt="Visual assets: CC BY 4.0" src="https://img.shields.io/badge/Branding-CC%20BY%204.0-0891b2.svg"></a>
+  <a href="https://github.com/mnl-nox/BinLab/releases"><img alt="Release" src="https://img.shields.io/badge/version-0.3.2-informational.svg"></a>
 </p>
 
-> **Estado do projeto:** a versão Python 0.3.2 (CLI e GUI Tkinter) é a base funcional. A aplicação Web está em desenvolvimento; o Binary & Logic Lab é a primeira experiência funcional no navegador. API FastAPI, persistência e desktop Tauri ainda não fazem parte do produto integrado.
+<p align="center">
+  <a href="https://github.com/mnl-nox/BinLab">Repositório</a> ·
+  <a href="https://github.com/mnl-nox/BinLab/tree/main/docs">Documentação</a> ·
+  <a href="https://github.com/mnl-nox/BinLab/issues">Issues</a> ·
+  <a href="https://github.com/mnl-nox/BinLab/blob/main/CONTRIBUTING.md">Contribuir</a> ·
+  <a href="https://github.com/mnl-nox/BinLab/blob/main/SECURITY.md">Segurança</a>
+</p>
 
-O BinLab é um laboratório de engenharia computacional projetado para estudar, experimentar e investigar sistemas desde a representação binária até arquitetura de computadores, compiladores, sistemas operacionais, redes, segurança e computação científica. A prioridade arquitetural é **execução local, transparência técnica, modularidade e segurança por padrão**.
+> **Versão atual do núcleo: 0.3.2.** CLI Python, GUI Tkinter, leitor estático de artefatos e a primeira fundação Web estão disponíveis. Os pacotes Linux x86_64 foram construídos e validados no CI. A publicação da GitHub Release oficial depende da criação da tag v0.3.2; até lá, os instaladores podem ser obtidos no artefato do workflow indicado em [Distribuição Linux](#distribuição-linux).
 
-## Índice
+BinLab Engineering é um laboratório open source para estudar, experimentar e investigar sistemas computacionais — da representação binária à arquitetura de computadores, compiladores, sistemas operacionais, redes, segurança e computação científica.
 
-- [Escopo e estado](#escopo-e-estado)
-- [Capacidades disponíveis](#capacidades-disponíveis)
-- [Instalação e execução](#instalação-e-execução)
+O projeto evolui a partir de um núcleo Python funcional para uma plataforma **local-first, modular, verificável e segura por padrão**. O objetivo não é esconder a complexidade atrás de uma interface: é tornar cada camada observável e cada experimento reproduzível.
+
+## Sumário
+
+- [Estado do projeto](#estado-do-projeto)
+- [O que já funciona](#o-que-já-funciona)
+- [Distribuição Linux](#distribuição-linux)
+- [Instalação a partir do código-fonte](#instalação-a-partir-do-código-fonte)
+- [Aplicação Web](#aplicação-web)
 - [Arquitetura](#arquitetura)
-- [Segurança e limites](#segurança-e-limites)
+- [Segurança e limites conhecidos](#segurança-e-limites-conhecidos)
 - [Estrutura do repositório](#estrutura-do-repositório)
+- [Desenvolvimento e testes](#desenvolvimento-e-testes)
 - [Roadmap](#roadmap)
-- [Desenvolvimento e qualidade](#desenvolvimento-e-qualidade)
-- [Documentação](#documentação)
+- [Documentação e suporte](#documentação-e-suporte)
+- [Contribuição](#contribuição)
+- [Comunidade e suporte](#comunidade-e-suporte)
 - [Licenças e autoria](#licenças-e-autoria)
 
-## Escopo e estado
+## Estado do projeto
 
-| Componente | Estado | Tecnologia |
+| Área | Estado em 0.3.2 | Implementação |
 |---|---|---|
-| CLI | Disponível | Python 3.8+ |
-| Desktop legado | Disponível | Tkinter |
-| Web | Fundação funcional em desenvolvimento | React, TypeScript, Vite, Tailwind CSS |
-| API local | Bloqueada até conclusão do hardening | FastAPI — planejado |
-| Desktop multiplataforma | Planejado | Tauri |
-| Persistência de experimentos | Planejada | SQLite |
+| Núcleo numérico | Disponível | Python |
+| CLI | Disponível | Python |
+| Desktop clássico | Disponível | Tkinter |
+| Leitor estático | Disponível | Python, Intel HEX, binários e fontes |
+| Aplicação Web | Fundação funcional | React, TypeScript, Vite |
+| Binary & Logic Lab Web | Disponível em escopo inicial | BigInt no navegador |
+| API local | Não integrada | FastAPI planejado, bloqueado por revisão de segurança |
+| Desktop integrado | Planejado | Tauri |
+| Projetos e persistência | Planejado | SQLite |
 
-## Capacidades disponíveis
+**Importante:** a aplicação Web e a aplicação Python ainda são experiências separadas. Não existe integração HTTP entre elas, backend FastAPI publicado ou persistência compartilhada nesta versão.
 
-### Aplicação Python 0.3.2
+## O que já funciona
 
-- Conversão entre binário, octal, decimal e hexadecimal.
-- Aritmética inteira e operações lógicas bit a bit.
+### Núcleo Python 0.3.2
+
+- Conversão de inteiros entre bases 2, 8, 10 e 16.
+- Formatação, aritmética e operações lógicas bit a bit.
 - Análise de largura, sinal, bytes e caracteres ASCII.
-- Inspeção estática de fontes C/Assembly, dumps HEX e arquivos binários.
-- Desassemblagem opcional por GNU `objdump`.
-- CLI e GUI Tkinter sem dependências Python extras no runtime de base.
+- Leitura e inspeção estática de fontes C/Assembly, dumps HEX, Intel HEX e arquivos binários.
+- Desassemblagem opcional com GNU objdump.
+- Interface de terminal (binlab) e interface Tkinter (binlab-gui).
 
 ### Aplicação Web
 
-- Navegação modular pelos oito laboratórios previstos.
-- Binary & Logic Lab com conversão de bases usando `BigInt`.
-- Operações AND, OR, XOR e deslocamento à esquerda.
-- Temas claro e escuro e layout responsivo.
-- Módulos ainda não implementados identificados como planejados.
-- Sem API remota ou persistência integrada nesta etapa.
+- Interface React + TypeScript com navegação modular e temas claro/escuro.
+- Conversão de bases e operações AND, OR, XOR e shift-left usando BigInt.
+- Validação de entradas, limites de operandos e mensagens de erro explícitas.
+- Laboratórios ainda não implementados identificados como planejados.
 
-## Instalação e execução
+### Princípios técnicos
 
-### Pacotes Linux (primeira linha: x86_64)
+- Execução local por padrão; sem conta, analytics ou backend remoto exigido pelo núcleo.
+- Domínio numérico separado das interfaces.
+- Entradas externas validadas e limites de recursos explícitos.
+- Arquivos importados são inspecionados estaticamente, nunca executados automaticamente.
+- Testes unitários e property-based no pipeline de qualidade.
 
-A primeira distribuição binária é destinada a Linux x86_64 e inclui CLI e GUI Tkinter:
+## Distribuição Linux
 
-- Debian, Ubuntu e derivados: pacote `.deb`.
-- Fedora, RHEL e sistemas compatíveis: pacote `.rpm`.
-- Outras distribuições: arquivo `.tar.gz` com executáveis e recursos em uma árvore `usr/`.
+<sub>Primeira linha de distribuição: Linux x86_64 · build em Ubuntu 22.04 · baseline GLIBC_2.14</sub>
 
-Os arquivos são publicados como ativos de uma GitHub Release, depois da aprovação do CI. Antes da instalação, valide os arquivos com `sha256sum -c SHA256SUMS`.
+| Formato | Distribuições | Arquivo |
+|---|---|---|
+| Debian | Debian, Ubuntu e derivados | binlab_0.3.2_amd64.deb |
+| RPM | Fedora, RHEL e compatíveis | binlab-0.3.2-1.x86_64.rpm |
+| Tarball | Distribuições glibc compatíveis | binlab-0.3.2-linux-x86_64.tar.gz |
 
-Debian / Ubuntu:
+**Obter os pacotes:** [workflow Linux — artefatos da versão 0.3.2](https://github.com/mnl-nox/BinLab/actions/runs/41939255038). Abra a execução e baixe o artefato binlab-linux-x86_64. O artefato inclui os três pacotes e SHA256SUMS; a retenção do GitHub Actions é limitada e exige sessão autenticada.
 
-```bash
+A tag v0.3.2 e a GitHub Release pública ainda precisam ser publicadas. A página [Releases](https://github.com/mnl-nox/BinLab/releases) é o destino das distribuições oficiais quando essa etapa for concluída.
+
+### Debian / Ubuntu
+
+~~~bash
+sha256sum -c SHA256SUMS
 sudo apt install ./binlab_0.3.2_amd64.deb
 binlab
 binlab-gui
-```
+~~~
 
-Fedora / RHEL:
+### Fedora / RHEL
 
-```bash
+~~~bash
+sha256sum -c SHA256SUMS
 sudo dnf install ./binlab-0.3.2-1.x86_64.rpm
 binlab
 binlab-gui
-```
+~~~
 
-Outras distribuições:
+### Outras distribuições glibc
 
-```bash
+~~~bash
 tar -xzf binlab-0.3.2-linux-x86_64.tar.gz
 sudo cp -a usr/. /usr/
 binlab
 binlab-gui
-```
+~~~
 
-A GUI requer uma sessão gráfica X11/compatibilidade XWayland e bibliotecas gráficas do host. Os binários usam glibc com baseline GLIBC_2.14; distribuições baseadas em musl (como Alpine) não são suportadas por estes artefatos. A primeira linha não inclui AppImage, Flatpak nem build ARM64. A instalação dos pacotes deve ser validada em distribuições-alvo antes de declarar compatibilidade ampla.
+**Compatibilidade e validação:** o pacote DEB foi instalado no runner Ubuntu 22.04 e CLI/GUI passaram por smoke test; o RPM foi construído e inspecionado, mas ainda não foi instalado em uma VM Fedora/RHEL. A GUI requer bibliotecas gráficas do host e sessão X11 ou XWayland. Alpine/musl, ARM64, AppImage e Flatpak não fazem parte desta entrega. Não interprete x86_64 como compatibilidade universal com toda distribuição Linux.
 
-### Python
+## Instalação a partir do código-fonte
 
-Requisitos: Python 3.8 ou superior. GNU `objdump` é opcional.
+### Requisitos
 
-```bash
+- Python 3.8 ou superior.
+- GNU objdump opcional para desassemblagem.
+- Para a interface Web: Node.js 22 e npm.
+
+### Python — ambiente virtual
+
+~~~bash
+git clone https://github.com/mnl-nox/BinLab.git
+cd BinLab
+
 python3 -m venv .venv
 source .venv/bin/activate
+python -m pip install --upgrade pip
 python -m pip install .
+
 binlab
-```
-
-Interface gráfica:
-
-```bash
+# Interface gráfica:
 binlab-gui
-```
+~~~
 
-Em algumas distribuições Linux, instale `python3-tk` pelo gerenciador de pacotes. Para executar diretamente do checkout:
+Para executar sem instalar o pacote:
 
-```bash
-PYTHONPATH=src python3 -m binlab
-PYTHONPATH=src python3 -m binlab.gui
-```
+~~~bash
+PYTHONPATH=src python -m binlab
+PYTHONPATH=src python -m binlab.gui
+~~~
 
-### Web
+Em algumas distribuições Debian, a GUI requer o pacote de sistema python3-tk.
 
-Requisitos: Node.js 20+ e npm 10+.
+### Web — ambiente de desenvolvimento
 
-```bash
+~~~bash
 cd apps/web
 npm install
 npm run dev
-```
+~~~
 
-Validação local:
+Validação da aplicação:
 
-```bash
+~~~bash
 npm test
 npm run build
-```
+~~~
 
-Consulte [apps/web/README.md](apps/web/README.md) para estrutura e limitações atuais.
+Consulte [apps/web/README.md](apps/web/README.md) para detalhes e limitações da fundação Web.
 
 ## Arquitetura
 
-A direção é um **monólito modular**, evitando a complexidade prematura de microserviços.
+A direção arquitetural é um **monólito modular**, não uma coleção prematura de microserviços.
 
-```text
+~~~text
 React / TypeScript ───────┐
-                          ├── HTTP /api/v1 ── FastAPI adapter
+                          ├── HTTP /api/v1 ── FastAPI adapter (planejado)
 Tauri Desktop ────────────┘                         │
                                             Application services
                                                     │
@@ -159,24 +195,22 @@ Tauri Desktop ────────────┘                         �
                                                     │
                                        Infrastructure adapters
                                        SQLite · filesystem · tools
-```
+~~~
 
-Princípios de projeto:
+Regras de dependência:
 
-1. O domínio permanece independente de frameworks, interfaces, banco de dados e sistema operacional.
-2. Interfaces Web e Desktop consomem casos de uso por contratos explícitos.
+1. O domínio não depende de frameworks, interfaces, banco de dados ou sistema operacional.
+2. Casos de uso coordenam domínio e portas; adaptadores implementam portas.
 3. Contratos HTTP serão versionados e documentados por OpenAPI.
-4. A aplicação Web não acessará filesystem ou banco diretamente.
-5. O backend local deverá validar origem, autenticação, CSRF, Host e tentativas de DNS rebinding.
-6. C/C++ serão introduzidos somente quando houver justificativa mensurável de desempenho ou acesso de baixo nível.
+4. A interface Web não acessará filesystem ou banco diretamente.
+5. O backend local deverá tratar origem, autenticação, CSRF, Host e DNS rebinding antes de expor operações.
+6. C/C++ serão introduzidos quando houver justificativa mensurável de desempenho ou acesso de baixo nível.
 
-## Segurança e limites
+## Segurança e limites conhecidos
 
-O leitor Python realiza **inspeção estática**. Arquivos importados não são executados nem compilados automaticamente.
+O leitor de artefatos realiza **inspeção estática**. Arquivos importados não são executados nem compilados automaticamente.
 
-Limites atuais:
-
-| Superfície | Limite |
+| Superfície | Limite atual |
 |---|---:|
 | Código-fonte | 2 MiB |
 | Binário | 8 MiB |
@@ -184,82 +218,113 @@ Limites atuais:
 | Registros Intel HEX | 65.536 |
 | Span decodificado | 1 MiB |
 | Lacuna esparsa | 64 KiB |
-| Saída combinada do `objdump` | 64 KiB |
-| Timeout do `objdump` | 20 s |
+| Saída combinada do objdump | 64 KiB |
+| Timeout do objdump | 20 s |
 
-O parser Intel HEX valida checksum e estrutura, exige EOF único e terminal, rejeita sobreposições e limita endereços e alocações esparsas. O `objdump` é iniciado sem shell, com ambiente reduzido, timeout e saída drenada sob limite.
+O parser Intel HEX valida checksum e estrutura, exige EOF único e terminal, rejeita sobreposições e limita endereços e alocações esparsas. O objdump é iniciado sem shell, com ambiente reduzido, timeout e saída limitada.
 
-Esses controles **não equivalem a uma sandbox**. Não use o BinLab como ambiente de execução de arquivos não confiáveis. A exposição do leitor pela API permanece bloqueada até a conclusão da [Issue #2](https://github.com/mnl-nox/BinLab/issues/2), incluindo fuzzing e revisão complementar.
+Esses controles **não constituem uma sandbox**. Não use o BinLab para executar arquivos não confiáveis. A exposição do leitor por API permanece bloqueada até a conclusão da [Issue #2](https://github.com/mnl-nox/BinLab/issues/2), incluindo fuzzing mais amplo e revisão complementar. A [Issue #3](https://github.com/mnl-nox/BinLab/issues/3) acompanha validações adicionais do pipeline e das permissões do repositório.
+
+Consulte [SECURITY.md](SECURITY.md) para reporte responsável e [o modelo de ameaças](docs/security/threat-model.md) para os limites da arquitetura.
 
 ## Estrutura do repositório
 
-```text
+~~~text
 src/binlab/                 núcleo Python, CLI, GUI e leitor estático
 apps/web/                   aplicação React/TypeScript
 apps/desktop/               integração Tauri (planejada)
 website/                    site institucional estático
-branding/                   logotipos e licença dos ativos visuais
+branding/                   logotipos vetoriais e licença dos ativos
 packaging/                  entrypoints e pipeline de pacotes Linux
 docs/                       arquitetura, contratos, auditoria e roadmap
 tests/                      testes Python
-.github/workflows/          CI e automações de release/deploy
-```
+.github/workflows/          CI, release e publicação do site
+~~~
 
-## Roadmap
+## Desenvolvimento e testes
 
-1. Estabilização, auditoria e hardening dos parsers.
-2. Testes property-based/fuzzing e conclusão da Issue #2.
-3. Backend de aplicação e contratos HTTP seguros.
-4. Expansão da aplicação Web e integração Desktop via Tauri.
-5. Binary & Logic Lab e Architecture Lab.
-6. Compiler, Operating Systems, Network e Security Labs.
-7. Computação científica, dados e IA local.
-8. Persistência de experimentos e projetos reproduzíveis.
-9. Releases Linux, builds reproduzíveis, SBOM e attestations.
+Instale dependências de teste:
 
-A conclusão de cada etapa depende de testes, documentação, critérios de aceite e revisão. Uma etapa não é considerada pronta apenas porque o código compila.
-
-## Desenvolvimento e qualidade
-
-O CI valida Python 3.8 e 3.13, executa testes unitários e property-based, verifica compilação e constrói wheel/sdist. O job Web instala dependências, executa testes Vitest e gera build de produção. Um job Linux constrói e inspeciona .deb, .rpm e tar.gz em Ubuntu 22.04 x86_64.
-
-Para instalar dependências de teste:
-
-```bash
+~~~bash
 python -m pip install -e ".[test]"
+python -m compileall -q src tests
 python -m unittest discover -s tests -v
-```
+~~~
 
-Para construir pacotes Linux:
+Verifique a Web:
 
-```bash
-python -m pip install . pyinstaller==6.16.0
+~~~bash
+cd apps/web
+npm install
+npm test
+npm run build
+~~~
+
+Construa os pacotes Linux em ambiente Ubuntu 22.04 x86_64 com as dependências de empacotamento:
+
+~~~bash
+python -m pip install . "pyinstaller==6.16.0"
 sudo apt install ruby ruby-dev rpm
 sudo gem install --no-document fpm
 bash packaging/build-linux.sh
-```
+~~~
 
-## Documentação
+O CI cobre Python 3.8 e 3.13, testes Python, testes/build Web e smoke build dos pacotes Linux. O workflow de release é acionado por tags v*.
 
-- [Site institucional — fonte e publicação](website/README.md)
+## Roadmap
+
+1. Concluir estabilização, auditoria e hardening dos parsers.
+2. Ampliar fuzzing/property tests e concluir a Issue #2.
+3. Definir contratos e backend local com fronteiras seguras.
+4. Expandir a aplicação Web e integrar o Desktop via Tauri.
+5. Evoluir Binary & Logic e implementar Architecture Lab.
+6. Implementar Compiler, Operating Systems, Network e Security Labs.
+7. Adicionar computação científica, dados e IA local opcional.
+8. Introduzir persistência de experimentos e projetos reproduzíveis.
+9. Fortalecer releases com builds reproduzíveis, SBOM e attestations.
+
+O status detalhado está em [docs/ROADMAP.md](docs/ROADMAP.md). Itens planejados não devem ser interpretados como funcionalidades disponíveis.
+
+## Documentação e suporte
+
+- [Site institucional](website/README.md)
 - [Roadmap](docs/ROADMAP.md)
-- [Visão geral da arquitetura](docs/architecture/overview.md)
-- [Arquitetura da aplicação Web](docs/architecture/web-application.md)
+- [Arquitetura geral](docs/architecture/overview.md)
+- [Arquitetura Web](docs/architecture/web-application.md)
 - [Contratos](docs/contracts/README.md)
 - [Modelo de ameaças](docs/security/threat-model.md)
-- [Auditoria técnica](docs/audit/2026-11-02-code-review.md)
-- [Licenciamento](docs/legal/LICENSING.md)
-- [Privacidade](docs/legal/PRIVACY.md)
+- [Auditoria técnica — 04/11/2026](docs/audit/2026-11-04-code-review.md)
 - [Política de segurança](SECURITY.md)
+- [Privacidade](docs/legal/PRIVACY.md)
 - [Contribuição](CONTRIBUTING.md)
 - [Histórico de alterações](CHANGELOG.md)
+- [Issues e solicitações](https://github.com/mnl-nox/BinLab/issues)
+
+Antes de abrir uma issue, verifique se já existe uma solicitação semelhante. Para vulnerabilidades, não publique detalhes exploráveis em issue pública; siga o processo de reporte privado descrito em [SECURITY.md](SECURITY.md).
+
+## Contribuição
+
+Contribuições são bem-vindas. Para manter o histórico auditável:
+
+1. Abra ou comente uma issue descrevendo o problema ou a proposta.
+2. Crie uma branch focada em uma única entrega.
+3. Inclua testes, documentação, limitações e riscos no pull request.
+4. Execute os testes e verificações aplicáveis antes de solicitar revisão.
+5. Não exponha credenciais, dados pessoais ou arquivos de terceiros nos commits e logs.
+
+Leia [CONTRIBUTING.md](CONTRIBUTING.md) antes de enviar alterações. O projeto usa Conventional Commits e Semantic Versioning.
+
+## Comunidade e suporte
+
+- [Código de conduta](CODE_OF_CONDUCT.md)
+- [Suporte](SUPPORT.md)
+- [Como contribuir](CONTRIBUTING.md)
+- [Citação acadêmica e técnica](CITATION.cff)
 
 ## Licenças e autoria
 
-**Código-fonte:** MIT License. Consulte [LICENSE](LICENSE).
+- **Código-fonte:** MIT — consulte [LICENSE](LICENSE).
+- **Identidade visual original:** CC BY 4.0 — consulte [branding/LICENSE](branding/LICENSE) e [branding/README.md](branding/README.md).
+- **Autoria:** Copyright © 2026 Manoel E. S. S. (mnl-nox).
 
-**Ativos visuais originais:** Creative Commons Attribution 4.0 International (CC BY 4.0). Consulte [branding/LICENSE](branding/LICENSE) e [branding/README.md](branding/README.md).
-
-**Autoria:** Copyright © 2026 Manoel E. S. S. (mnl-nox).
-
-A licença dos ativos visuais é independente da licença do código. CC BY 4.0 não concede direitos de marca registrada.
+A licença MIT do software não se aplica automaticamente aos ativos visuais. CC BY 4.0 exige atribuição e não concede direitos de marca registrada.
