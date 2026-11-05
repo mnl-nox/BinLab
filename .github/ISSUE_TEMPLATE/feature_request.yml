@@ -1,7 +1,6 @@
 name: Solicitação de funcionalidade
 description: Proponha uma melhoria ou novo laboratório.
 title: "[Feature]: "
-labels: ["enhancement"]
 body:
   - type: textarea
     id: problem
