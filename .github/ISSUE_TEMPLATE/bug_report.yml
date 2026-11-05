@@ -1,7 +1,6 @@
 name: Relato de bug
 description: Reporte um defeito reproduzível no BinLab.
 title: "[Bug]: "
-labels: ["bug"]
 body:
   - type: markdown
     attributes:
