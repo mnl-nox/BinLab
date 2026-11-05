@@ -1,0 +1,32 @@
+name: Solicitação de funcionalidade
+description: Proponha uma melhoria ou novo laboratório.
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problema ou necessidade
+      description: Qual tarefa ou limitação precisa ser resolvida?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposta
+      description: Descreva o comportamento esperado sem presumir uma implementação.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternativas consideradas
+    validations:
+      required: false
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Critérios de aceite
+      description: Como poderemos verificar que a proposta foi concluída?
+    validations:
+      required: true
