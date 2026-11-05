@@ -11,6 +11,7 @@ Este projeto segue [Semantic Versioning](https://semver.org/).
 - Melhorados metadados Open Graph, navegação e apresentação responsiva da release.
 - Reescrita a documentação do site e alinhado o README principal com a versão e os artefatos existentes.
 - Esclarecido que a GitHub Release pública depende da criação da tag v0.3.2 e que os artefatos de Actions são temporários.
+- Adicionados código de conduta, guia de suporte, template de pull request, formulários de issues e metadados de citação.
 
 ## 0.3.2 — 2026-11-04
 
