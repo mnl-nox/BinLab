@@ -48,9 +48,9 @@ jobs:
       - name: Check out source
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Set up Node.js
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
         with:
-          node-version: "20"
+          node-version: "22"
       - name: Install Web dependencies
         working-directory: apps/web
         run: npm install --no-audit --no-fund
@@ -101,7 +101,7 @@ jobs:
             exit 1
           fi
       - name: Upload Linux packages for direct testing
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
         with:
           name: binlab-linux-x86_64
           path: |
