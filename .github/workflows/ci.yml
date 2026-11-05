@@ -85,6 +85,21 @@ jobs:
           dpkg-deb --contents dist/*.deb
           rpm -qpl dist/*.rpm
           tar -tzf dist/*.tar.gz
+      - name: Install Debian package and smoke-test CLI/GUI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb xauth
+          sudo apt-get install -y ./dist/*.deb
+          expected_version="v$(python -c 'import binlab; print(binlab.__version__)')"
+          printf '0\\n' | binlab | grep -F "$expected_version"
+          set +e
+          xvfb-run -a timeout 8s binlab-gui
+          gui_status=$?
+          set -e
+          if [ "$gui_status" -ne 124 ]; then
+            echo "GUI smoke test failed or exited unexpectedly (status=$gui_status)." >&2
+            exit 1
+          fi
       - name: Upload Linux packages for direct testing
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
