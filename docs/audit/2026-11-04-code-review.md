@@ -23,6 +23,12 @@ Revisão estática da branch principal e do estado dos workflows, domínio TypeS
 - Evidência: a interface convertia qualquer exceção em `null` e exibia uma mensagem genérica.
 - Correção: preservar mensagens de validação e apresentar erros acessíveis via `role=alert`.
 
+### BL-PY-001 — Parser Python removia separadores antes de validar
+
+- Evidência: `parse_integer()` removia todos os underscores antes de chamar `int()`, aceitando entradas como `1__0`, `_10` e `10_`.
+- Correção: preservar os separadores até a validação estrita de `int()`; contar somente dígitos efetivos para aplicar o limite de tamanho.
+- Testes: entradas válidas com prefixo/sinal e casos de separadores no início, fim e duplicados.
+
 ### BL-SEC-007 — Ausência de testes property-based
 
 - Evidência: testes unitários determinísticos não exploravam sistematicamente o espaço de entradas.
@@ -60,6 +66,14 @@ Os executáveis CLI e GUI são empacotados com PyInstaller. O pacote GUI depende
 7. Encerrar Issue #2 somente após fuzzing Intel HEX mais amplo e revisão de segurança complementar.
 8. Encerrar Issue #3 somente após confirmar todas as referências `uses:` fixadas e permissões mínimas.
 
-## Status
+## Resultado da validação
 
-Esta revisão documenta alterações propostas na branch de release. Não afirma que os pacotes já foram construídos ou instalados com sucesso. A release só deve ser criada depois de CI verde e validação dos artefatos.
+- CI completo aprovado no commit `2ecdba418ae0834754bb6402fb64c228c54170c3`: Python 3.8, Python 3.13, Web (Node.js 22) e Linux package smoke build.
+- Pacotes .deb, .rpm e tar.gz construídos e inspecionados.
+- .deb instalado no runner Ubuntu 22.04; CLI executada e GUI iniciada sob Xvfb sem saída inesperada.
+- CLI do tarball extraído também foi executada e identificou a versão 0.3.2.
+- Checksums SHA-256 dos três pacotes conferidos.
+- RPM teve o manifesto inspecionado, mas ainda não foi instalado em uma VM Fedora/RHEL.
+- A release GitHub ainda depende da criação da tag `v0.3.2`.
+
+A validação comprova a construção e o smoke test na baseline Ubuntu 22.04 x86_64; não declara certificação ou compatibilidade universal com todas as distribuições. A Issue #2 permanece aberta para fuzzing mais amplo do Intel HEX e revisão de segurança complementar.

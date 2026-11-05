@@ -73,7 +73,7 @@ A primeira distribuição binária é destinada a Linux x86_64 e inclui CLI e GU
 - Fedora, RHEL e sistemas compatíveis: pacote `.rpm`.
 - Outras distribuições: arquivo `.tar.gz` com executáveis e recursos em uma árvore `usr/`.
 
-Os arquivos são publicados como ativos de uma GitHub Release, depois da aprovação do CI.
+Os arquivos são publicados como ativos de uma GitHub Release, depois da aprovação do CI. Antes da instalação, valide os arquivos com `sha256sum -c SHA256SUMS`.
 
 Debian / Ubuntu:
 

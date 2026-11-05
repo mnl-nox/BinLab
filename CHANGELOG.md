@@ -17,7 +17,7 @@ Este projeto segue [Semantic Versioning](https://semver.org/).
 - Implementado conversor de bases e operações AND/OR/XOR/shift-left locais com BigInt.
 - Adicionados limites de entrada e largura de operandos/resultados no domínio Web.
 - Revertida a atualização de Vitest 4.1.11 para 2.1.8 após falha de instalação no CI.
-- Parsing numérico agora valida separadores somente entre dígitos válidos da base.
+- Parsing numérico em Python e TypeScript agora valida separadores somente entre dígitos válidos da base.
 - Mensagens de erro do domínio são preservadas e exibidas na interface.
 - Ampliada a cobertura de testes para sinais, separadores, bases inválidas, precisão e operações bit a bit.
 - Laboratórios ainda não implementados são identificados como planejados; não há integração com API.
