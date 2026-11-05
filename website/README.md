@@ -1,27 +1,42 @@
-# Website institucional
+# Website institucional — BinLab Engineering
 
-Site estático do BinLab Engineering. O conteúdo é servido diretamente pelo GitHub Pages; não utiliza backend, analytics, cookies ou serviços externos de fontes.
+Site estático oficial do projeto, publicado via GitHub Pages a partir de website/. O conteúdo documenta o produto e seu estado real; não é a aplicação React, não hospeda API e não executa os laboratórios.
 
-## Estrutura
+## Conteúdo e identidade
 
-- `index.html`: página institucional e documentação resumida.
-- `styles.css`: identidade visual, temas, responsividade e acessibilidade.
-- `main.js`: navegação móvel e alternância de tema.
-- `assets/`: recursos estáticos locais.
-- `404.html`: página de rota não encontrada.
+- index.html: visão do produto, módulos, arquitetura, segurança, versão 0.3.2, pacotes Linux e roadmap.
+- styles.css: sistema visual responsivo, temas e componentes de release.
+- main.js: navegação móvel, acessibilidade por teclado e alternância de tema/logo.
+- assets/binlab-logo.svg: logotipo horizontal oficial para tema escuro.
+- assets/binlab-logo-light.svg: variante para tema claro.
+- assets/binlab-mark.svg: símbolo vetorial usado como favicon.
+- 404.html: página de rota não encontrada.
+
+Os logotipos são cópias de distribuição dos ativos canônicos em branding/. A licença dos ativos visuais é CC BY 4.0; consulte [branding/LICENSE](../branding/LICENSE).
+
+## Versão e distribuição
+
+O site documenta BinLab 0.3.2. Os pacotes Linux x86_64 (.deb, .rpm e .tar.gz) foram construídos pelo CI; o DEB passou por instalação e smoke test no runner Ubuntu 22.04. O RPM foi construído e inspecionado, mas não instalado em Fedora/RHEL. A tag v0.3.2 e a GitHub Release pública ainda precisam ser criadas. O site aponta para o artefato temporário do workflow, não para URLs de download fictícias.
+
+## Validação local
+
+Na raiz do repositório:
+
+~~~bash
+python website/validate.py
+node --check website/main.js
+~~~
+
+Abra website/index.html em um navegador ou sirva a pasta com um servidor HTTP estático local. Não é necessário instalar dependências externas.
 
 ## Publicação
 
-O workflow `.github/workflows/pages.yml` empacota a pasta `website/` e publica em GitHub Pages. As actions externas estão fixadas em SHAs completos. O gatilho de push monitora alterações em `website/**` e no próprio arquivo do workflow; pushes em caminhos não monitorados não iniciam o deploy.
+O workflow .github/workflows/pages.yml valida e publica a pasta website/ em GitHub Pages. Actions externas estão fixadas em SHAs completos. O gatilho de push monitora website/** e o workflow.
 
-**Ação manual necessária:** em GitHub, abra **Settings → Pages → Build and deployment → Source** e selecione **GitHub Actions**. O token de CI não possui permissão administrativa para habilitar Pages automaticamente.
+**Configuração administrativa necessária:** em GitHub, abra **Settings → Pages → Build and deployment → Source** e selecione **GitHub Actions**. A integração de CI não possui permissão administrativa para alterar essa configuração.
 
-Depois de habilitar Pages, publique por uma destas formas:
-- Em **Actions**, abra uma execução existente do workflow **Deploy GitHub Pages** e selecione **Re-run all jobs**; ou
-- Faça uma alteração legítima em `website/**` ou em `.github/workflows/pages.yml` e envie-a para `main`, para acionar o gatilho de push.
-
-A URL esperada é `https://mnl-nox.github.io/BinLab/`; ela só estará disponível após o primeiro deploy bem-sucedido.
+Após habilitar Pages, um push em main que altere website/** dispara a publicação. URL esperada: [https://mnl-nox.github.io/BinLab/](https://mnl-nox.github.io/BinLab/). Ela só deve ser anunciada como publicada depois de um deploy bem-sucedido no workflow.
 
 ## Limites
 
-O site documenta o estado real do produto. A aplicação Web está em desenvolvimento; o site não executa nem hospeda o frontend da aplicação, não expõe uma API e não representa funcionalidades planejadas como disponíveis.
+O site institucional é uma camada de documentação e apresentação. A aplicação Web em apps/web/ é uma experiência separada e ainda não está integrada ao núcleo Python. API FastAPI, persistência, Tauri e os demais laboratórios permanecem planejados.
