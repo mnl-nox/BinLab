@@ -44,8 +44,10 @@ As etapas podem ter subentregas menores. Uma etapa só é considerada concluída
 - [ ] Revisão funcional, acessibilidade e responsividade em navegador.
 - [ ] Cliente HTTP tipado e contratos de integração, somente após definição da API.
 - [ ] Backend FastAPI: bloqueado pela Issue #2 até fuzz/property tests, testes de fronteira e revisão complementar.
-- [x] Fonte do site institucional estático criada em `website/`, com workflow GitHub Pages e validação de links.
-- [ ] Primeiro deploy do site e confirmação da URL pública.
+- [x] Site institucional documentado com versão 0.3.2, capacidades reais, identidade visual canônica e distribuição Linux.
+- [x] Workflow GitHub Pages e validação de links configurados.
+- [ ] Habilitar GitHub Pages em Settings → Pages e confirmar o primeiro deploy/URL pública.
+- [ ] Criar a tag v0.3.2 para publicar a GitHub Release e anexar os pacotes Linux.
 - [ ] Integração Tauri e persistência: etapas posteriores.
 
 ## Etapa 0 — critérios de aceite
