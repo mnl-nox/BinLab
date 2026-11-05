@@ -11,7 +11,7 @@
 
 - Defeitos reproduzíveis: abra uma issue usando o formulário de bug.
 - Novas capacidades: use o formulário de solicitação de funcionalidade.
-- Dúvidas de uso: abra uma discussão/issue com contexto mínimo e passos já tentados.
+- Dúvidas de uso: abra uma issue com contexto mínimo, versão e passos já tentados.
 - Vulnerabilidades: não abra issue pública; siga [SECURITY.md](SECURITY.md).
 
 ## Escopo de suporte
