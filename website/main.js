@@ -23,6 +23,9 @@ themeButton?.addEventListener("click", () => {
   const themeColor = document.querySelector('meta[name="theme-color"]');
   themeColor?.setAttribute("content", nextTheme === "dark" ? "#0b1020" : "#f5f7fa");
   themeButton.setAttribute("aria-label", nextTheme === "dark" ? "Ativar tema claro" : "Ativar tema escuro");
+  document.querySelectorAll(".brand-logo").forEach((logo) => {
+    logo.setAttribute("src", nextTheme === "dark" ? "./assets/binlab-logo.svg" : "./assets/binlab-logo-light.svg");
+  });
 });
 
 document.addEventListener("keydown", (event) => {
