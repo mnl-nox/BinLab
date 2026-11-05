@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/mnl-nox/BinLab/blob/main/SECURITY.md
+    about: Report security issues privately; do not publish exploitable details in a public issue.
+  - name: Support and usage help
+    url: https://github.com/mnl-nox/BinLab/blob/main/SUPPORT.md
+    about: Read the support guide before opening a question.
