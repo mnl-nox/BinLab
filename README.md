@@ -43,6 +43,7 @@ O projeto evolui a partir de um núcleo Python funcional para uma plataforma **l
 - [Roadmap](#roadmap)
 - [Documentação e suporte](#documentação-e-suporte)
 - [Contribuição](#contribuição)
+- [Comunidade e suporte](#comunidade-e-suporte)
 - [Licenças e autoria](#licenças-e-autoria)
 
 ## Estado do projeto
@@ -312,6 +313,13 @@ Contribuições são bem-vindas. Para manter o histórico auditável:
 5. Não exponha credenciais, dados pessoais ou arquivos de terceiros nos commits e logs.
 
 Leia [CONTRIBUTING.md](CONTRIBUTING.md) antes de enviar alterações. O projeto usa Conventional Commits e Semantic Versioning.
+
+## Comunidade e suporte
+
+- [Código de conduta](CODE_OF_CONDUCT.md)
+- [Suporte](SUPPORT.md)
+- [Como contribuir](CONTRIBUTING.md)
+- [Citação acadêmica e técnica](CITATION.cff)
 
 ## Licenças e autoria
 
