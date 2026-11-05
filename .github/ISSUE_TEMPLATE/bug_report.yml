@@ -1,0 +1,47 @@
+name: Relato de bug
+description: Reporte um defeito reproduzível no BinLab.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: "Não inclua credenciais, dados pessoais ou arquivos privados. Vulnerabilidades devem ser reportadas pelo canal descrito em SECURITY.md."
+  - type: input
+    id: version
+    attributes:
+      label: Versão do BinLab
+      placeholder: "0.3.2 ou commit SHA"
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Sistema operacional e arquitetura
+      placeholder: "Debian 13 x86_64, Python 3.13"
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Passos para reproduzir
+      description: Inclua comandos e entradas mínimas.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Resultado esperado
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Resultado observado
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs adicionais (opcional)
+      render: text
