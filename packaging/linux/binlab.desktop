@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=BinLab Engineering
+Comment=Laboratório local de engenharia computacional
+Exec=binlab-gui
+Icon=binlab
+Terminal=false
+Categories=Education;Development;Utility;
+StartupNotify=true

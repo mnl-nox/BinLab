@@ -15,17 +15,22 @@ def parse_integer(text: str, base: int) -> int:
     _validate_base(base)
     if not isinstance(text, str):
         raise ValueError("O valor deve ser texto.")
-    if len(text) > MAX_NUMERIC_DIGITS + 3:
+    if len(text) > (MAX_NUMERIC_DIGITS * 2) + 3:
         raise ValueError("O valor excede o limite de {} dígitos.".format(MAX_NUMERIC_DIGITS))
-    value = text.strip().replace("_", "")
+
+    value = text.strip()
     sign = ""
     if value.startswith(("+", "-")):
         sign, value = value[0], value[1:]
     if value.lower().startswith(BASE_PREFIXES[base]):
         value = value[2:]
-    if not value or len(value) > MAX_NUMERIC_DIGITS:
+
+    digit_count = len(value.replace("_", ""))
+    if not value or digit_count > MAX_NUMERIC_DIGITS:
         raise ValueError("Informe um número com até {} dígitos.".format(MAX_NUMERIC_DIGITS))
     try:
+        # int() already enforces Python's strict underscore grammar:
+        # separators must occur between valid digits, never at either edge.
         return int(sign + value, base)
     except ValueError as error:
         raise ValueError("Valor inválido para a base {}.".format(base)) from error

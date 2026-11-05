@@ -9,6 +9,10 @@ const baseOptions: { value: NumericBase; label: string }[] = [
   { value: 16, label: "Hexadecimal · 16" }
 ];
 
+function errorMessage(error: unknown): string {
+  return error instanceof Error ? error.message : "Falha inesperada ao processar a entrada.";
+}
+
 export default function BinaryLab() {
   const [input, setInput] = useState("255");
   const [base, setBase] = useState<NumericBase>(10);
@@ -16,16 +20,22 @@ export default function BinaryLab() {
   const [right, setRight] = useState("1010");
   const [operator, setOperator] = useState<"&" | "|" | "^" | "<<">("&");
 
-  const converted = useMemo(() => {
-    try { return convertInteger(input, base); } catch { return null; }
+  const conversion = useMemo(() => {
+    try {
+      return { value: convertInteger(input, base), error: null };
+    } catch (error) {
+      return { value: null, error: errorMessage(error) };
+    }
   }, [input, base]);
 
-  const bitResult = useMemo(() => {
+  const bitCalculation = useMemo(() => {
     try {
       const a = parseInteger(left, 2);
       const b = parseInteger(right, operator === "<<" ? 10 : 2);
-      return formatInteger(bitwiseOperation(a, operator, b), 2);
-    } catch { return null; }
+      return { value: formatInteger(bitwiseOperation(a, operator, b), 2), error: null };
+    } catch (error) {
+      return { value: null, error: errorMessage(error) };
+    }
   }, [left, right, operator]);
 
   return (
@@ -46,15 +56,15 @@ export default function BinaryLab() {
           </div>
           <label className="field-label" htmlFor="number-input">Valor de entrada</label>
           <div className="input-row">
-            <input id="number-input" value={input} onChange={(event) => setInput(event.target.value)} spellCheck={false} autoComplete="off" />
+            <input id="number-input" value={input} onChange={(event) => setInput(event.target.value)} spellCheck={false} autoComplete="off" aria-describedby="conversion-error" />
             <select aria-label="Base de entrada" value={base} onChange={(event) => setBase(Number(event.target.value) as NumericBase)}>
               {baseOptions.map((option) => <option key={option.value} value={option.value}>Base {option.value}</option>)}
             </select>
           </div>
-          {!converted && <p className="error-text">Valor inválido para a base selecionada ou limite de entrada excedido.</p>}
+          {conversion.error && <p id="conversion-error" className="error-text" role="alert">{conversion.error}</p>}
           <div className="result-list">
             {baseOptions.map((option) => (
-              <div className="result-row" key={option.value}><span>{option.label}</span><code>{converted?.[option.value] ?? "—"}</code></div>
+              <div className="result-row" key={option.value}><span>{option.label}</span><code>{conversion.value?.[option.value] ?? "—"}</code></div>
             ))}
           </div>
           <p className="helper-text">Inteiros via BigInt. A saída usa prefixos 0b, 0o e 0x para identificar as bases.</p>
@@ -74,7 +84,9 @@ export default function BinaryLab() {
           </div>
           <label className="field-label" htmlFor="operand-b">{operator === "<<" ? "Deslocamento · decimal" : "Operando B · binário"}</label>
           <input id="operand-b" className="full-input mono" value={right} onChange={(event) => setRight(event.target.value)} spellCheck={false} />
-          <div className="logic-result"><span>Resultado</span><code>{bitResult ?? "Entrada inválida ou limite excedido"}</code></div>
+          {bitCalculation.error
+            ? <p className="error-text" role="alert">{bitCalculation.error}</p>
+            : <div className="logic-result"><span>Resultado</span><code>{bitCalculation.value}</code></div>}
           <p className="helper-text">O deslocamento é limitado a 4096 posições. Os operandos são interpretados como inteiros.</p>
         </section>
       </div>

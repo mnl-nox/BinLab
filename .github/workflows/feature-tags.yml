@@ -5,16 +5,15 @@ on:
     branches:
       - "feat/**"
 
-permissions:
-  contents: write
-
 jobs:
   tag:
     name: Create an immutable tag for this feature commit
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Check out branch commit
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
       - name: Create and push feature tag

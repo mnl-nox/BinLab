@@ -11,6 +11,13 @@ from binlab.domain.operations import MAX_NOT_WIDTH, MAX_SHIFT_DISTANCE
 class NumericTests(unittest.TestCase):
     def test_parse_prefixed_hex_and_separators(self):
         self.assertEqual(parse_integer("0x2A_FF", 16), 0x2AFF)
+        self.assertEqual(parse_integer("-0b1010_0011", 2), -0b10100011)
+
+    def test_rejects_misplaced_numeric_separators(self):
+        invalid_values = ("_10", "10_", "1__0", "+_10", "-_10", "0x_FF")
+        for value in invalid_values:
+            with self.subTest(value=value), self.assertRaises(ValueError):
+                parse_integer(value, 2 if not value.lower().startswith("0x") else 16)
 
     def test_convert_hexadecimal_to_binary(self):
         self.assertEqual(convert_integer("0x2A", 16, 2), "101010")

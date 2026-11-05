@@ -22,6 +22,9 @@ classifiers = [
 ]
 dynamic = ["version"]
 
+[project.optional-dependencies]
+test = ["hypothesis==6.98.3"]
+
 [project.urls]
 Homepage = "https://github.com/mnl-nox/BinLab"
 Repository = "https://github.com/mnl-nox/BinLab"

@@ -15,10 +15,9 @@
   <a href="branding/LICENSE"><img alt="Visual assets: CC BY 4.0" src="https://img.shields.io/badge/Visual%20Assets-CC%20BY%204.0-0b7285.svg"></a>
 </p>
 
-> **Estado do projeto:** a versão Python 0.3.1 (CLI e GUI Tkinter) é a base funcional. A aplicação Web está em desenvolvimento; o Binary & Logic Lab é a primeira experiência funcional no navegador. API FastAPI, persistência e desktop Tauri ainda não fazem parte do produto integrado.
+> **Estado do projeto:** a versão Python 0.3.2 (CLI e GUI Tkinter) é a base funcional. A aplicação Web está em desenvolvimento; o Binary & Logic Lab é a primeira experiência funcional no navegador. API FastAPI, persistência e desktop Tauri ainda não fazem parte do produto integrado.
 
 O BinLab é um laboratório de engenharia computacional projetado para estudar, experimentar e investigar sistemas desde a representação binária até arquitetura de computadores, compiladores, sistemas operacionais, redes, segurança e computação científica. A prioridade arquitetural é **execução local, transparência técnica, modularidade e segurança por padrão**.
-
 
 ## Índice
 
@@ -46,7 +45,7 @@ O BinLab é um laboratório de engenharia computacional projetado para estudar, 
 
 ## Capacidades disponíveis
 
-### Aplicação Python 0.3.1
+### Aplicação Python 0.3.2
 
 - Conversão entre binário, octal, decimal e hexadecimal.
 - Aritmética inteira e operações lógicas bit a bit.
@@ -65,6 +64,43 @@ O BinLab é um laboratório de engenharia computacional projetado para estudar, 
 - Sem API remota ou persistência integrada nesta etapa.
 
 ## Instalação e execução
+
+### Pacotes Linux (primeira linha: x86_64)
+
+A primeira distribuição binária é destinada a Linux x86_64 e inclui CLI e GUI Tkinter:
+
+- Debian, Ubuntu e derivados: pacote `.deb`.
+- Fedora, RHEL e sistemas compatíveis: pacote `.rpm`.
+- Outras distribuições: arquivo `.tar.gz` com executáveis e recursos em uma árvore `usr/`.
+
+Os arquivos são publicados como ativos de uma GitHub Release, depois da aprovação do CI. Antes da instalação, valide os arquivos com `sha256sum -c SHA256SUMS`.
+
+Debian / Ubuntu:
+
+```bash
+sudo apt install ./binlab_0.3.2_amd64.deb
+binlab
+binlab-gui
+```
+
+Fedora / RHEL:
+
+```bash
+sudo dnf install ./binlab-0.3.2-1.x86_64.rpm
+binlab
+binlab-gui
+```
+
+Outras distribuições:
+
+```bash
+tar -xzf binlab-0.3.2-linux-x86_64.tar.gz
+sudo cp -a usr/. /usr/
+binlab
+binlab-gui
+```
+
+A GUI requer uma sessão gráfica X11/compatibilidade XWayland e bibliotecas gráficas do host. Os binários usam glibc com baseline GLIBC_2.14; distribuições baseadas em musl (como Alpine) não são suportadas por estes artefatos. A primeira linha não inclui AppImage, Flatpak nem build ARM64. A instalação dos pacotes deve ser validada em distribuições-alvo antes de declarar compatibilidade ampla.
 
 ### Python
 
@@ -107,7 +143,7 @@ npm test
 npm run build
 ```
 
-Consulte [apps/web/README.md](apps/web/README.md) para a estrutura e as limitações atuais.
+Consulte [apps/web/README.md](apps/web/README.md) para estrutura e limitações atuais.
 
 ## Arquitetura
 
@@ -129,7 +165,7 @@ Princípios de projeto:
 
 1. O domínio permanece independente de frameworks, interfaces, banco de dados e sistema operacional.
 2. Interfaces Web e Desktop consomem casos de uso por contratos explícitos.
-3. Contratos HTTP serão versionados e documentados em OpenAPI.
+3. Contratos HTTP serão versionados e documentados por OpenAPI.
 4. A aplicação Web não acessará filesystem ou banco diretamente.
 5. O backend local deverá validar origem, autenticação, CSRF, Host e tentativas de DNS rebinding.
 6. C/C++ serão introduzidos somente quando houver justificativa mensurável de desempenho ou acesso de baixo nível.
@@ -138,7 +174,7 @@ Princípios de projeto:
 
 O leitor Python realiza **inspeção estática**. Arquivos importados não são executados nem compilados automaticamente.
 
-Limites atuais documentados:
+Limites atuais:
 
 | Superfície | Limite |
 |---|---:|
@@ -153,7 +189,7 @@ Limites atuais documentados:
 
 O parser Intel HEX valida checksum e estrutura, exige EOF único e terminal, rejeita sobreposições e limita endereços e alocações esparsas. O `objdump` é iniciado sem shell, com ambiente reduzido, timeout e saída drenada sob limite.
 
-Esses controles **não equivalem a uma sandbox**. Não use o BinLab como ambiente de execução de arquivos não confiáveis. A exposição do leitor pela API permanece bloqueada até a conclusão da [Issue #2](https://github.com/mnl-nox/BinLab/issues/2), incluindo testes de fronteira, fuzzing reproduzível e revisão complementar.
+Esses controles **não equivalem a uma sandbox**. Não use o BinLab como ambiente de execução de arquivos não confiáveis. A exposição do leitor pela API permanece bloqueada até a conclusão da [Issue #2](https://github.com/mnl-nox/BinLab/issues/2), incluindo fuzzing e revisão complementar.
 
 ## Estrutura do repositório
 
@@ -163,10 +199,9 @@ apps/web/                   aplicação React/TypeScript
 apps/desktop/               integração Tauri (planejada)
 website/                    site institucional estático
 branding/                   logotipos e licença dos ativos visuais
+packaging/                  entrypoints e pipeline de pacotes Linux
 docs/                       arquitetura, contratos, auditoria e roadmap
-doc/                        documentação da versão Python atual
 tests/                      testes Python
-images/                     diagramas e recursos históricos
 .github/workflows/          CI e automações de release/deploy
 ```
 
@@ -179,24 +214,30 @@ images/                     diagramas e recursos históricos
 5. Binary & Logic Lab e Architecture Lab.
 6. Compiler, Operating Systems, Network e Security Labs.
 7. Computação científica, dados e IA local.
-8. Persistência de experimentos e distribuição reproduzível.
+8. Persistência de experimentos e projetos reproduzíveis.
+9. Releases Linux, builds reproduzíveis, SBOM e attestations.
 
-A evolução de cada etapa depende de testes, documentação, critérios de aceite e revisão. A API não deve ser liberada antes da conclusão dos critérios de segurança pendentes.
+A conclusão de cada etapa depende de testes, documentação, critérios de aceite e revisão. Uma etapa não é considerada pronta apenas porque o código compila.
 
 ## Desenvolvimento e qualidade
 
-O CI do repositório valida Python 3.8 e 3.13, executa testes unitários, verifica compilação e constrói wheel/sdist. O job Web instala dependências, executa testes Vitest e gera build de produção.
+O CI valida Python 3.8 e 3.13, executa testes unitários e property-based, verifica compilação e constrói wheel/sdist. O job Web instala dependências, executa testes Vitest e gera build de produção. Um job Linux constrói e inspeciona .deb, .rpm e tar.gz em Ubuntu 22.04 x86_64.
 
-Contribuições devem preservar:
+Para instalar dependências de teste:
 
-- compatibilidade com a versão mínima de Python;
-- ausência de dependências obrigatórias desnecessárias no runtime Python;
-- testes para entradas válidas, inválidas e limites;
-- documentação dos contratos e mudanças de comportamento;
-- análise estática por padrão e execução explícita somente em ambiente controlado;
-- ausência de segredos, tokens e dados pessoais em commits e logs.
+```bash
+python -m pip install -e ".[test]"
+python -m unittest discover -s tests -v
+```
 
-Leia [CONTRIBUTING.md](CONTRIBUTING.md) antes de abrir uma contribuição e [SECURITY.md](SECURITY.md) para reportar vulnerabilidades.
+Para construir pacotes Linux:
+
+```bash
+python -m pip install . pyinstaller==6.16.0
+sudo apt install ruby ruby-dev rpm
+sudo gem install --no-document fpm
+bash packaging/build-linux.sh
+```
 
 ## Documentação
 
