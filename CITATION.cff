@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use BinLab in research, teaching, or technical work, please cite this project."
+title: "BinLab Engineering"
+type: software
+authors:
+  - family-names: "E. S. S."
+    given-names: "Manoel"
+    alias: "mnl-nox"
+version: 0.3.2
+date-released: 2026-11-04
+url: "https://github.com/mnl-nox/BinLab"
+repository-code: "https://github.com/mnl-nox/BinLab"
+license: MIT
+keywords:
+  - computational engineering
+  - binary analysis
+  - computer architecture
+  - Linux
+  - open source
