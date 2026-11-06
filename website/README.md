@@ -16,7 +16,7 @@ Os logotipos são cópias de distribuição dos ativos canônicos em branding/. 
 
 ## Versão e distribuição
 
-O site documenta BinLab 0.3.2. Os pacotes Linux x86_64 (.deb, .rpm e .tar.gz) foram construídos pelo CI; o DEB passou por instalação e smoke test no runner Ubuntu 22.04. O RPM foi construído e inspecionado, mas não instalado em Fedora/RHEL. A tag v0.3.2 e a GitHub Release pública ainda precisam ser criadas. O site aponta para o artefato temporário do workflow, não para URLs de download fictícias.
+O site documenta BinLab 0.3.2. Os pacotes Linux x86_64 (.deb, .rpm e .tar.gz) foram construídos pelo CI; o DEB passou por instalação e smoke test no Ubuntu 22.04. O RPM foi construído e inspecionado, mas não instalado em Fedora/RHEL. A tag `v0.3.2` e a GitHub Release pública ainda precisam ser criadas. O link abre as [execuções de CI](https://github.com/mnl-nox/BinLab/actions/workflows/ci.yml); o artefato da execução concluída mais recente exige login e fica disponível por 14 dias.
 
 ## Validação local
 

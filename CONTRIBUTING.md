@@ -5,13 +5,11 @@
 3. Atualize documentação, contratos e testes no mesmo pull request.
 4. Execute localmente:
 
-```bash
+~~~bash
+python -m pip install -e ".[test]"
 python -m compileall -q src tests
-python -m pip install .
 python -m unittest discover -s tests -v
-python -m pip install build
-python -m build
-``
+~~~
 
 5. Envie a branch e abra pull request para `main`. Não integre etapas incompletas sem explicitar bloqueios e riscos.
 

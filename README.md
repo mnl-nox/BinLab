@@ -12,7 +12,7 @@
   <a href="https://github.com/mnl-nox/BinLab/actions/workflows/pages.yml"><img alt="GitHub Pages" src="https://github.com/mnl-nox/BinLab/actions/workflows/pages.yml/badge.svg"></a>
   <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/Code-MIT-2563eb.svg"></a>
   <a href="branding/LICENSE"><img alt="Visual assets: CC BY 4.0" src="https://img.shields.io/badge/Branding-CC%20BY%204.0-0891b2.svg"></a>
-  <a href="https://github.com/mnl-nox/BinLab/releases"><img alt="Release" src="https://img.shields.io/badge/version-0.3.2-informational.svg"></a>
+  <a href="https://github.com/mnl-nox/BinLab#estado-do-projeto"><img alt="Versão do código" src="https://img.shields.io/badge/versão-0.3.2-blue.svg"></a>
 </p>
 
 <p align="center">
@@ -23,11 +23,11 @@
   <a href="https://github.com/mnl-nox/BinLab/blob/main/SECURITY.md">Segurança</a>
 </p>
 
-> **Versão atual do núcleo: 0.3.2.** CLI Python, GUI Tkinter, leitor estático de artefatos e a primeira fundação Web estão disponíveis. Os pacotes Linux x86_64 foram construídos e validados no CI. A release estável v0.3.2 depende da criação da tag correspondente; pushes em branches `feat/**` publicam pré-releases com instaladores atualizados após passarem pela validação.
+> **Versão atual: 0.3.2.** CLI, GUI Tkinter, leitor estático de artefatos e a primeira fundação Web estão disponíveis. Os instaladores Linux x86_64 estão em `dist/` nesta cópia e passaram pelas verificações descritas abaixo. A publicação no GitHub Releases depende da criação da tag `v0.3.2`.
 
-BinLab Engineering é um laboratório open source para estudar, experimentar e investigar sistemas computacionais — da representação binária à arquitetura de computadores, compiladores, sistemas operacionais, redes, segurança e computação científica.
+BinLab é um laboratório open source para aprender fundamentos de computação por meio de ferramentas locais. A versão atual oferece conversão e operações numéricas, uma interface de terminal e desktop e inspeção estática de artefatos; a aplicação Web está em desenvolvimento.
 
-O projeto evolui a partir de um núcleo Python funcional para uma plataforma **local-first, modular, verificável e segura por padrão**. O objetivo não é esconder a complexidade atrás de uma interface: é tornar cada camada observável e cada experimento reproduzível.
+O projeto prioriza execução local, limites explícitos e experimentos reproduzíveis. Arquivos importados são inspecionados estaticamente e não são executados automaticamente.
 
 ## Sumário
 
@@ -90,21 +90,24 @@ O projeto evolui a partir de um núcleo Python funcional para uma plataforma **l
 
 ## Distribuição Linux
 
-<sub>Primeira linha de distribuição: Linux x86_64 · build em Ubuntu 22.04 · baseline GLIBC_2.14</sub>
+<sub>BinLab 0.3.2 · Linux x86_64 · build em Ubuntu 22.04 · glibc mínima: 2.14</sub>
 
-| Formato | Distribuições | Arquivo |
+| Plataforma e formato | Distribuições | Instalador local |
 |---|---|---|
-| Debian | Debian, Ubuntu e derivados | binlab_0.3.2_amd64.deb |
-| RPM | Fedora, RHEL e compatíveis | binlab-0.3.2-1.x86_64.rpm |
-| Tarball | Distribuições glibc compatíveis | binlab-0.3.2-linux-x86_64.tar.gz |
+| Linux x86_64 · DEB | Debian, Ubuntu e derivados | `binlab_0.3.2_amd64.deb` |
+| Linux x86_64 · RPM | Fedora, RHEL e compatíveis | `binlab-0.3.2-1.x86_64.rpm` |
+| Linux x86_64 · tar.gz | Outras distribuições com glibc 2.14+ | `binlab-0.3.2-linux-x86_64.tar.gz` |
 
-**Obter os pacotes:** baixe o pacote do seu sistema e o arquivo `SHA256SUMS` da mesma [pré-release ou release estável](https://github.com/mnl-nox/BinLab/releases). Cada push em uma branch `feat/**` executa testes, constrói os três formatos e publica uma pré-release identificada pelo commit. As versões de feature são únicas e ordenáveis pelos gerenciadores de pacotes, para permitir atualizar uma instalação anterior. Releases estáveis continuam sendo publicadas por tags `v*`.
+Os instaladores foram gerados em `dist/` nesta cópia e não são armazenados no Git. Para baixar o artefato mais recente do CI, abra a [página de execuções](https://github.com/mnl-nox/BinLab/actions/workflows/ci.yml), selecione a execução concluída mais recente e baixe `binlab-linux-x86_64`; o GitHub exige login e remove artefatos após 14 dias. A release estável estará na [página de releases](https://github.com/mnl-nox/BinLab/releases) após a publicação da tag `v0.3.2`.
+
+Com os arquivos locais em `dist/`, confira `dist/SHA256SUMS` e use o comando da sua distribuição:
 
 ### Debian / Ubuntu
 
 ~~~bash
-grep -E ' binlab_.*_amd64\.deb$' SHA256SUMS | sha256sum -c -
-sudo apt install ./binlab_*.deb
+cd dist
+sha256sum -c SHA256SUMS
+sudo apt install ./binlab_0.3.2_amd64.deb
 binlab
 binlab-gui
 ~~~
@@ -114,8 +117,9 @@ O instalador `.deb` resolve as bibliotecas gráficas necessárias. O atalho **Bi
 ### Fedora / RHEL
 
 ~~~bash
-grep -E ' binlab-.*\.x86_64\.rpm$' SHA256SUMS | sha256sum -c -
-sudo dnf install ./binlab-*.x86_64.rpm
+cd dist
+sha256sum -c SHA256SUMS
+sudo dnf install ./binlab-0.3.2-1.x86_64.rpm
 binlab
 binlab-gui
 ~~~
@@ -123,8 +127,9 @@ binlab-gui
 ### Outras distribuições glibc
 
 ~~~bash
-grep -E ' binlab-.*-linux-x86_64\.tar\.gz$' SHA256SUMS | sha256sum -c -
-tar -xzf binlab-*-linux-x86_64.tar.gz
+cd dist
+sha256sum -c SHA256SUMS
+tar -xzf binlab-0.3.2-linux-x86_64.tar.gz
 sudo install -Dm755 usr/bin/binlab /usr/local/bin/binlab
 sudo install -Dm755 usr/bin/binlab-gui /usr/local/bin/binlab-gui
 sudo install -Dm644 usr/share/applications/binlab.desktop /usr/local/share/applications/binlab.desktop
@@ -135,7 +140,9 @@ binlab-gui
 
 No tarball, instale as bibliotecas gráficas exigidas pela distribuição manualmente.
 
-**Compatibilidade e validação:** o pacote DEB foi instalado no runner Ubuntu 22.04 e CLI/GUI passaram por smoke test; o RPM foi construído e inspecionado, mas ainda não foi instalado em uma VM Fedora/RHEL. A GUI requer bibliotecas gráficas do host e sessão X11 ou XWayland. Alpine/musl, ARM64, AppImage e Flatpak não fazem parte desta entrega. Não interprete x86_64 como compatibilidade universal com toda distribuição Linux.
+**Executáveis por plataforma na versão 0.3.2:** Linux x86_64 inclui `binlab` (CLI) e `binlab-gui` (desktop Tkinter), distribuídos em DEB, RPM e tar.gz. Windows e macOS ainda não têm instaladores ou executáveis nativos publicados; nesses sistemas, use o núcleo Python a partir do código-fonte. A aplicação Web é executada no navegador e não é um executável desktop.
+
+**Validação e compatibilidade:** o DEB foi instalado no Ubuntu 22.04; `binlab` executou e `binlab-gui` permaneceu aberta no smoke test sob Xvfb. RPM e tarball foram construídos, inspecionados e tiveram seus hashes conferidos; o RPM ainda não foi instalado em uma VM Fedora/RHEL. A GUI requer bibliotecas gráficas do host e sessão X11 ou XWayland. Alpine/musl, ARM64, Windows, macOS, AppImage e Flatpak não fazem parte desta entrega. A compatibilidade glibc 2.14+ não significa compatibilidade universal com toda distribuição Linux.
 
 ## Instalação a partir do código-fonte
 
@@ -154,7 +161,7 @@ cd BinLab
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
-python -m pip install .
+python3 -m pip install .
 
 binlab
 # Interface gráfica:
@@ -241,7 +248,7 @@ apps/web/                   aplicação React/TypeScript
 apps/desktop/               integração Tauri (planejada)
 website/                    site institucional estático
 branding/                   logotipos vetoriais e licença dos ativos
-packaging/                  entrypoints e pipeline de pacotes Linux
+packaging/                  entrypoints, pacotes Linux e manual instalado
 docs/                       arquitetura, contratos, auditoria e roadmap
 tests/                      testes Python
 .github/workflows/          CI, release e publicação do site
@@ -269,7 +276,7 @@ npm run build
 Construa os pacotes Linux em ambiente Ubuntu 22.04 x86_64 com as dependências de empacotamento:
 
 ~~~bash
-python -m pip install . "pyinstaller==6.16.0"
+python3 -m pip install . "pyinstaller==6.16.0"
 sudo apt install ruby ruby-dev rpm
 sudo gem install --no-document fpm
 bash packaging/build-linux.sh

@@ -23,6 +23,8 @@ apps/web/.vite/
 # Build and distribution output
 build/
 dist/
+package-root/
+*.spec
 *.egg-info/
 
 # Operating system files

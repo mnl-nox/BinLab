@@ -121,6 +121,8 @@ html[data-theme="dark"] .moon-icon, html[data-theme="light"] .sun-icon { display
 .arch-node small { display: block; color: var(--muted); font: 8px "SFMono-Regular", Consolas, monospace; letter-spacing: 1.2px; }
 .arch-node strong { display: block; margin-top: 5px; font-size: 12px; }
 .arch-node p { margin: 5px 0 0; color: var(--muted); font-size: 9px; }
+.architecture-caption { display: flex; align-items: flex-start; gap: 11px; max-width: 790px; margin: -18px auto 16px; padding: 13px 15px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); color: var(--muted); font-size: .875rem; line-height: 1.6; }
+.architecture-caption .status-indicator { margin-top: 7px; }
 .arch-api { border-color: color-mix(in srgb, #7cb9ff 45%, var(--border)); }
 .arch-app { border-color: color-mix(in srgb, #bba3ff 40%, var(--border)); }
 .arch-domain { border-color: color-mix(in srgb, var(--accent) 50%, var(--border)); }
