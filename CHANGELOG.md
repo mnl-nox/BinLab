@@ -10,6 +10,7 @@ Este projeto segue [Semantic Versioning](https://semver.org/).
 - Corrigido o guia de contribuição e alinhado o roadmap ao CI e aos pacotes Linux atuais.
 - Tornado o script de build Linux compatível com ambientes que fornecem `python3`, sem o alias `python`.
 - Adicionado um guia de uso conciso ao pacote instalado, independente do README de desenvolvimento do repositório.
+- Atualizado o validador do site para reconhecer caminhos absolutos sob a base `/BinLab` do GitHub Pages.
 
 ### Website e identidade
 - Atualizada a página institucional com o estado real da versão 0.3.2, capacidades disponíveis e roadmap.

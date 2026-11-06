@@ -6,6 +6,7 @@ import sys
 from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parent
+PAGES_BASE_PATH = "/BinLab"
 
 
 class SiteParser(HTMLParser):
@@ -61,7 +62,19 @@ def validate_page(path: Path) -> list[str]:
                 errors.append(f"{path.name}: âncora local inexistente: {reference}")
             continue
 
-        target = (path.parent / parsed.path).resolve()
+        if parsed.path.startswith("/"):
+            if parsed.path == PAGES_BASE_PATH:
+                relative_path = ""
+            elif parsed.path.startswith(f"{PAGES_BASE_PATH}/"):
+                relative_path = parsed.path[len(PAGES_BASE_PATH) + 1 :]
+            else:
+                errors.append(
+                    f"{path.name}: caminho local fora da base do site {PAGES_BASE_PATH}: {reference}"
+                )
+                continue
+            target = (ROOT / relative_path).resolve()
+        else:
+            target = (path.parent / parsed.path).resolve()
         if target.is_dir():
             target = target / "index.html"
         if not target.exists():
