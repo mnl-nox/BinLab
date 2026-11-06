@@ -76,10 +76,12 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install . "pyinstaller==6.16.0"
           sudo apt-get update
-          sudo apt-get install -y ruby ruby-dev rpm
+          sudo apt-get install -y ruby ruby-dev rpm desktop-file-utils
           sudo gem install --no-document fpm
       - name: Build Linux packages
-        run: bash packaging/build-linux.sh
+        run: |
+          desktop-file-validate packaging/linux/binlab.desktop
+          bash packaging/build-linux.sh
       - name: Inspect package manifests
         run: |
           dpkg-deb --contents dist/*.deb
@@ -91,9 +93,9 @@ jobs:
           sudo apt-get install -y xvfb xauth
           sudo apt-get install -y ./dist/*.deb
           expected_version="v$(python -c 'import binlab; print(binlab.__version__)')"
-          printf '0\\n' | binlab | grep -F "$expected_version"
+          printf '0\n' | /usr/bin/binlab | grep -F "$expected_version"
           set +e
-          xvfb-run -a timeout 8s binlab-gui
+          xvfb-run -a timeout 8s /usr/bin/binlab-gui
           gui_status=$?
           set -e
           if [ "$gui_status" -ne 124 ]; then

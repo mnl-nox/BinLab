@@ -1,33 +1,145 @@
-name: Tag feature commits
+name: Package and publish feature updates
 
 on:
   push:
     branches:
       - "feat/**"
 
+permissions:
+  contents: read
+
 jobs:
-  tag:
-    name: Create an immutable tag for this feature commit
-    runs-on: ubuntu-latest
+  publish:
+    name: Build and publish Linux desktop update
+    runs-on: ubuntu-22.04
     permissions:
       contents: write
     steps:
-      - name: Check out branch commit
+      - name: Check out feature commit
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
-      - name: Create and push feature tag
+
+      - name: Set up Python
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.13"
+
+      - name: Set a unique installable feature version
+        id: version
         env:
-          GITHUB_REF_NAME: ${{ github.ref_name }}
-          GITHUB_SHA: ${{ github.sha }}
+          RUN_NUMBER: ${{ github.run_number }}
         run: |
-          branch_slug="$(printf '%s' "$GITHUB_REF_NAME" | tr '/_' '--' | tr -cd '[:alnum:].-')"
-          tag="feat/${branch_slug}/${GITHUB_SHA}"
-          if git ls-remote --exit-code --tags origin "refs/tags/${tag}" >/dev/null 2>&1; then
-            echo "Tag ${tag} already exists; nothing to do."
-            exit 0
+          base_version="$(python -c 'import re; from pathlib import Path; text=Path("src/binlab/__init__.py").read_text(); print(re.search(r"__version__ = \"([^\"]+)\"", text).group(1))')"
+          feature_version="${base_version}.$(date -u +%Y%m%d).${RUN_NUMBER}"
+          python - "$feature_version" <<'PY'
+          import re
+          import sys
+          from pathlib import Path
+
+          version_file = Path("src/binlab/__init__.py")
+          contents = version_file.read_text()
+          updated, count = re.subn(
+              r'(?m)^__version__ = "[^"]+"$',
+              f'__version__ = "{sys.argv[1]}"',
+              contents,
+          )
+          if count != 1:
+              raise SystemExit("Could not set the feature package version")
+          version_file.write_text(updated)
+          PY
+          echo "value=${feature_version}" >> "$GITHUB_OUTPUT"
+          echo "Feature package version: ${feature_version}"
+
+      - name: Install package, tests and packager
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install ".[test]" "pyinstaller==6.16.0"
+          sudo apt-get update
+          sudo apt-get install -y ruby ruby-dev rpm desktop-file-utils xvfb xauth
+          sudo gem install --no-document fpm
+
+      - name: Compile sources and run Python tests
+        run: |
+          python -m compileall -q src tests
+          python -m unittest discover -s tests -v
+
+      - name: Set up Node.js
+        uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
+        with:
+          node-version: "22"
+
+      - name: Run Web tests and production build
+        working-directory: apps/web
+        run: |
+          npm install --no-audit --no-fund
+          npm test
+          npm run build
+
+      - name: Validate desktop launcher and build Linux packages
+        run: |
+          desktop-file-validate packaging/linux/binlab.desktop
+          bash packaging/build-linux.sh
+          dpkg-deb --contents dist/*.deb
+          rpm -qpl dist/*.rpm
+          tar -tzf dist/*.tar.gz
+          (cd dist && sha256sum --check SHA256SUMS)
+
+      - name: Install Debian package and smoke-test desktop launch
+        env:
+          EXPECTED_VERSION: v${{ steps.version.outputs.value }}
+        run: |
+          sudo apt-get install -y ./dist/*.deb
+          printf '0\n' | /usr/bin/binlab | grep -F "$EXPECTED_VERSION"
+          set +e
+          xvfb-run -a timeout 8s /usr/bin/binlab-gui
+          gui_status=$?
+          set -e
+          if [ "$gui_status" -ne 124 ]; then
+            echo "GUI smoke test failed or exited unexpectedly (status=$gui_status)." >&2
+            exit 1
           fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git tag -a "$tag" "$GITHUB_SHA" -m "Feature commit ${GITHUB_SHA} (${GITHUB_REF_NAME})"
-          git push origin "refs/tags/${tag}"
+
+      - name: Create immutable feature tag
+        env:
+          BRANCH_NAME: ${{ github.ref_name }}
+          COMMIT_SHA: ${{ github.sha }}
+        run: |
+          branch_slug="$(printf '%s' "$BRANCH_NAME" | tr '/_' '--' | tr -cd '[:alnum:].-')"
+          branch_slug="${branch_slug:0:80}"
+          tag="feat/${branch_slug}/${COMMIT_SHA}"
+          if git rev-parse --quiet --verify "refs/tags/${tag}" >/dev/null; then
+            target="$(git rev-list -n 1 "$tag")"
+            if [ "$target" != "$COMMIT_SHA" ]; then
+              echo "Existing feature tag points to another commit: $tag" >&2
+              exit 1
+            fi
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git tag -a "$tag" "$COMMIT_SHA" -m "Feature update ${COMMIT_SHA} (${BRANCH_NAME})"
+            git push origin "refs/tags/${tag}"
+          fi
+          echo "FEATURE_TAG=${tag}" >> "$GITHUB_ENV"
+
+      - name: Publish feature pre-release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          FEATURE_VERSION: ${{ steps.version.outputs.value }}
+          BRANCH_NAME: ${{ github.ref_name }}
+        run: |
+          notes_file="$RUNNER_TEMP/feature-release-notes.md"
+          cat > "$notes_file" <<EOF
+          Automated desktop update from branch \`${BRANCH_NAME}\` at commit \`${GITHUB_SHA}\`.
+
+          Package version: \`${FEATURE_VERSION}\`.
+
+          Supported packages in this release: Debian/Ubuntu \`.deb\`, Fedora/RHEL compatible \`.rpm\`, and a glibc Linux x86_64 tarball. This is a feature pre-release.
+          EOF
+          title="BinLab ${FEATURE_VERSION} — feature update"
+          if gh release view "$FEATURE_TAG" >/dev/null 2>&1; then
+            gh release upload "$FEATURE_TAG" dist/* --clobber
+          else
+            gh release create "$FEATURE_TAG" dist/* \
+              --verify-tag --prerelease --title "$title" --notes-file "$notes_file"
+          fi

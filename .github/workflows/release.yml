@@ -26,7 +26,7 @@ jobs:
           python -m pip install --upgrade pip build
           python -m pip install ".[test]" "pyinstaller==6.16.0"
           sudo apt-get update
-          sudo apt-get install -y ruby ruby-dev rpm
+          sudo apt-get install -y ruby ruby-dev rpm desktop-file-utils xvfb xauth
           sudo gem install --no-document fpm
       - name: Compile sources and tests
         run: python -m compileall -q src tests
@@ -44,7 +44,22 @@ jobs:
       - name: Build source and wheel distributions
         run: python -m build
       - name: Build Linux packages
-        run: bash packaging/build-linux.sh
+        run: |
+          desktop-file-validate packaging/linux/binlab.desktop
+          bash packaging/build-linux.sh
+      - name: Install Debian package and smoke-test desktop launch
+        run: |
+          sudo apt-get install -y ./dist/*.deb
+          expected_version="v$(python -c 'import binlab; print(binlab.__version__)')"
+          printf '0\n' | /usr/bin/binlab | grep -F "$expected_version"
+          set +e
+          xvfb-run -a timeout 8s /usr/bin/binlab-gui
+          gui_status=$?
+          set -e
+          if [ "$gui_status" -ne 124 ]; then
+            echo "GUI smoke test failed or exited unexpectedly (status=$gui_status)." >&2
+            exit 1
+          fi
       - name: Publish or update GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}
