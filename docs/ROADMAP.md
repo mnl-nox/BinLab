@@ -33,21 +33,21 @@ Evoluir o BinLab para um laboratório de engenharia computacional local-first, c
 
 As etapas podem ter subentregas menores. Uma etapa só é considerada concluída quando seus critérios de aceite passam no CI e a documentação descreve limitações conhecidas.
 
-## Estado atual — 2026-11-02
+## Estado atual — 2026-11-06
 
 - [x] Branch isolada para a fundação Web.
 - [x] Estrutura inicial React + TypeScript + Vite + Tailwind em \`apps/web/\`.
 - [x] Navegação responsiva e tema independente.
 - [x] Conversão de bases e operações binárias locais com BigInt.
 - [x] Testes de domínio e job de CI para testes/build Web adicionados.
-- [ ] Execução de CI e correção de eventuais falhas.
+- [x] CI de Python, Web e pacote Linux concluído na integração da versão 0.3.2.
 - [ ] Revisão funcional, acessibilidade e responsividade em navegador.
 - [ ] Cliente HTTP tipado e contratos de integração, somente após definição da API.
 - [ ] Backend FastAPI: bloqueado pela Issue #2 até fuzz/property tests, testes de fronteira e revisão complementar.
 - [x] Site institucional documentado com versão 0.3.2, capacidades reais, identidade visual canônica e distribuição Linux.
 - [x] Workflow GitHub Pages e validação de links configurados.
 - [ ] Habilitar GitHub Pages em Settings → Pages e confirmar o primeiro deploy/URL pública.
-- [ ] Criar a tag v0.3.2 para publicar a GitHub Release e anexar os pacotes Linux.
+- [ ] Criar a tag `v0.3.2` para publicar a GitHub Release e anexar os pacotes Linux; os artefatos atuais do CI são temporários.
 - [ ] Integração Tauri e persistência: etapas posteriores.
 
 ## Etapa 0 — critérios de aceite

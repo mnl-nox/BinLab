@@ -4,7 +4,19 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
 
-VERSION="$(python -c 'import binlab; print(binlab.__version__)')"
+PYTHON_BIN="${PYTHON:-python3}"
+if ! command -v "$PYTHON_BIN" >/dev/null 2>&1 && [[ -z "${PYTHON:-}" ]]; then
+  PYTHON_BIN=python
+fi
+if ! command -v "$PYTHON_BIN" >/dev/null 2>&1; then
+  echo "Python 3 is required to determine the package version." >&2
+  exit 2
+fi
+if ! "$PYTHON_BIN" -c 'import sys; raise SystemExit(sys.version_info < (3, 8))'; then
+  echo "Python 3.8 or newer is required to build the Linux packages." >&2
+  exit 2
+fi
+VERSION="$("$PYTHON_BIN" -c 'import binlab; print(binlab.__version__)')"
 ARCH="$(uname -m)"
 GLIBC_LIMIT="${BINLAB_GLIBC_LIMIT:-GLIBC_2.14}"
 if [[ "$ARCH" != "x86_64" ]]; then
@@ -16,12 +28,14 @@ if [[ ! "$GLIBC_LIMIT" =~ ^GLIBC_[0-9]+(\.[0-9]+)*$ ]]; then
   exit 2
 fi
 
-rm -rf build/pyinstaller package-root
+rm -rf build/binlab build/binlab-gui package-root
+rm -f binlab.spec binlab-gui.spec
 mkdir -p dist package-root/usr/bin package-root/usr/share/applications \
   package-root/usr/share/icons/hicolor/scalable/apps package-root/usr/share/doc/binlab
 # Do not ship packages left by a previous build, while preserving Python
 # wheels/source archives created by `python -m build` in the release workflow.
-rm -f dist/binlab_*.deb dist/binlab-*.rpm dist/binlab-*-linux-x86_64.tar.gz dist/SHA256SUMS
+rm -f dist/binlab dist/binlab-gui dist/binlab_*.deb dist/binlab-*.rpm \
+  dist/binlab-*-linux-x86_64.tar.gz dist/SHA256SUMS
 
 pyinstaller --clean --noconfirm --onefile --name binlab \
   --paths src packaging/entrypoints/binlab_cli.py
@@ -32,7 +46,10 @@ install -m 0755 dist/binlab package-root/usr/bin/binlab
 install -m 0755 dist/binlab-gui package-root/usr/bin/binlab-gui
 install -m 0644 packaging/linux/binlab.desktop package-root/usr/share/applications/binlab.desktop
 install -m 0644 branding/logo.svg package-root/usr/share/icons/hicolor/scalable/apps/binlab.svg
-install -m 0644 README.md LICENSE package-root/usr/share/doc/binlab/
+install -m 0644 LICENSE package-root/usr/share/doc/binlab/
+sed "s/@VERSION@/${VERSION}/g" packaging/linux/README.md \
+  > package-root/usr/share/doc/binlab/README.md
+chmod 0644 package-root/usr/share/doc/binlab/README.md
 
 MAX_REQUIRED_GLIBC="GLIBC_0.0"
 # Keep the portable Linux baseline explicit and fail if a future toolchain
@@ -69,6 +86,7 @@ fpm -s dir -t rpm -n binlab -v "$VERSION" -a x86_64 \
 tar -czf "dist/binlab-${VERSION}-linux-x86_64.tar.gz" -C package-root .
 (
   cd dist
+  rm -f binlab binlab-gui
   sha256sum "binlab_${VERSION}_amd64.deb" "binlab-${VERSION}-1.x86_64.rpm" \
     "binlab-${VERSION}-linux-x86_64.tar.gz" > SHA256SUMS
 )
