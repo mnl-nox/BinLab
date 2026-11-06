@@ -6,14 +6,22 @@ cd "$ROOT_DIR"
 
 VERSION="$(python -c 'import binlab; print(binlab.__version__)')"
 ARCH="$(uname -m)"
+GLIBC_LIMIT="${BINLAB_GLIBC_LIMIT:-GLIBC_2.14}"
 if [[ "$ARCH" != "x86_64" ]]; then
   echo "Esta primeira linha de pacotes suporta x86_64; arquitetura detectada: $ARCH" >&2
+  exit 2
+fi
+if [[ ! "$GLIBC_LIMIT" =~ ^GLIBC_[0-9]+(\.[0-9]+)*$ ]]; then
+  echo "BINLAB_GLIBC_LIMIT precisa estar no formato GLIBC_2.14; recebido: $GLIBC_LIMIT" >&2
   exit 2
 fi
 
 rm -rf build/pyinstaller package-root
 mkdir -p dist package-root/usr/bin package-root/usr/share/applications \
   package-root/usr/share/icons/hicolor/scalable/apps package-root/usr/share/doc/binlab
+# Do not ship packages left by a previous build, while preserving Python
+# wheels/source archives created by `python -m build` in the release workflow.
+rm -f dist/binlab_*.deb dist/binlab-*.rpm dist/binlab-*-linux-x86_64.tar.gz dist/SHA256SUMS
 
 pyinstaller --clean --noconfirm --onefile --name binlab \
   --paths src packaging/entrypoints/binlab_cli.py
@@ -26,27 +34,35 @@ install -m 0644 packaging/linux/binlab.desktop package-root/usr/share/applicatio
 install -m 0644 branding/logo.svg package-root/usr/share/icons/hicolor/scalable/apps/binlab.svg
 install -m 0644 README.md LICENSE package-root/usr/share/doc/binlab/
 
+MAX_REQUIRED_GLIBC="GLIBC_0.0"
 # Keep the portable Linux baseline explicit and fail if a future toolchain
-# silently raises the minimum glibc symbol version.
+# silently raises it. Local builds can set BINLAB_GLIBC_LIMIT to their target.
 for binary in dist/binlab dist/binlab-gui; do
   max_glibc="$(readelf --version-info "$binary" | grep -oE 'GLIBC_[0-9.]+' | sort -Vu | tail -n 1)"
-  if [[ "$max_glibc" != "GLIBC_2.14" ]]; then
-    echo "Unexpected glibc baseline in $binary: $max_glibc (expected GLIBC_2.14)." >&2
+  if [[ -z "$max_glibc" ]]; then
+    echo "Unable to determine the glibc baseline in $binary." >&2
     exit 3
   fi
+  latest="$(printf '%s\n%s\n' "$max_glibc" "$GLIBC_LIMIT" | sort -V | tail -n 1)"
+  if [[ "$latest" != "$GLIBC_LIMIT" ]]; then
+    echo "Unexpected glibc baseline in $binary: $max_glibc (limit $GLIBC_LIMIT)." >&2
+    exit 3
+  fi
+  MAX_REQUIRED_GLIBC="$(printf '%s\n%s\n' "$MAX_REQUIRED_GLIBC" "$max_glibc" | sort -V | tail -n 1)"
 done
+GLIBC_DEPENDENCY="${MAX_REQUIRED_GLIBC#GLIBC_}"
 
 fpm -s dir -t deb -n binlab -v "$VERSION" -a amd64 \
   --license MIT --maintainer "BinLab Engineering <ghostnether28@gmail.com>" --vendor "BinLab Engineering" --url https://github.com/mnl-nox/BinLab \
   --description "Local-first computational engineering laboratory" \
-  --depends "libc6 >= 2.14" --depends libx11-6 --depends libxext6 --depends libxrender1 \
+  --depends "libc6 >= ${GLIBC_DEPENDENCY}" --depends libx11-6 --depends libxext6 --depends libxrender1 \
   --depends libxtst6 --depends libxi6 --depends libfontconfig1 --depends libxft2 \
   --package "dist/binlab_${VERSION}_amd64.deb" -C package-root .
 
 fpm -s dir -t rpm -n binlab -v "$VERSION" -a x86_64 \
   --license MIT --maintainer "BinLab Engineering <ghostnether28@gmail.com>" --vendor "BinLab Engineering" --url https://github.com/mnl-nox/BinLab \
   --description "Local-first computational engineering laboratory" \
-  --depends "glibc >= 2.14" --depends libX11 --depends libXext --depends libXrender \
+  --depends "glibc >= ${GLIBC_DEPENDENCY}" --depends libX11 --depends libXext --depends libXrender \
   --depends libXtst --depends libXi --depends fontconfig --depends libXft \
   --package "dist/binlab-${VERSION}-1.x86_64.rpm" -C package-root .
 

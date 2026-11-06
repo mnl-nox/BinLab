@@ -14,13 +14,15 @@ python -m pip install build
 python -m build
 ```
 
-## Tags automáticas para funcionalidades
+## Pré-releases de funcionalidades
 
-`.github/workflows/feature-tags.yml` é acionado em cada push para uma branch `feat/*`. Cria uma tag anotada por commit no padrão `feat/<nome-da-branch>/<sha-completo>`. Requer `contents: write`; não representa uma release.
+`.github/workflows/feature-tags.yml` é acionado em cada push para uma branch `feat/**`. Executa os testes Python e Web, valida o atalho desktop, constrói e inspeciona os pacotes `.deb`, `.rpm` e tarball x86_64 e instala o `.deb` no runner para smoke test da CLI e da GUI via Xvfb. Só depois publica uma pré-release GitHub com uma tag anotada por commit no padrão `feat/<nome-da-branch>/<sha-completo>`.
+
+Cada execução define uma versão de pacote maior que a versão base atual, usando `X.Y.Z.AAAAMMDD.RUN_NUMBER`. Assim, `apt` e `dnf` podem aplicar uma pré-release posterior sobre a versão base instalada. Essas publicações destinam-se a testes e continuam limitadas a Linux x86_64 com glibc; não são releases estáveis nem suportam Alpine/musl ou ARM64.
 
 ## Releases versionadas
 
-`.github/workflows/release.yml` é acionado por tags `v*`. Compara a tag com `binlab.__version__`, compila fontes e testes, instala o pacote, executa a suíte `unittest`, constrói wheel e source distribution e só então cria um GitHub Release. Atualize a versão e o changelog antes de marcar uma release.
+`.github/workflows/release.yml` é acionado por tags `v*`. Compara a tag com `binlab.__version__`, executa a suíte `unittest`, constrói wheel, source distribution e pacotes Linux, valida a entrada desktop, instala o `.deb` no runner e inicia a GUI sob Xvfb. Só publica o GitHub Release depois que esses passos passam. Atualize a versão e o changelog antes de marcar uma release.
 
 ```bash
 git switch main
@@ -29,7 +31,7 @@ git tag -a vX.Y.Z -m "Release X.Y.Z"
 git push origin vX.Y.Z
 ```
 
-Crie versões somente após revisão e integração. Tags de feature não publicam releases.
+Crie versões estáveis somente após revisão e integração. Tags `v*` continuam sendo o canal de releases estáveis; versões de feature são pré-releases independentes.
 
 ## Segurança de pipeline
 
